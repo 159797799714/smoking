@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "今日步数",
+  "usingComponents": {
+    "article-list": "/pages/components/articleList"
+  }
+}

@@ -1,0 +1,209 @@
+<template>
+  <view class="container">
+    <view class="f-34 col-f f-w t-c">深圳爱绚科技有限公司</view>
+    <view class="wechatapp">
+      <view class="header">
+        <open-data class="" type="userAvatarUrl"></open-data>
+      </view>
+    </view>
+    <view class="auth-title f-w f-40 col-9">申请获取以下权限</view>
+    <view class="auth-subtitle f-30 col-6">获得你的公开信息（昵称、头像等）</view>
+    <view class="dis-flex treaty">
+      <checkbox-group @change="checkboxChange">
+        <checkbox :value="checked" :checked="checked" color="#ff00ff"/>
+      </checkbox-group>
+      <view class="f-26 col-6">已经阅读并同意<text class="col-9" catchtap="goRegisterWord">《相关用户服务协议》</text></view>
+    </view>
+    <button class="m-t-30 login-btn b-90f col-f" openType="getUserInfo" lang="zh_CN" bindgetuserinfo="authorLogin">允许</button>
+    <button class="m-t-20 login-btn col-13 b-9" catchtap="reject">拒绝并返回首页</button>
+  </view>
+</template>
+
+<script>
+  export default{
+    data() {
+      return {
+        checked: true
+      }
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+  .container {
+    padding: 88upx 60upx 0;
+    font-size: 32upx;
+  }
+  
+  .wechatapp {
+    padding: 80upx 0 48upx;
+    margin-bottom: 72upx;
+    text-align: center;
+  }
+  
+  .wechatapp .header {
+    width: 190upx;
+    height: 190upx;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 2upx solid #ccc;
+    overflow: hidden;
+    box-shadow: 1px 0px 5px rgba(50, 50, 50, 0.3);
+  }
+  
+  .auth-title {
+    margin-bottom: 50upx;
+  }
+  
+  .auth-subtitle {
+    margin-bottom: 15upx;
+  }
+  .treaty{
+    margin-bottom: 70upx;
+  }
+  .login-btn {
+    border: none;
+    height: 88upx;
+    line-height: 88upx;
+    border-radius: 999upx;
+  }
+  .b-cc{
+    background: #ccc;
+  }
+  
+  .login-btn::after {
+    display: none;
+  }
+  
+  .login-btn.button-hover {
+    box-shadow: inset 0 5upx 30upx rgba(0, 0, 0, 0.15);
+  }
+  
+  /*  重写 checkbox 样式  */
+  /* 未选中的 背景样式 */
+  
+  /* #ifdef H5 */
+  checkbox .uni-checkbox-input{
+    position: relative;
+    top: -8rpx;
+     width: 24rpx; /* 背景的宽 */
+     height: 24rpx; /* 背景的高 */
+     background: #131313;
+     border: 1px solid #666;
+  }
+  /* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+  checkbox .uin-checkbox-input.uin-checkbox-input-checked{
+     border: 1px solid #666;
+     background: #131313;
+  }
+  /* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+  checkbox .uni-checkbox-input.uni-checkbox-input-checked::before{
+    border-radius: 50%;/* 圆角 */
+    width: 24rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+    height: 24rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+    line-height: 24rpx;
+    text-align: center;
+    font-size: 16rpx; /* 对勾大小 30rpx */
+    color: #ff00ff; /* 对勾颜色 白色 */
+    background: transparent;
+    transform:translate(-50%, -50%) scale(1);
+    -webkit-transform:translate(-50%, -50%) scale(1);
+  }
+  
+  /* #endif */
+  
+  /* #ifdef APP-PLUS || MP-WEIXIN */
+  checkbox .wx-checkbox-input{
+    position: relative;
+    top: -8rpx;
+     width: 24rpx; /* 背景的宽 */
+     height: 24rpx; /* 背景的高 */
+     background: #131313;
+     border: 1px solid #666;
+  }
+  /* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+  checkbox .wx-checkbox-input.wx-checkbox-input-checked{
+     border: 1px solid #666;
+     background: #131313;
+  }
+  /* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+  checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
+    border-radius: 50%;/* 圆角 */
+    width: 24rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+    height: 24rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+    line-height: 24rpx;
+    text-align: center;
+    font-size: 16rpx; /* 对勾大小 30rpx */
+    color: #ff00ff; /* 对勾颜色 白色 */
+    background: transparent;
+    transform:translate(-50%, -50%) scale(1);
+    -webkit-transform:translate(-50%, -50%) scale(1);
+  }
+  
+  /* #endif */
+     
+</style>
+<style>
+  /*  重写 checkbox 样式  */
+  /* 未选中的 背景样式 */
+  
+  /* #ifdef H5 */
+  checkbox .uni-checkbox-input{
+    position: relative;
+    top: -8rpx;
+     width: 24rpx; /* 背景的宽 */
+     height: 24rpx; /* 背景的高 */
+     background: #131313;
+     border: 1px solid #666;
+  }
+  /* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+  checkbox .uin-checkbox-input.uin-checkbox-input-checked{
+     border: 1px solid #666;
+     background: #131313;
+  }
+  /* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+  checkbox .uni-checkbox-input.uni-checkbox-input-checked::before{
+    border-radius: 50%;/* 圆角 */
+    width: 24rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+    height: 24rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+    line-height: 24rpx;
+    text-align: center;
+    font-size: 16rpx; /* 对勾大小 30rpx */
+    color: #ff00ff; /* 对勾颜色 白色 */
+    background: transparent;
+    transform:translate(-50%, -50%) scale(1);
+    -webkit-transform:translate(-50%, -50%) scale(1);
+  }
+  
+  /* #endif */
+  
+  /* #ifdef APP-PLUS || MP-WEIXIN */
+  checkbox .wx-checkbox-input{
+    position: relative;
+    top: -8rpx;
+     width: 24rpx; /* 背景的宽 */
+     height: 24rpx; /* 背景的高 */
+     background: #131313;
+     border: 1px solid #666;
+  }
+  /* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+  checkbox .wx-checkbox-input.wx-checkbox-input-checked{
+     border: 1px solid #666;
+     background: #131313;
+  }
+  /* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+  checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
+    border-radius: 50%;/* 圆角 */
+    width: 24rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+    height: 24rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+    line-height: 24rpx;
+    text-align: center;
+    font-size: 16rpx; /* 对勾大小 30rpx */
+    color: #ff00ff; /* 对勾颜色 白色 */
+    background: transparent;
+    transform:translate(-50%, -50%) scale(1);
+    -webkit-transform:translate(-50%, -50%) scale(1);
+  }
+  
+  /* #endif */
+</style>

@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "积分",
+  "usingComponents": {
+    "top-bar": "/pages/components/topBar",
+    "good-list": "/pages/components/goodList"
+  }
+}

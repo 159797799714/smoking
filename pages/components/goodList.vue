@@ -1,0 +1,60 @@
+<template>
+  <view class="goodList">
+    <view v-for="(item, index) in goodList" :key="index" class="good-item b-f" @click="goDetail">
+      <view class="good-img">
+        <image src="../../static/mine/discount/null.png" mode="widthFix"></image>
+      </view>
+      <view class="good-info">
+        <view class="m-t-30 f-24 col-6 onelist-hidden">{{item.name}}</view>
+        <view class="m-t-15 f-24 col-f0f">积分￥{{item.grade}}</view>  
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  export default {
+    props: {
+      goodList: Array
+    },
+    data () {
+      return {
+        
+      }
+    },
+    methods: {
+      goDetail() {
+        uni.navigateTo({
+          url: '../integral/goodDetail'
+        })
+      }
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+  .goodList{
+    line-height: 1;
+  }
+  .good-item{
+    display: inline-block;
+    width: 330upx;
+    height: 450upx;
+    margin-bottom: 30upx;
+  }
+  .good-item:nth-of-type(2n) {
+    margin-left: 28upx;
+  }
+  .good-img{
+    width: 100%;
+    height: 330upx;
+    overflow: hidden;
+    &>image{
+      width: 100%;
+    }
+  }
+  .good-info{
+    padding: 0 15upx;
+  }
+  
+</style>

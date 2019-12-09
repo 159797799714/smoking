@@ -1,0 +1,73 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/index/release/release",
+    "pages/index/release/center",
+    "pages/index/article/detail",
+    "pages/integral/integral",
+    "pages/integral/goodDetail",
+    "pages/integral/order/orderSure",
+    "pages/integral/order/orderDetail",
+    "pages/integral/order/success",
+    "pages/integral/plan",
+    "pages/integral/todayFoot",
+    "pages/integral/rules",
+    "pages/integral/integralDetail",
+    "pages/store/store",
+    "pages/mine/mine",
+    "pages/mine/member",
+    "pages/mine/todayExperience",
+    "pages/mine/personal"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#131313",
+    "navigationBarBackgroundColor": "#131313"
+  },
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#fff",
+    "backgroundColor": "#000",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "社区",
+        "iconPath": "static/img/tabbar/index1.png",
+        "selectedIconPath": "static/img/tabbar/index2.png"
+      },
+      {
+        "pagePath": "pages/integral/integral",
+        "text": "积分",
+        "iconPath": "static/img/tabbar/market1.png",
+        "selectedIconPath": "static/img/tabbar/market2.png"
+      },
+      {
+        "pagePath": "pages/index/release/center",
+        "text": "发布",
+        "iconPath": "static/img/tabbar/release.png",
+        "selectedIconPath": "static/img/tabbar/release.png"
+      },
+      {
+        "pagePath": "pages/store/store",
+        "text": "门店",
+        "iconPath": "static/img/tabbar/shopcar1.png",
+        "selectedIconPath": "static/img/tabbar/shopcar2.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "static/img/tabbar/mine1.png",
+        "selectedIconPath": "static/img/tabbar/mine2.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取用户位置信息，从而给用户提供最近的门店查询服务，提升效率"
+    }
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

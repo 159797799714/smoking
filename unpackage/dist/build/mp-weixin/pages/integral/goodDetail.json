@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "详情",
+  "usingComponents": {
+    "banner": "/pages/components/banner",
+    "uni-popup": "/pages/components/uni-popup/uni-popup"
+  }
+}

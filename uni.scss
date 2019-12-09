@@ -1,0 +1,146 @@
+
+$color-f5: #f5f5f5;
+
+text, view{
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  text-decoration: none;
+}
+.border-box{box-sizing: border-box;}
+
+.p-re{position: relative;}
+.p-ab{position: absolute;}
+.p-fix{position: fixed;}
+
+.fr{float: right;}
+.fl{float: left;}
+.oh{overflow: hidden;}
+
+// 弹性布局
+.dis-block{display: block;}
+.dis-inline-block{display: inline-block;}
+.dis-flex{display: flex;}
+.flex-box{flex: 1;}
+.flex-dir-col{flex-direction: column;}
+.flex-x-center{justify-content: center;}
+.flex-x-between{justify-content: space-between;}
+.flex-x-around{justify-content: space-around;}
+.flex-x-end{justify-content: flex-end;}
+.flex-y-center{align-items: center;}
+.flex-y-end{align-items: flex-end;}
+.flex-wrap{flex-wrap: wrap;}
+.flex-nowrap{flex-wrap: nowrap;}
+
+// 边距
+.m-t-10{margin-top: 10upx;}
+.m-t-15{margin-top: 15upx;}
+.m-t-20{margin-top: 20upx;}
+.m-t-25{margin-top: 25upx;}
+.m-t-30{margin-top: 30upx;}
+.m-l-10{margin-left: 10upx;}
+.m-l-20{margin-left: 20upx;}
+.m-l-25{margin-left: 25upx;}
+.m-l-30{margin-left: 30upx;}
+
+.p-30{padding: 0 30upx;}
+
+// 字体大小
+.f-16{font-size: 16upx;}
+.f-18{font-size: 18upx;}
+.f-20{font-size: 20upx;}
+.f-22{font-size: 22upx;}
+.f-24{font-size: 24upx;}
+.f-26{font-size: 26upx;}
+.f-28{font-size: 28upx;}
+.f-30{font-size: 30upx;}
+.f-32{font-size: 32upx;}
+.f-36{font-size: 36upx;}
+.f-38{font-size: 38upx;}
+.f-40{font-size: 40upx;}
+.f-44{font-size: 44upx;}
+.f-50{font-size: 50upx;}
+.f-60{font-size: 60upx;}
+
+// 颜色
+.col-f{color: #fff;}
+.col-13{color: #131313;}
+.col-9{color: #999;}
+.col-6{color: #666;}
+.col-c{color: #ccc;}
+.col-f3c{color: #ff33cc;}
+.col-f0f{color: #FF00FF;}
+.col-90f{color: #9900FF;}
+
+// 字体对齐方向
+.t-l{text-align: left;}
+.t-c{text-align: center;}
+.t-r{text-align: right;}
+
+// 背景颜色
+.b-f{background: #fff;}
+.b-9{background: #999;}
+.b-13{background: #131313;}
+.b-33{background: #333333;}
+.b-00{background: #000;}
+.b-c3f{background: #cc33ff;}
+.b-f0f{background: #ff00ff;}
+.b-90f{background: #9900ff;}
+.b-linear{background:linear-gradient(0deg,rgba(82,95,247,1),rgba(251,0,240,1));}
+.b-linear-row{background:linear-gradient(-90deg,rgba(82,95,247,1),rgba(251,0,240,1));}
+
+.oh{overflow: hidden;}
+
+// 换行超出省略号
+.onelist-hidden {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.twolist-hidden {
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.threelist-hidden {
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.t-line{
+  text-decoration: line-through;
+}
+
+// 等级文字颜色渐变
+.linear-word{
+  background-image: linear-gradient(#0CDDFE,#4269F8,#923EF4,#EC08F1);
+  -webkit-background-clip:text;
+  color: transparent;
+}
+// iconfont
+@font-face {
+  font-family: 'iconfont';
+  src: url('~@/static/icon/iconfont.eot');
+  src: url('~@/static/icon/iconfont.eot?#iefix') format('embedded-opentype'),
+      url('~@/static/icon/iconfont.woff2') format('woff2'),
+      url('~@/static/icon/iconfont.woff') format('woff'),
+      url('~@/static/icon/iconfont.ttf') format('truetype'),
+      url('~@/static/icon/iconfont.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-style: normal;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

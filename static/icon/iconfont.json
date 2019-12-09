@@ -1,0 +1,16 @@
+{
+  "id": "1549811",
+  "name": "smoke",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "10459924",
+      "name": "返 回",
+      "font_class": "fanhui",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    }
+  ]
+}

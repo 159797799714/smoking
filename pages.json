@@ -1,0 +1,140 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+        "navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/login/login",
+			"style": {
+        "navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/index/release/release",
+			"style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "文章发布"
+			}
+		}, {
+			"path": "pages/index/release/center",
+			"style": {
+        "navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/index/article/detail",
+			"style": {
+        "navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/integral/integral",
+			"style": {
+        "navigationStyle": "custom",
+				"navigationBarTitleText": "积分"
+			}
+		}, {
+			"path": "pages/integral/goodDetail",
+			"style": {
+				"navigationBarTitleText": "详情"
+			}
+		}, {
+			"path": "pages/integral/order/orderSure",
+			"style": {
+				"navigationBarTitleText": "订单确认"
+			}
+		}, {
+			"path": "pages/integral/order/orderDetail",
+			"style": {
+				"navigationBarTitleText": "订单详情"
+			}
+		}, {
+			"path": "pages/integral/order/success",
+			"style": {
+        "navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/integral/plan",
+			"style": {
+				"navigationBarTitleText": "打卡计划"
+			}
+		}, {
+			"path": "pages/integral/todayFoot",
+			"style": {
+				"navigationBarTitleText": "今日步数"
+			}
+		}, {
+			"path": "pages/integral/rules",
+			"style": {
+				"navigationBarTitleText": "积分规则说明"
+			}
+		}, {
+			"path": "pages/integral/integralDetail",
+			"style": {
+				"navigationBarTitleText": "积分详情"
+			}
+		}, {
+			"path": "pages/store/store",
+			"style": {
+        "navigationStyle": "custom",
+				"navigationBarTitleText": ""
+			}
+		}, {
+			"path": "pages/mine/mine",
+			"style": {
+        "navigationStyle": "custom",
+				"navigationBarTitleText": ""
+			}
+		}, {
+			"path": "pages/mine/member",
+			"style": {
+				"navigationBarTitleText": "我的会员等级"
+			}
+		}, {
+			"path": "pages/mine/todayExperience",
+      "style": {
+      	"navigationBarTitleText": "今日经验"
+      }
+		}, {
+			"path": "pages/mine/personal",
+      "style": {
+      	"navigationBarTitleText": "个人信息"
+      }
+		}
+	],
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#fff",
+    "backgroundColor": "#000",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "社区",
+      "iconPath": "static/img/tabbar/index1.png",
+      "selectedIconPath": "static/img/tabbar/index2.png"
+    }, {
+      "pagePath": "pages/integral/integral",
+      "text": "积分",
+      "iconPath": "static/img/tabbar/market1.png",
+      "selectedIconPath": "static/img/tabbar/market2.png"
+    }, {
+      "pagePath": "pages/index/release/center",
+      "text": "发布",
+      "iconPath": "static/img/tabbar/release.png",
+      "selectedIconPath": "static/img/tabbar/release.png"
+    }, {
+      "pagePath": "pages/store/store",
+      "text": "门店",
+      "iconPath": "static/img/tabbar/shopcar1.png",
+      "selectedIconPath": "static/img/tabbar/shopcar2.png"
+    }, {
+      "pagePath": "pages/mine/mine",
+      "text": "我的",
+      "iconPath": "static/img/tabbar/mine1.png",
+      "selectedIconPath": "static/img/tabbar/mine2.png"
+    }]
+  },
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+    "backgroundColor": "#131313",
+		"navigationBarBackgroundColor": "#131313"
+	}
+}

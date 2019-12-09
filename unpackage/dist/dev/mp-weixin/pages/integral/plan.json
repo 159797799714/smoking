@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "打卡计划",
+  "usingComponents": {
+    "article-list": "/pages/components/articleList"
+  }
+}
