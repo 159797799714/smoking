@@ -3,7 +3,9 @@
     <swiper class="swiper" :indicator-dots="indicatorDots" :autoplay="autoplay" :circular="true"
       :indicator-active-color="indicatorActiveColor" :interval="interval" :duration="duration">
       <swiper-item v-for="(item, index) in swiperList" :key="index" @click="naviget(item.activity_link)" class="swiper-item">
-        <image :src="item.image.file_path || item.file_path || item.image" mode="aspectFill"></image>
+        <view class="img-bg b-13">
+          <image :src="item.image.file_path || item.file_path || item.image" mode="widthFix"></image>
+        </view>
       </swiper-item>
     </swiper>
   </view>
@@ -21,7 +23,7 @@
     },
     data() {
       return {
-        indicatorDots: true,
+        indicatorDots: false,
         autoplay: true,
         interval: 5000,
         duration: 1000,
@@ -62,19 +64,24 @@
 
 <style lang="scss" scoped>
  .banner{
-    height: 600upx;
+    height: 100%;
+    max-height: 750upx;
     width: 100%;
     background: linear-gradient(to right,#00BFFF, #9933FF, #ff33cc);
     .swiper-item{
-      position: relative;
       height: 100%;
       width: 100%;
-      &>image{
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+      .img-bg{
+        position: relative;
         height: 100%;
         width: 100%;
+        &>image{
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          height: 100%;
+          width: 100%;
+        }
       }
     }
  }

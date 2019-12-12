@@ -9,24 +9,26 @@
       <textarea  class="article-content f-24 col-f" placeholder="这一刻的分享" placeholder-style="color: #ccc; font-size: 24upx;" maxlength="200"/>
       
       <view class="img-box">
-        <view v-for="(item, index) in imgArr" :key="index" class="img-item col-f0f">
+        <view v-for="(item, index) in imgArr" :key="index" class="p-re img-item col-f0f">
           <image :src="item" mode="widthFix"></image>
-          <view class="del-btn b-9 f-w col-13 f-30">+</view>
+          <view class="del-btn b-9 f-w col-13 f-30" @click="delImg(index)">+</view>
         </view>
         
-        <view class="img-item col-f0f" @click="uploadImg"></view>
+        <view class="img-item col-f0f" @click="uploadImg">
+          <image src="../../../static/img/index/add.png" mode="widthFix" class="add"></image>
+        </view>
       </view>
       
       <view class="line-item">
-        <image src="../../../static/img/tabbar/market1.png" class="icon-img" mode="widthFix"></image>
-        <input type="text" placeholder="请输入参与话题" placeholder-style="color: #fff;font-size: 24upx;"/>
-        <image src="../../../static/mine/mine4.png" class="fr icon-img" mode="widthFix"></image>
+        <image src="../../../static/img/index/topic.png" class="icon-img" mode="widthFix"></image>
+        <input type="text" placeholder="请输入参与话题" placeholder-style="color: #ccc;font-size: 24upx;"/>
+        <text class="fr f-40 col-9 iconfont rotate-180">&#xe61b;</text>
       </view>
       
       <view class="line-item">
-        <image src="../../../static/img/tabbar/market1.png" class="icon-img" mode="widthFix"></image>
-        <input type="text" placeholder="所在的位置" placeholder-style="color: #fff;font-size: 24upx;"/>
-        <image src="../../../static/mine/mine4.png" class="fr icon-img" mode="widthFix"></image>
+        <image src="../../../static/img/index/address.png" class="icon-img" mode="widthFix"></image>
+        <input type="text" placeholder="所在的位置" placeholder-style="color: #ccc;font-size: 24upx;"/>
+        <text class="fr f-40 col-9 iconfont rotate-180">&#xe61b;</text>
       </view>
       
       <view class="release-btn">
@@ -41,6 +43,8 @@
 </template>
 
 <script>
+  import uploadImg from '../../../common/uploadImg.js'
+  
   import topBar from '../../components/topBar.vue'
   export default {
     components: {
@@ -49,7 +53,8 @@
     data () {
       return {
         imgArr: [],
-        time: 0
+        imgUploadID: [],
+        time: 0,
       }
     },
     methods: {
@@ -59,20 +64,31 @@
         })
       },
       
+      delImg(index) {
+        this.imgArr.splice(index, 1)
+      },
+      
       // 上传图片
       uploadImg () {
         let that= this
         let length= this.imgArr.length
-        let leavelength = 3 - length
+        let leavelength = 9 - length
         if(leavelength > 0) {
+          
           uni.chooseImage({
             count: leavelength, //默认9
             sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
             sourceType: ['album'], //从相册选择
             success: function (res) {
+              
               console.log(JSON.stringify(res.tempFilePaths))
               res.tempFilePaths.map((item, index) => {
-                that.imgArr.push(item)
+                // 上传图片
+                uploadImg(item).then((res)=> {
+                  console.log(res)
+                  that.imgArr.push(item)
+                  that.imgUploadID.push(res.file_id)
+                })
               })
             }
           }) 
@@ -117,6 +133,25 @@
         &>image{
           width: 100%;
         }
+        .add{
+          height: 55upx;
+          width: 55upx;
+          margin: 30upx;
+          
+        }
+        .del-btn{
+          position: absolute;
+          top: 0;
+          right: 0;
+          height: 40upx;
+          width: 40upx;
+          text-align: center;
+          line-height: 40upx;
+          background: #ccc;
+          border-radius: 100%;
+          transform: rotate(45deg);
+          z-index: 1000;
+        }
       }
     }
     .line-item{
@@ -126,7 +161,7 @@
       .icon-img{
         display: inline-block;
         height: 40upx;
-        width: 40upx;
+        width: 34upx;
       }
       &>input{
         display: inline-block;
@@ -143,7 +178,7 @@
       height: 143upx;
       width: 143upx;
       line-height: 143upx;
-      padding: 4upx;
+      padding: 6upx;
       border-radius: 100%;
       background: linear-gradient(-70deg,rgba(26,182,252,1),rgba(82,95,247,1),rgba(191,35,242,1),rgba(251,0,240,1));
       .btn-main{
@@ -154,5 +189,8 @@
         text-align: center;
       }
     }
+  }
+  .rotate-180{
+    transform: rotate(180deg);
   }
 </style>

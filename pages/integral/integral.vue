@@ -1,20 +1,31 @@
 <template>
   <view>
     <!-- 头部 -->
-    <topBar :isindex="true"/>
+    <topBar :isindex="false" :title="'爱绚科技有限公司'"/>
     
-    <view class="t-c">
+    <!-- <view class="t-c">
       <image class="userImg" src="../../static/mine/card/china.png" mode="widthFix"></image>
-    </view>
-    <view class="t-c f-36 col-f">风一样的男人</view>
-    <view class="menu">
-      <view class="span-item col-f"  @click="navigate('../mine/member')">
-        <view class="f-32 f-w linear-word">Lv{{level.num}}</view>
-        <view class="m-t-20 f-26">绚等级</view>
+    </view> -->
+    
+    <view class="info oh col-c f-26">
+      <view class="leftBox fl oh">
+        <image class="userImg" src="../../static/mine/card/china.png" mode="widthFix"></image>
+        <view class="dis-inline-block m-l-20">
+          <view>绚等级 <text class="m-l-10 f-32 col-90f">Lv1</text></view>
+          <view class="m-t-25">积分详情 <text class="m-l-10 f-32 col-f"> 6666</text></view>  
+        </view>
+        
       </view>
-      <view v-for="(item, index) in spanList" :key="index" class="span-item col-f" @click="navigate(item.url)">
-        <view class="num">{{item.num}}</view>
-        <view class="m-t-20 f-26">{{item.name}}</view>
+      
+      <view class="fr rightBox">
+        <view class="dis-inline-block t-c m-r-43">
+          <image class="iconImg" src="../../static/mine/card/china.png" mode="widthFix"></image>
+          <view class="m-t-20 col-f t-c">习惯打卡</view>
+        </view>
+        <view class="dis-inline-block t-c">
+          <image class="iconImg" src="../../static/mine/card/china.png" mode="widthFix"></image>
+          <view class="m-t-20 col-f t-c">行走步数</view>
+        </view>
       </view>
     </view>
     
@@ -35,6 +46,8 @@
     },
     data () {
       return {
+        info: {},       // 首页详情
+        
         level: {
           name: '绚等级',
           num: 1
@@ -52,22 +65,34 @@
           num: '666',
           url: './todayFoot'
         }],
-        goodList: [{
-          name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-          grade: 999
-        }, {
-          name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-          grade: 999
-        }, {
-          name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-          grade: 999
-        }, {
-          name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-          grade: 999
-        }]
+        goodList: []
       }
     },
+    onLoad() {
+      this.getDetail()
+    },
     methods: {
+      getDetail() {
+        let that= this
+        let params = {
+          url: that.$api.integralIndex
+        }
+        that.$httpRequest(params).then(res => {
+          console.log(res.data.info)
+          that.info= res.data.info
+          let list= res.data.info.goods_list.data,
+            arr= []
+          list.map((item, index) => {
+            let obj= {}
+            obj.goods_id= item.goods_id
+            obj.grade= item.sku[0].goods_price
+            obj.name= item.goods_name
+            obj.image= item.image
+            arr.push(obj)
+          })
+          that.goodList= arr
+        })
+      },
       navigate(url) {
         uni.navigateTo({
           url: url
@@ -78,20 +103,34 @@
 </script>
 
 <style lang="scss" scoped>
+  .m-r-43{
+    margin-right: 43upx;
+  }
+  text{
+    line-height: 1;
+  }
   .userImg{
     display: inline-block;
     height: 114upx;
     width: 114upx;
     border-radius: 100%;
   }
-  .menu{
-    margin: 43upx 0 77upx;
+  .info{
+    padding: 0 50upx;
+    margin-bottom: 80upx;
     line-height: 1;
-  }
-  .span-item{
-    display: inline-block;
-    width: 25%;
-    text-align: center;
+    .leftBox,.rightBox{
+      display: inline-block;
+    }
+    .leftBox{
+      padding-top: 24upx;
+    }
+    .rightBox{
+      .iconImg{
+        height: 90upx;
+        width: 90upx;
+      }
+    }
   }
   .good-main{
     padding: 0 30upx;

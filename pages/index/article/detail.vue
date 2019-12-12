@@ -4,54 +4,31 @@
       <view class="search col-f">
         <view class="iconfont" @click="goBack">&#xe61b;</view>
         <view class="center">
-          <image :src="userInfo.file_path" mode="aspectFill" class="b-9"></image>
-          <text class="name">{{ userInfo.author }}奶油田官方</text>
+          <image :src="detail.user.avatarUrl" mode="aspectFill" class="b-9"></image>
+          <text class="name onelist-hidden">{{ detail.user.nickName }}</text>
         </view>
-        <text class="iconfont" @click="goShare">&#xe60f;</text>
+        <text class="iconfont" @click="goShare">&#xe6b6;</text>
+        <text class="iconfont m-l-30">&#xe613;</text>
       </view>
     </topBar>
-    <!-- <view class="topBar" :style="{'padding-top': statusBarHeight + 'px', top: isHeadShow? '0': '-88px' }">
-      <view class="search f-38 col-f">
-        <text class="iconfont" @click="goBack">&#xe61c;</text>
-        <view class="center">
-          <image :src="userInfo.file_path" mode="aspectFill"></image>
-          <text class="name">{{ userInfo.author }}</text>
-        </view>
-        <text class="iconfont" @click="goShare">&#xe60f;</text>
-      </view>
-    </view> -->
+    
     <scroll-view scroll-y="true" class="content" @scroll="onScroll">
       <view class="banners">
         <banner :swiperList="detail.articleimage" :borderWidth="false"></banner>
       </view>
-      <view class="cultureInfo bg-black">
-       <view class="cultureTitle font-30 f-w">{{ detail.article_title }}</view>
-        <view class="cultureTime f-24 col-9">{{ detail.headimg.create_time }}</view> -->
-        <view class="cultureWords f-28 col-9">
-          
-          <!-- <rich-text type="node" :nodes="strings"></rich-text> -->
-          <!-- <u-parse :content="strings" @preview="preview" @navigate="navigate"/> -->
-          
-        </view>
-      </view>
-      
-      <!-- 商品 -->
-      <view v-for="(item, index) in detail.article_goods_info" :key="index" class="good dis-flex flex-x-between border-box bg-black" @click="gogoodDetail(item)">
-        <view class="left">
-          <image :src="item.image[0].file_path" mode="widthFix"></image>
-        </view>
-        <view class="right border-box dis-flex flex-dir-column flex-x-between">
-          <view class="good-name font-30 twolist-hidden">{{ item.goods_name }}</view>
-          <view class="good-info dis-flex flex-x-between font-32">
-            <view class="good-price col-m">￥{{item.sku[0].goods_price}}</view>
-            <view class="good-btn col-f bg-orange t-center b-r-10">去选购</view>
-          </view>
+      <view class="cultureInfo col-c">
+        <view class="cultureTitle f-40">{{ detail.article_title }}</view>
+        <view class="f-24 col-c">{{detail.subtitle}}</view>
+        <view class="m-t-20 cultureTime f-24 col-6">{{ detail.input_time }}</view>
+        <view class="cultureWords f-28 col-c">
+          <!-- 富文本 -->
+          <rich-text type="node" :nodes="strings"></rich-text>
         </view>
       </view>
       
       <!-- 评论 -->
-      <view class="comment bg-black">
-        <view class="total f-bold font-36">评论({{ detail.comments.num }})</view>
+      <view class="comment">
+        <view class="total f-30 col-9">评论  ({{ detail.comments.num }})</view>
         <view v-for="(item, index) in detail.comments_show" :key="index" v-if="index < 10" :class="{ item: true, 'border-box': true, 'no-border': index === 0 }">
           <view class="writer">
             <view class="writerImg">
@@ -59,22 +36,22 @@
             </view>
             <view class="writer-center">
               <view class="writer-father">
-                <view class="writer-name">{{ item.nickName }}</view>
-                <view class="writer-speak f-28">{{ item.content }}<text class="f-24 col-9">{{ item.input_date }}</text></view>
+                <view class="writer-name f-26 col-6">{{ item.nickName }}</view>
+                <view class="writer-speak f-28 col-c"  @click="commentComment(item.id)">{{ item.content }}<text class="f-22 col-6">{{ item.input_date }}</text></view>
                 <view class="zan">
-                  <text :class="{iconfont: true, isZan: item.islike === 'yes'}" @click="zanAction(item, index)">&#xe63a;</text>
-                  <text>{{ item.likenum }}</text>
+                  <text :class="{'iconfont col-6': true, 'col-f0f': item.islike === 'yes'}" @click="zanAction(item, index)">&#xe610;</text>
+                  <text class="col-6">{{ item.likenum }}</text>
                 </view>
               </view>
               <view v-for="(li, num) in item.replys" :key="num" v-if="num < 2 " class="writer-child">
-                <image class="childImg"></image>
+                <image :src="li.reply_avatarUrl" class="childImg"></image>
                 <view class="childCenter">
-                  <view class="writer-name f-26 col-9">{{ li.reply_name }}</view>
-                  <view class="writer-speak">{{ li.reply_content }}<text>{{ li.reply_input_time }}</text></view>
+                  <view class="writer-name f-26 col-6">{{ li.reply_name }}</view>
+                  <view class="writer-speak f-28 col-c">{{ li.reply_content }}<text class="f-22 col-6">{{ li.reply_input_date }}</text></view>
                 </view>
                 <view class="zan">
-                  <text class="iconfont">&#xe63a;</text>
-                  <text>{{ li.likenum }}</text>
+                  <text :class="{'iconfont col-6': true, 'col-f0f': li.isreplylike === 'yes'}" @click="commentZanAction(li, index, num)">&#xe610;</text>
+                  <text class="col-6">{{ li.replylikenum }}</text>
                 </view>
               </view>
             </view>
@@ -82,19 +59,27 @@
         </view>
       </view>
     </scroll-view>
-    <view class="speak bg-black border-box">
-      <input type="text" class="bg-66" v-model="speakVal" placeholder="留下你的精彩评论吧" placeholder-style="color: #ccc" @confirm="addComment" @input="onInput"/>
+    
+    <!-- 固定在底部评论输入框 -->
+    <view v-if="!comment_id" class="speak b-13 border-box">
+      <input type="text" class="b-6 col-c" v-model="speakVal" placeholder="留下你的精彩评论吧" placeholder-style="color: #ccc" @confirm="addComment"/>
       <view>
-        <text class="iconfont">&#xe69d;</text>
-        <text>{{ detail.comments.num }}</text>
+        <text :class="{'iconfont col-6': true, 'col-f0f': detail.isLike}" @click="likeArticle">&#xe610;</text>
+        <text class="col-6">{{ detail.articlelike_count }}</text>
       </view>
+      <view>
+        <text class="iconfont f-w col-6">&#xe65b;</text>
+        <text class="col-6">{{ detail.show_views }}</text>
+      </view>
+    </view>
+    
+    <view v-else class="speak b-13 border-box">
+      <input type="text" class="b-6 col-c" focus="true" v-model="commentVal" placeholder="对此评论你想说 ~ " placeholder-style="color: #ccc" @confirm="addCommentReply" @blur="closeComment"/>
     </view>
   </view>
 </template>
 
 <script>
-  
-  // import uParse from  "../../components/uni-rich/parse.vue"
   import topBar from  "../../components/topBar.vue"
   import banner from  "../../components/banner.vue"
   
@@ -116,33 +101,11 @@
         indicatorActiveColor: '#ffffff',
         detail: {},
         userInfo: {},
-        cultureInfo: {
-          title: '2019深圳奶油田电音节',
-          tags: ['深圳奶油田', '深圳'],
-          time: '2019-05-16',
-          words: '邀请了著名乐队Pendulum的核心成员Rob Swire和GaretMcGrillen改组成的双人电子音乐制作团队KnifeParty等，一系列世界级百慕大DJ及国际流行巨星齐现阵。一系列世界级百慕大DJ及国际流行巨星齐现阵。除了力为消费者带来前所未有的跟世界音乐巨星接触的机会，作为风暴电音节的主赞助商，随时随地可以去发现、体检、享受电音所带来的无限兴奋和快乐。'
-        },
-        swiperList: [],                          // 轮播图
-        strings: [],
-        // commentList: [{
-        //   imgUrl: '',
-        //   name: '撒浪嘿',
-        //   speak: '终于有机会去一次音乐节，现场嗨爆了感觉人生已经到了高潮，哈哈。',
-        //   time: '05-12',
-        //   zan: 666,
-        //   zan_status: 1,
-        //   writerChild: [
-        //     {
-        //       imgUrl: '',
-        //       name: '@看灰机',
-        //       speak: '的确，现场太燃了，而且很多漂亮小姐姐。',
-        //       time: '05-12',
-        //       zan: 999,
-        //       zan_status: 1
-        //     }
-        //   ]
-        // }],               // 评论信息
-        speakVal: '',     // 我的评论value值
+        swiperList: [],               // 轮播图
+        strings: [],                  // 评论信息
+        speakVal: '',                 // 我的评论value值
+        commentVal: '',               // 评论回复的value值
+        comment_id: '',             // 是否评论评论、默认评论文章
         sumList: {
           zanTotal: 2000,
           starTotal: 1578,
@@ -187,87 +150,106 @@
         this.$httpRequest(params).then((res) => {
           console.log(res.data.detail)
           this.detail = res.data.detail
-        })
-        
-        // this.$http({
-        //   cb: (err, res) => {
-        //     console.log(res.data.detail)
-        //     let detail = res.data.detail
-        //     this.detail = detail
-        //     this.swiperList = detail.banners
-        //     // 文章标题等
-        //     this.cultureInfo.title = detail.article_title
-            
-        //     this.userInfo = {
-        //       file_path: detail.headimg.file_path,
-        //       author: detail.author
-        //     }
-        //     var richtext =  detail.article_content
-        //     const regex = new RegExp('img')
-        //     richtext= richtext.replace(regex, `img style="max-width: 100%;"`)
-            
-        //     this.strings = richtext
-            
-            
-        //     this.cultureInfo.time = detail.update_time
-        //   }
-        // })
-      },
-      gogoodDetail(item) {
-        console.log(item)
-        uni.navigateTo({
-          url: './goodDetail?goods_id=' + item.goods_id
+          
+          var richtext =  res.data.detail.article_content
+          const regex = new RegExp('img')
+          richtext= richtext.replace(regex, `img style="max-width: 100%;"`)
+          this.strings = richtext
         })
       },
       // 评论点赞
       zanAction(item, index) {
         console.log('点赞', item, item.islike, index)
-        let url = this.$api.commentunlike
-        if(item.islike === 'no') {
-          url = this.$api.commentlike
+        let that= this
+        let url = this.$api.commentUnlike
+        if (item.islike === 'no') {
+          url = this.$api.commentLike
         }
-        this.$http({
+        let params= {
           url: url,
           data: {
             comment_id: item.id
-          },
-          cb: (err, res) => {
-            if(!err && res) {
-              switch(this.detail.comments_show[index].islike) {
-                case 'yes':
-                  this.detail.comments_show[index].islike = 'no'
-                  this.detail.comments_show[index].likenum -= 1
-                  uni.showToast({
-                  	title: '取消点赞成功',
-                    icon: 'none'
-                  })
-                  break
-                case 'no':
-                  this.detail.comments_show[index].islike = 'yes'
-                  this.detail.comments_show[index].likenum += 1
-                  uni.showToast({
-                  	title: '点赞成功',
-                    icon: 'none'
-                  })
-                  break
-              }
-            } else {
-              switch(this.detail.comments_show[index].islike) {
-                case 'yes':
-                  uni.showToast({
-                  	title: '取消点赞失败',
-                    icon: 'none'
-                  })
-                  break
-                case 'no':
-                  uni.showToast({
-                  	title: '点赞失败请重试',
-                    icon: 'none'
-                  })
-                  break
-              }
-            }
           }
+        }
+        that.$httpRequest(params).then((res) => {
+          console.log('成功了', res)
+          switch(this.detail.comments_show[index].islike) {
+            case 'yes':
+              this.detail.comments_show[index].islike = 'no'
+              this.detail.comments_show[index].likenum -= 1
+              uni.showToast({
+              	title: '取消点赞成功',
+                icon: 'none'
+              })
+              break
+            case 'no':
+              this.detail.comments_show[index].islike = 'yes'
+              this.detail.comments_show[index].likenum += 1
+              uni.showToast({
+              	title: '点赞成功',
+                icon: 'none'
+              })
+              break
+          }
+        })
+      },
+      
+      // 评论回复点赞
+      commentZanAction(li, index, num) {
+        console.log('点赞', li, li.isreplylike, index, num)
+        let that= this
+        let url = this.$api.commentreplyunlike
+        if (li.isreplylike === 'no') {
+          url = this.$api.commentReplyLike
+        }
+        let params= {
+          url: url,
+          data: {
+            reply_id: li.id
+          }
+        }
+        that.$httpRequest(params).then((res) => {
+          console.log('成功了', res)
+          switch(this.detail.comments_show[index].replys[num].isreplylike) {
+            case 'yes':
+              this.detail.comments_show[index].replys[num].isreplylike = 'no'
+              this.detail.comments_show[index].replys[num].replylikenum -= 1
+              uni.showToast({
+              	title: '取消点赞成功',
+                icon: 'none'
+              })
+              break
+            case 'no':
+              this.detail.comments_show[index].replys[num].isreplylike = 'yes'
+              this.detail.comments_show[index].replys[num].replylikenum += 1
+              uni.showToast({
+              	title: '点赞成功',
+                icon: 'none'
+              })
+              break
+          }
+        })
+      },
+      
+      // 文章点赞
+      likeArticle() {
+        console.log('文章点赞')
+        let that= this
+        let url = this.$api.articleunLike
+        if (this.detail.isLike) {
+          url = this.$api.articleLike
+        }
+        let params= {
+          url: url,
+          data: {
+            article_id: this.article_id
+          }
+        }
+        that.$httpRequest(params).then((res) => {
+          let isLike= that.detail.isLike,
+            count= that.detail.articlelike_count
+          that.detail.articlelike_count= isLike? count - 1: count + 1
+          that.detail.isLike= !isLike
         })
       },
       
@@ -289,44 +271,75 @@
           }
         })
       },
-      onInput(e) {
-        this.speakVal = e.detail.value
-      },
       // 发布评论
       addComment(e) {
         console.log(this.speakVal)
-        this.$http({
-          url: this.$api.addcomments,
+        let that= this,
+          params= {
+          url: this.$api.articleAddComment,
           data: {
-            article_id: this.article_id,
+            article_id: that.article_id,
             comment: e.detail.value
           },
-          cb: (err, res) => {
-            if(!err && res.code === 1) {
-              // 成功后刷新数据
-              this.getDetail(this.article_id)
-              this.speakVal = ''
-              uni.showToast({
-              	title: '评论发布成功',
-                icon: 'none'
-              })
-            } else {
-              uni.showToast({
-              	title: '发布失败请重试',
-                icon: 'none'
-              })
+        }
+        that.$httpRequest(params).then((res) => {
+          that.closeComment()
+          that.getDetail(this.article_id)
+          uni.showToast({
+            title: '发布成功',
+            icon: 'none'
+          })
+        })
+      },
+      // 评论回复
+      addCommentReply(e) {
+        let that= this,
+          params= {
+            url: this.$api.commentreply,
+            data: {
+              comment_id: this.comment_id,
+              comment: e.detail.value
             }
           }
+        that.$httpRequest(params).then((res) => {
+          that.closeComment()
+          that.getDetail(this.article_id)
+          uni.showToast({
+            title: '发布成功',
+            icon: 'none'
+          })
         })
+      },
+      // 评论评论
+      commentComment(id) {
+        console.log('点击了', id)
+        this.comment_id= id
+      },
+      // 取消评论回复
+      closeComment() {
+        this.comment_id= ''
+        this.commentVal= ''
+        this.speakVal= ''
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
+  .container{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+  .content{
+    height: calc(100% - 188upx);
+    overflow: hidden;
+  }
   .search{
     display: flex;
     width: 100%;
+    box-sizing: border-box;
+    padding: 0 30upx;
     line-height: 88upx;
     align-items: center;
     .center{
@@ -345,6 +358,7 @@
   .banners{
     width: 100%;
     height: 600upx;
+    border-bottom: 1px solid #333;
   }
   .cultureInfo{
     display: flex;
@@ -369,35 +383,6 @@
         max-width: 500upx;
       }
     }
-    
-  }
-  .good{
-    height: 290upx;
-    width: 100%;
-    padding: 20upx;
-    border-top: 1px solid #ededed;
-    border-bottom: 1px solid #ededed;
-    .left{
-      width: 250upx;
-      height: 100%;
-      margin-right: 30upx;
-      &>image{
-        width: 250upx;
-        height: 100%;
-      }
-    }
-    .right{
-      flex: 1;
-      padding-top: 10upx;
-      .good-info{
-        line-height: 70upx;
-      }
-      .good-btn{
-        margin-right: 20upx;
-        width: 180upx;
-        height: 70upx;
-      }
-    }
   }
   .comment{
     padding: 40upx 40upx 0 35upx;
@@ -408,8 +393,6 @@
     .item{
       min-height: 150upx;
       padding-top: 30upx;
-      padding-bottom: 27upx;
-      border-top: 2upx solid $color-f5;
       .writer{
         display: flex;
         .writerImg{
@@ -417,7 +400,7 @@
           width: 66upx;
           border-radius: 100%;
           margin-right: 30upx;
-          border: 1px solid $color-f5;
+          border: 1px solid #f5f5f5;
           overflow: hidden;
           &>image{
             height: 100%;
@@ -434,18 +417,6 @@
               position: absolute;
               right: -70upx;
               top: 0;
-            }
-            .isZan{
-              position: relative;
-              &::before{
-                content: '';
-                height: 13upx;
-                width: 14upx;
-                background: #333;
-                position: absolute;
-                bottom: 6upx;
-                left: 8upx;
-              }
             }
           }
           .writer-name{
@@ -485,12 +456,10 @@
           .iconfont{
             font-size: 36upx;
             margin: 0;
-            color: #999;
           }
           &>text{
             font-size: 20upx;
             line-height: 36upx;
-            color: #666;
           }
         }
       }
@@ -511,18 +480,18 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 30upx;
-    border-top: 1px solid $color-f5;
+    border-top: 1px solid #666;
     &>input{
       flex: 1;
-      height: 60upx;
-      border-radius: 30upx;
-      padding: 0 30upx;
+      height: 40upx;
+      border-radius: 20upx;
+      padding: 0 17upx;
       box-sizing: border-box;
-      font-size: 22upx;
-      background: $color-f5;
+      font-size: 26upx;
+      background: #666;
     }
     &>view{
-      margin: 0 35upx 0;
+      margin: 0 28upx 0;
       height: 60upx;
       display: flex;
       flex-direction: column;
@@ -531,13 +500,11 @@
       .iconfont{
         font-size: 36upx;
         line-height: 36upx;
-        color: #666;
         margin: 0;
       }
       &>text{
         font-size: 20upx;
-        line-height: 34upx;
-        color: #666;
+        line-height: 25upx;
       }
     }
   }

@@ -25,7 +25,7 @@
               </view>
               <view class="zan">
                 <text :class="{'search-icon': true, iconfont: true, isZan: item.islike !== 'no'}" @click="zanAction(item, index)">&#xe63a;</text>
-                <text>{{ item.islike_count }}</text>
+                <text class="col-6">{{ item.islike_count }}</text>
               </view>
             </view>
           </view>
@@ -280,10 +280,10 @@
       height: 0;
       background-color: transparent;
     }
-
     .banner-swiper {
       padding: 40upx 30upx 0 30upx;
       height: 400upx;
+      overflow: hidden;
     }
 
     .word-swiper {

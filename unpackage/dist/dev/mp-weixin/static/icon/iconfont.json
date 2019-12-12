@@ -6,11 +6,53 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5062013",
+      "name": "爱心",
+      "font_class": "aixin",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "5367576",
+      "name": "分享",
+      "font_class": "fenxiang-",
+      "unicode": "e6b6",
+      "unicode_decimal": 59062
+    },
+    {
+      "icon_id": "5491977",
+      "name": "消息",
+      "font_class": "xiaoxi",
+      "unicode": "e65b",
+      "unicode_decimal": 58971
+    },
+    {
+      "icon_id": "7336857",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "e676",
+      "unicode_decimal": 58998
+    },
+    {
+      "icon_id": "8433705",
+      "name": "删 除",
+      "font_class": "shanchu",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
       "icon_id": "10459924",
       "name": "返 回",
       "font_class": "fanhui",
       "unicode": "e61b",
       "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "10941713",
+      "name": "心 爱心",
+      "font_class": "xinaixin",
+      "unicode": "e633",
+      "unicode_decimal": 58931
     }
   ]
 }

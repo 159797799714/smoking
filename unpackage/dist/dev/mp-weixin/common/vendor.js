@@ -241,7 +241,7 @@ var promiseInterceptor = {
 
 
 var SYNC_API_RE =
-/^\$|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64/;
+/^\$|restoreGlobal|getCurrentSubNVue|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64/;
 
 var CONTEXT_API_RE = /^create|Manager$/;
 
@@ -1085,6 +1085,18 @@ function handleEvent(event) {var _this = this;
           {// mp-weixin,mp-toutiao 抽象节点模拟 scoped slots
             handlerCtx = handlerCtx.$parent.$parent;
           }
+          if (methodName === '$emit') {
+            handlerCtx.$emit.apply(handlerCtx,
+            processEventArgs(
+            _this.$vm,
+            event,
+            eventArray[1],
+            eventArray[2],
+            isCustom,
+            methodName));
+
+            return;
+          }
           var handler = handlerCtx[methodName];
           if (!isFn(handler)) {
             throw new Error(" _vm.".concat(methodName, " is not a function"));
@@ -1189,6 +1201,13 @@ function parseBaseApp(vm, _ref3)
 
   // 兼容旧版本 globalData
   appOptions.globalData = vm.$options.globalData || {};
+  // 将 methods 中的方法挂在 getApp() 中
+  var methods = vm.$options.methods;
+  if (methods) {
+    Object.keys(methods).forEach(function (name) {
+      appOptions[name] = methods[name];
+    });
+  }
 
   initHooks(appOptions, hooks);
 
@@ -1291,7 +1310,7 @@ function parseBaseComponent(vueComponentOptions)
 
 
   {
-    // 微信multipleSlots  部分情况有 bug，导致内容顺序错乱 如 u-list，提供覆盖选项
+    // 微信 multipleSlots 部分情况有 bug，导致内容顺序错乱 如 u-list，提供覆盖选项
     if (vueOptions['mp-weixin'] && vueOptions['mp-weixin']['options']) {
       Object.assign(options, vueOptions['mp-weixin']['options']);
     }
@@ -1662,7 +1681,7 @@ store;exports.default = _default;
 
 /***/ }),
 
-/***/ 153:
+/***/ 152:
 /*!********************************************************************!*\
   !*** C:/Users/pc/Desktop/LEI/smoking/static/img/tabbar/index1.png ***!
   \********************************************************************/
@@ -2634,40 +2653,46 @@ var index_esm = {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
+  uploadImage: 'upload/image', // 图片上传
+
   // 首页文章
   homebanners: 'axumi.homebanner/gethomebanners', // 首页轮播图列表
   recomList: 'axumi.article/recomList', // 发现文章列表
   focusList: 'axumi.article/focusList', // 关注文章列表
   newList: 'axumi.article/list', // 最新文章列表
 
+  // 文章
   articleDetail: 'axumi.article/detail', // 文章详情
+  articleDelete: 'axumi.article/delete', // 文章删除
+  articleAddComment: 'axumi.article/addcomments', // 文章评论
   articleLike: 'axumi.article/like', // 文章点赞
   articleunLike: 'axumi.article/unLike', // 文章取消点赞
   articleCollect: 'axumi.article/collection', // 文章收藏
   articleunCollect: 'axumi.article/unCollection', // 文章取消收藏
 
   articleFocus: 'axumi.article/focus', // 文章用户关注
-  articleunFocus: 'axumi.article/unFocus' // 文章用户取消关注
+  articleunFocus: 'axumi.article/unFocus', // 文章用户取消关注
+
+  commentreply: 'axumi.article/commentreply', // 评论回复
+  commentLike: 'axumi.article/commentlike', // 评论点赞
+  commentUnlike: 'axumi.article/commentunlike', // 评论取消点赞
+  commentReplyLike: 'axumi.article/commentreplylike', // 评论回复点赞
+  commentreplyunlike: 'axumi.article/commentreplyunlike', // 评论回复取消点赞
+
+  // 积分
+  integralIndex: 'ax.goods/goodsList', // 积分--商城（产品列表）首页
+  goodDetail: 'ax.goods/detail', // 商品详情
+  buyNow: 'ax.order/buyNow', // 兑换商品
+  buyNowinventory: 'ax.order/buyNowinventory', // 点击兑换--库存与积分检测接口
+  integralLogs: 'axapp.center/integralLogs', // 用户积分明细
+  lists: 'axapp.center/lists', // 商品兑换记录---订单列表
+  userIntegralDetails: 'axapp.center/userIntegralDetails', // 积分总额-当日已获得积分--每日最高可获得积分
+  userIntegralDetailsByDay: 'axapp.center/userIntegralDetailsByDay' // 查看当日积分获得详情(获得积分)
 };exports.default = _default;
 
 /***/ }),
 
 /***/ 18:
-/*!*****************************************************!*\
-  !*** C:/Users/pc/Desktop/LEI/smoking/api/config.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  devApi: 'http://192.168.31.186/code/api/web/index.php?s=/api/', // 开发环境
-  conductApi: 'https://market.pd-unixe.com/index.php?s=/api/' // 生产环境
-};exports.default = _default;
-
-/***/ }),
-
-/***/ 19:
 /*!*********************************************************!*\
   !*** C:/Users/pc/Desktop/LEI/smoking/common/request.js ***!
   \*********************************************************/
@@ -2676,7 +2701,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = _default;var _index = _interopRequireDefault(__webpack_require__(/*! ../store/index.js */ 15));
-var _config = _interopRequireDefault(__webpack_require__(/*! ../api/config.js */ 18));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+var _config = _interopRequireDefault(__webpack_require__(/*! ../api/config.js */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 
 function _default(obj) {
   var params = {
@@ -2721,6 +2746,21 @@ function _default(obj) {
   return promise;
 }
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 19:
+/*!*****************************************************!*\
+  !*** C:/Users/pc/Desktop/LEI/smoking/api/config.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  devApi: 'http://192.168.31.186/code/api/web/index.php?s=/api/', // 开发环境
+  conductApi: 'https://market.pd-unixe.com/index.php?s=/api/' // 生产环境
+};exports.default = _default;
 
 /***/ }),
 
@@ -8687,6 +8727,43 @@ internalMixin(Vue);
 
 /***/ }),
 
+/***/ 241:
+/*!***********************************************************!*\
+  !*** C:/Users/pc/Desktop/LEI/smoking/common/uploadImg.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = _default;var _index = _interopRequireDefault(__webpack_require__(/*! ../store/index.js */ 15));
+var _config = _interopRequireDefault(__webpack_require__(/*! ../api/config.js */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+function _default(imgInfo) {
+  var params = {
+    'wxapp_id': '10001',
+    // token: store.state.token
+    token: 'cd3f5492377469fe601f173dwewe' };
+
+  var promise = new Promise(function (resolve, reject) {
+    uni.uploadFile({
+      url: _config.default.devApi + 'ax.upload/image', //仅为示例，非真实的接口地址
+      filePath: imgInfo,
+      name: 'iFile',
+      formData: params,
+      success: function success(res) {
+        resolve(res.data);
+      },
+      fail: function fail(err) {
+        reject(err);
+      } });
+
+  });
+  return promise;
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
 /***/ 3:
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -9624,7 +9701,7 @@ main();
 /*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, deprecated, description, devDependencies, files, gitHead, homepage, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.0.0-24220191115004","_inBundle":false,"_integrity":"sha512-UKnpiHSP7h9c5IFpJFkWkpm1KyWz9iHj1hchrQSUxPhChx+KPOmunnQcKGiQvvBz9CeSi7Se/eauJYha5ch0kw==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@next","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"next","saveSpec":null,"fetchSpec":"next"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-24220191115004.tgz","_shasum":"5848f2204f37daaf8c340fb27d9f76b16fcbfdeb","_spec":"@dcloudio/uni-stat@next","_where":"/Users/guoshengqiang/Documents/dcloud-plugins/release/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"bcf65737c5111d47398695d3db8ed87305df346e","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-24220191115004"};
+module.exports = {"_from":"@dcloudio/uni-stat@^2.0.0-alpha-24420191128001","_id":"@dcloudio/uni-stat@2.0.0-v3-24020191018001","_inBundle":false,"_integrity":"sha512-nYBm5pRrYzrj2dKMqucWSF2PwInUMnn3MLHM/ik3gnLUEKSW61rzcY1RPlUwaH7c+Snm6N+bAJzmj3GvlrlVXA==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"@dcloudio/uni-stat@^2.0.0-alpha-24420191128001","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"^2.0.0-alpha-24420191128001","saveSpec":null,"fetchSpec":"^2.0.0-alpha-24420191128001"},"_requiredBy":["/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-v3-24020191018001.tgz","_shasum":"6ef04326cc0b945726413eebe442ab8f47c7536c","_spec":"@dcloudio/uni-stat@^2.0.0-alpha-24420191128001","_where":"/Users/guoshengqiang/Documents/dcloud-plugins/alpha/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"197e8df53cc9d4c3f6eb722b918ccf51672b5cfe","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-v3-24020191018001"};
 
 /***/ }),
 

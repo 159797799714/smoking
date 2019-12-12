@@ -1,12 +1,12 @@
 <template>
   <view class="goodList">
-    <view v-for="(item, index) in goodList" :key="index" class="good-item b-f" @click="goDetail">
+    <view v-for="(item, index) in goodList" :key="index" class="good-item b-f" @click="goDetail(item.goods_id)">
       <view class="good-img">
-        <image src="../../static/mine/discount/null.png" mode="widthFix"></image>
+        <image :src="item.image[0].file_path" mode="widthFix"></image>
       </view>
       <view class="good-info">
         <view class="m-t-30 f-24 col-6 onelist-hidden">{{item.name}}</view>
-        <view class="m-t-15 f-24 col-f0f">积分￥{{item.grade}}</view>  
+        <view class="m-t-15 f-24 col-f0f">积分 {{item.grade}}</view>  
       </view>
     </view>
   </view>
@@ -23,9 +23,9 @@
       }
     },
     methods: {
-      goDetail() {
+      goDetail(id) {
         uni.navigateTo({
-          url: '../integral/goodDetail'
+          url: '../integral/goodDetail?goods_id=' + id
         })
       }
     }

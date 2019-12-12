@@ -1,33 +1,34 @@
 <template>
   <view class="detail">
     <view class="swiper-box">
-      <banner :swiperList="swiperList"/>
+      <banner :swiperList="swiperList" :borderWidth="''"/>
     </view>
     
     <view class="good-info">
-      <view class="good-name f-28 col-c twolist-hidden">{{detail.name}}</view>
-      <view class="price m-t-10 f-24 col-f0f">积分：<text class="f-28">{{detail.price}}</text></view>
+      <view class="good-name f-28 col-c twolist-hidden">{{detail.goods_name}}</view>
+      <view class="price m-t-10 f-24 col-f0f">积分：<text class="f-28">{{detail.sku[0].goods_price * 100 / 100}}</text></view>
       <view class="m-t-20 point onelist-hidden">
-        <text class="b-90f f-28 col-f">{{detail.sell_point}}</text>
+        <text class="b-90f f-28 col-f">{{detail.selling_point}}</text>
       </view>
     </view>
     
     <view class="item oh col-9 b-20" @click="open">
       <text class="fl">商品规格</text>
-      <view class="fr">
-        <text class="col-90f">></text>
+      <view class="fr rotate-180">
+        <text class="col-90f iconfont">&#xe61b;</text>
       </view>
     </view>
     
     <view class="item oh col-9">
       <text class="fl">商品详情</text>
-      <view class="fr">
-        <text class="col-90f">></text>
+      <view class="fr rotate-180">
+        <text class="col-90f iconfont">&#xe61b;</text>
       </view>
     </view>
     
     <view class="good-detail">
-      
+      <!-- 富文本 -->
+      <rich-text type="node" :nodes="detail.content"></rich-text>
     </view>
     
     <view class="p-fix buy-btn t-c f-30 col-f" @click="open">兑换商品</view>
@@ -37,18 +38,18 @@
       <view class="b-13 col-f p-30">
         <view class="popup-head">
           <view class="fl good-img">
-            <image src="../../static/mine/sign_bg.png" mode="widthFix"></image>
+            <image :src="goods.image_path" mode="widthFix"></image>
           </view>
-          <text class="f-32 col-f0f">积分4000</text>
+          <text class="f-32 col-f0f">积分{{goods.goods_price * 100 / 100}}</text>
         </view>
         <view v-for="(item, index) in specData.spec_attr" :key="index" class="norm-item">
           <view class="norm-title f-24 col-c">{{ item.group_name }}</view>
           <view class="norm-bar">
-            <text v-for="(li, num) in item.spec_items" :key="num" :class="{selected: select_arr[index] === li.item_id, 'f-26 col-13 b-9': true }" @click="selectNorm(index, li, num)">{{ li.spec_value }}</text>
+            <text v-for="(li, num) in item.spec_items" :key="num" :class="{selected: select_arr[index] === li.item_id, 'f-26 col-13 b-9': true }" @click="selectNorm(index, li, num)">{{ li.spec_value }}{{li.item_id}}</text>
           </view>
         </view>
         <view class="control-num oh">
-          <view class="num-title f-24 col-c">购买数量</view>
+          <view class="fl num-title f-24 col-c">购买数量</view>
           <view class="sum col-6">
             <text v-if="!showPanic" class="iconfont f-24" @click="controlNum('-')">-</text>
             <text class="num b-9 f-30">{{ goods_num }}</text>
@@ -72,49 +73,126 @@
     },
     data () {
       return {
-        swiperList: ['', ''],
-        detail: {
-          name: 'MOBY任天堂switch保护套ns保护壳nintendo游戏机外壳主机手柄一体s保护壳nintendo游戏机外壳主机手柄一体s保护壳nintendo游戏机外壳主机手柄一体',
-          price: 70000,
-          sell_point: '包邮'
-        },
-        specData: {
-          spec_attr: [{
-            group_name: '颜色',
-            spec_items: [{
-              item_id: 0,
-              spec_value: '红'
-            }, {
-              item_id: 1,
-              spec_value: '黄'
-            }, {
-              item_id: 2,
-              spec_value: '蓝'
-            }]
-          }, {
-            group_name: '尺寸',
-            spec_items: [{
-              item_id: 0,
-              spec_value: '小'
-            }, {
-              item_id: 1,
-              spec_value: '中'
-            }, {
-              item_id: 2,
-              spec_value: '大'
-            }]
-          }]
-        },
-        select_arr: [0, 0],             // 选中的规格id值
+        goods_id: '',
+        detail: '',                         // 商品详情
+        specData: '',                       // 商品规格
+        swiperList: [],
+        goods: {},
+        select_arr: [],             // 选中的规格id值
+        select_name: [],            // 选中的名称
         goods_num: 1,                   // 兑换的数量
       }
     },
+    onLoad(opt) {
+      console.log(opt)
+      if(!opt.goods_id) {
+        return
+      }
+      this.goods_id= opt.goods_id
+      this.getDetail(opt.goods_id)
+     
+    },
     methods: {
+      getDetail(id) {
+        let that= this
+        let params = {
+          url: that.$api.goodDetail,
+          data: {
+            goods_id: this.goods_id
+          }
+        }
+        that.$httpRequest(params).then(res => {
+          console.log(res.data)
+          that.detail= res.data.detail
+          that.specData= res.data.specData
+          that.swiperList= res.data.detail.image
+          
+          // 商品详情
+          var richtext =  res.data.detail.content
+          const regex = new RegExp('img')
+          richtext= richtext.replace(regex, `img style="max-width: 100%;"`)
+          that.detail.content = richtext
+          
+          if(that.specData) {
+             // 默认选中的规格，以及规格名称
+            that.specData.spec_attr.map((item, index) => {
+              that.select_arr.push(item.spec_items[0].item_id)
+              that.select_name.push(item.spec_items[0].spec_value)
+            })
+            
+            // 图片及价钱和库存
+            let obj = {},
+              id = that.select_arr.join('_')
+            that.specData.spec_list.map((item, index) => {
+              if(item.spec_sku_id === id) {
+                obj.goods_price= item.form.goods_price
+                obj.goods_price= item.form.goods_price
+                if(item.form.image_path) {
+                  obj.image_path = item.form.image_path
+                  console.log(item.form.image_path)
+                }
+              }
+            })
+            that.goods = obj
+            
+          }
+        })
+      },
+      // 检测库存
+      // detectStock() {
+      //   let that= this,
+      //     id = that.select_arr.join('_'),
+      //     status= false
+      //   let params = {
+      //     url: that.$api.buyNowinventory,
+      //     data: {
+      //       goods_id: this.goods_id,
+      //       goods_num: this.goods_num,
+      //       goods_sku_id: id
+      //     }
+      //   }
+      //   let info= that.$httpRequest(params).then(res => {
+      //     if(res.code === 1) {
+      //       status= true
+      //       console.log('执行了1', status)
+      //       return status
+      //     }
+      //     uni.showToast({
+      //       title: res.msg,
+      //       icon: 'none'
+      //     })
+      //   })
+      //   return status
+      // },
+      
       // 确认订单
       goOrder() {
-        uni.navigateTo({
-          url: 'order/orderSure'
+        // 先检测库存
+        let that= this,
+          id = that.select_arr.join('_')
+        let params = {
+          url: that.$api.buyNowinventory,
+          data: {
+            goods_id: this.goods_id,
+            goods_num: this.goods_num,
+            goods_sku_id: id
+          }
+        }
+        that.$httpRequest(params).then(res => {
+          if(res.code === 1) {
+            let str= JSON.stringify(params.data)
+            console.log(str)
+            uni.navigateTo({
+              url: 'order/orderSure?obj=' + str
+            }) 
+            return
+          }
+          uni.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
         })
+        
       },
       // 打开弹窗
       open(){
@@ -124,7 +202,6 @@
       // 商品规格
       selectNorm(shu, li, num) {
         let that = this
-        console.log(shu, li , num)
         that.select_arr[shu] = li.item_id
         let arr = []
         let arr2 = []
@@ -149,18 +226,18 @@
         })
         that.select_name = arr2
         
-        console.log('选中的规格id', arr, '选中的规格名称',  arr2)
-        
         let id = that.select_arr.join('_')
         
         // 图片及价钱和库存
         let obj = that.goods
         that.specData.spec_list.map((item, index) => {
+          console.log(item, id)
           if(item.spec_sku_id === id) {
             obj.goods_price= item.form.goods_price
-            obj.stock_num= item.form.stock_num
+            obj.goods_price= item.form.goods_price
             if(item.form.image_path) {
               obj.image_path = item.form.image_path
+              console.log(item.form.image_path)
             }
           }
         })
@@ -169,13 +246,13 @@
       // 设置商品数量
       controlNum(type) {
         if(type === '+') {
-          // if(this.goods_num >= this.goods.stock_num) {
+          if(this.goods_num >= this.goods.stock_num) {
             uni.showToast({
               title: '库存不足',
               icon: 'none'
             })
             return
-          // }
+          }
           this.goods_num += 1
         }
         else if(type === '-') {
@@ -257,8 +334,12 @@
       .sum{
         float: right;
         height: 45upx;
+        padding-top: 23upx;
         display: flex;
         align-items: center;
+        .iconfont{
+          padding: 0 15upx;
+        }
         .num{
           padding: 0 35upx;
           margin: 0 19upx;
@@ -289,5 +370,7 @@
   .b-20{
     border-bottom: 20upx solid #333;
   }
-  
+  .rotate-180{
+    transform: rotate(180deg);
+  }
 </style>
