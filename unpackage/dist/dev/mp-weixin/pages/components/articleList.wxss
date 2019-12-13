@@ -286,7 +286,7 @@ text.data-v-277d5829, view.data-v-277d5829 {
   margin-left: 30rpx;
 }
 .article-img.data-v-277d5829 {
-  width: 100%;
+  width: calc(100% - 2rpx);
   height: 330rpx;
   overflow: hidden;
 }
@@ -310,7 +310,7 @@ text.data-v-277d5829, view.data-v-277d5829 {
 .box.data-v-277d5829 {
   line-height: 40rpx;
 }
-.m-l-4.data-v-277d5829 {
+.m-l-7.data-v-277d5829 {
   margin-left: 4rpx;
 }
 

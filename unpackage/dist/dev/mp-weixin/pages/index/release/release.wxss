@@ -337,6 +337,9 @@ text.data-v-354c8078, view.data-v-354c8078 {
       width: 460rpx;
       padding: 0 20rpx;
 }
+.content .line-item .address.data-v-354c8078 {
+      width: 80%;
+}
 .content .release-btn.data-v-354c8078 {
     position: fixed;
     bottom: 100rpx;
@@ -361,5 +364,8 @@ text.data-v-354c8078, view.data-v-354c8078 {
 .rotate-180.data-v-354c8078 {
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
+}
+.line-40.data-v-354c8078 {
+  line-height: 40rpx;
 }
 

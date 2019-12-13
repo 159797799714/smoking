@@ -3,7 +3,7 @@
     <view class="t-r f-32 col-9">打卡规则</view>
     <view class="progress-circle">
       <view class="small-circle b-13 col-90f">
-        <view class="day t-c f-130">31
+        <view class="day t-c f-130">{{detail.clock_in_days}}
           <view class="small-word f-20">
             <view>连续</view>
             <view>DAY</view>
@@ -18,12 +18,12 @@
     <view class="m-t-30 t-c">
       <view class="sign-btn f-40 col-f">今日打卡</view>
     </view>
-    <view class="m-t-30 t-c f-30 col-6">还有21天就可以领取奖励</view>
+    <view class="m-t-30 t-c f-30 col-6">还有{{31 - detail.clock_in_days}}天就可以领取奖励</view>
     
     <view class="section-title t-c f-32 col-c">打卡墙</view>
     
     <view class="article">
-      <articleList :articleList="articleList"/>
+      <articleList :articleList="detail.list.data"/>
     </view>
   </view>
 </template>
@@ -36,19 +36,23 @@
     },
     data () {
       return {
-        articleList: [{
-          name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-          grade: 999
-        }, {
-          name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-          grade: 999
-        }, {
-          name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-          grade: 999
-        }, {
-          name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-          grade: 999
-        }]
+        detail: {},                 // 打卡详情
+      }
+    },
+    onLoad() {
+      this.getDetail()
+    },
+    methods: {
+      getDetail() {
+        let that= this
+        let params = {
+          url: that.$api.clockInPage
+        }
+        that.$httpRequest(params).then(res => {
+          console.log(res)
+          that.detail= res.data
+          
+        })
       }
     }
   }

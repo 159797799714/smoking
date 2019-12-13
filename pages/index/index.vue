@@ -14,10 +14,10 @@
 
       <view class="section">
         <view v-if="articleList.length > 0" v-for="(item, index) in articleList" :key="index" class="culture bg-black">
-          <image :src="item.articleimage[0].file_path" mode="widthFix" @click="goInfo(item.article_id)"></image>
+          <image v-if="item.articleimage.length > 0" :src="item.articleimage[0].file_path" mode="widthFix" @click="goInfo(item.article_id)"></image>
           <view class="item-words">
-            <view v-if="item.article_title" class="title f-36 col-f" @click="goInfo(item.article_id)">{{ item.article_title }}</view>
-            <view v-if="item.subtitle" class="info f-24 col-6" @click="goInfo(item.article_id)">{{ item.subtitle }}</view>
+            <view v-if="item.article_title" class="title f-36 col-f twolist-hidden" @click="goInfo(item.article_id)">{{ item.article_title }}</view>
+            <view v-if="item.article_content" class="info f-24 col-6 twolist-hidden" @click="goInfo(item.article_id)">{{ item.article_content }}</view>
             <view class="control f-24 col-6">
               <view class="look">
                 <text class="search-icon iconfont">&#xe6cc;</text>
@@ -31,7 +31,7 @@
           </view>
         </view>
         
-        <view v-if="articleList.length < 1" class="null dis-flex flex-dir-column  flex-y-center">
+       <view v-if="articleList !== '' && articleList.length < 1" class="null dis-flex flex-dir-column  flex-y-center">
           <view class="iconfont font-88 col-f">&#xe698;</view>
           <view class="col-f font-32">亲，暂无相关文章哦！</view>
         </view>
@@ -68,7 +68,7 @@
           category_id: 2
         }],                // 菜单
         category_id: 0,    // 菜单选中
-        articleList: [],   // 文章列表
+        articleList: '',   // 文章列表
         page: {
           total: 1,
           current_page: 1,
@@ -86,7 +86,7 @@
       category_id (val) {
         let that= this
         that.page.current_page= 1
-        that.articleList= []
+        that.articleList= ''
         switch (val) {
           case 0:
             that.getFindList()
@@ -178,7 +178,6 @@
             // 设置页面信息
             that.setPage(res.data.list)
           } else  {
-            
             uni.showToast({
             	title: '发现文章列表加载失败',
               icon: 'none'

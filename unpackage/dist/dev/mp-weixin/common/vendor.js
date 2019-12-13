@@ -2662,6 +2662,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   newList: 'axumi.article/list', // 最新文章列表
 
   // 文章
+  articleRelease: 'axumi.article/release', // 文章发布
   articleDetail: 'axumi.article/detail', // 文章详情
   articleDelete: 'axumi.article/delete', // 文章删除
   articleAddComment: 'axumi.article/addcomments', // 文章评论
@@ -2687,7 +2688,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   integralLogs: 'axapp.center/integralLogs', // 用户积分明细
   lists: 'axapp.center/lists', // 商品兑换记录---订单列表
   userIntegralDetails: 'axapp.center/userIntegralDetails', // 积分总额-当日已获得积分--每日最高可获得积分
-  userIntegralDetailsByDay: 'axapp.center/userIntegralDetailsByDay' // 查看当日积分获得详情(获得积分)
+  userIntegralDetailsByDay: 'axapp.center/userIntegralDetailsByDay', // 查看当日积分获得详情(获得积分)
+
+  clockInPage: 'axumi.article/clockInPage' // 打卡页面
 };exports.default = _default;
 
 /***/ }),

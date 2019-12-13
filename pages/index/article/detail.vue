@@ -13,12 +13,12 @@
     </topBar>
     
     <scroll-view scroll-y="true" class="content" @scroll="onScroll">
-      <view class="banners">
+      <view v-if="detail.articleimage.length > 0" class="banners">
         <banner :swiperList="detail.articleimage" :borderWidth="false"></banner>
       </view>
       <view class="cultureInfo col-c">
-        <view class="cultureTitle f-40">{{ detail.article_title }}</view>
-        <view class="f-24 col-c">{{detail.subtitle}}</view>
+        <view v-if="detail.article_title" class="cultureTitle f-40">{{ detail.article_title }}</view>
+        <view v-if="detail.subtitle" class="f-24 col-c">{{detail.subtitle}}</view>
         <view class="m-t-20 cultureTime f-24 col-6">{{ detail.input_time }}</view>
         <view class="cultureWords f-28 col-c">
           <!-- 富文本 -->

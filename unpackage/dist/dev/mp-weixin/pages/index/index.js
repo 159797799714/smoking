@@ -192,7 +192,7 @@ __webpack_require__.r(__webpack_exports__);
         category_id: 2 }],
       // 菜单
       category_id: 0, // 菜单选中
-      articleList: [], // 文章列表
+      articleList: '', // 文章列表
       page: {
         total: 1,
         current_page: 1,
@@ -210,7 +210,7 @@ __webpack_require__.r(__webpack_exports__);
     category_id: function category_id(val) {
       var that = this;
       that.page.current_page = 1;
-      that.articleList = [];
+      that.articleList = '';
       switch (val) {
         case 0:
           that.getFindList();
@@ -302,7 +302,6 @@ __webpack_require__.r(__webpack_exports__);
           // 设置页面信息
           that.setPage(res.data.list);
         } else {
-
           uni.showToast({
             title: '发现文章列表加载失败',
             icon: 'none' });

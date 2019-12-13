@@ -159,10 +159,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
 {
   components: {
     topBar: topBar,
@@ -194,6 +190,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   onLoad: function onLoad() {
     this.getDetail();
+
+    var str = 'a: 乐乐钱, b: 快活林';
+
+    for (var i = 0; i < str.length; i++) {
+      console.log(str.charCodeAt(i));
+    }
+
+    // let str2= '{'+ str + '}'
+    // console.log(str2)
+    // let obj= JSON.parse(str2)
+    // console.log(obj)
   },
   methods: {
     getDetail: function getDetail() {

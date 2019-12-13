@@ -5,8 +5,8 @@
       <view class="col-f iconfont" @click="goIndex">&#xe61b;</view>
     </topBar>
     <view class="content">
-      <input type="text" class="title f-24 col-f" placeholder="标题是吸引别人看关注 (可选可不选)" placeholder-style="color: #ccc; font-size: 24upx;" maxlength="20"/>
-      <textarea  class="article-content f-24 col-f" placeholder="这一刻的分享" placeholder-style="color: #ccc; font-size: 24upx;" maxlength="200"/>
+      <input type="text" v-model="formData.article_title" class="title f-24 col-f" placeholder="标题是吸引别人看关注 (可选可不选)" placeholder-style="color: #ccc; font-size: 24upx;" maxlength="20"/>
+      <textarea v-model="formData.article_content"  class="article-content f-24 col-f" placeholder="这一刻的分享" placeholder-style="color: #ccc; font-size: 24upx;" maxlength="200"/>
       
       <view class="img-box">
         <view v-for="(item, index) in imgArr" :key="index" class="p-re img-item col-f0f">
@@ -21,17 +21,17 @@
       
       <view class="line-item">
         <image src="../../../static/img/index/topic.png" class="icon-img" mode="widthFix"></image>
-        <input type="text" placeholder="请输入参与话题" placeholder-style="color: #ccc;font-size: 24upx;"/>
+        <input type="text" v-model="formData.tags" placeholder="请输入参与话题" placeholder-style="color: #ccc;font-size: 24upx;" class="col-c f-24"/>
         <text class="fr f-40 col-9 iconfont rotate-180">&#xe61b;</text>
       </view>
       
-      <view class="line-item">
-        <image src="../../../static/img/index/address.png" class="icon-img" mode="widthFix"></image>
-        <input type="text" placeholder="所在的位置" placeholder-style="color: #ccc;font-size: 24upx;"/>
+      <view class="line-item oh" @click="getAddress">
+        <image src="../../../static/img/index/address.png" class="icon-img fl" mode="widthFix"></image>
+        <text class="address fl m-l-20 col-c f-24 line-40 onelist-hidden">{{formData.address? formData.address: '所在的位置'}}</text>
         <text class="fr f-40 col-9 iconfont rotate-180">&#xe61b;</text>
       </view>
       
-      <view class="release-btn">
+      <view class="release-btn" @click="releaseAction">
         <view class="btn-main">
           <text class="f-44 col-f f-w">发布</text>
         </view>
@@ -52,6 +52,17 @@
     },
     data () {
       return {
+        formData: {
+          article_title: '',
+          article_content: '',
+          category_id: '',
+          tags: '',
+          address: '',
+          address_latitude: '',
+          address_longitude: '',
+          uploaded: [],
+          source: 'umi'
+        },
         imgArr: [],
         imgUploadID: [],
         time: 0,
@@ -63,11 +74,41 @@
           url: '../index'
         })
       },
-      
-      delImg(index) {
-        this.imgArr.splice(index, 1)
+      // 获取当前位置信息
+      getAddress() {
+        let that= this
+        uni.chooseLocation({
+          success: function (res) {
+            console.log(res)
+            console.log('位置名称：' + res.name);
+            console.log('详细地址：' + res.address);
+            console.log('纬度：' + res.latitude);
+            console.log('经度：' + res.longitude);
+            
+            that.formData.address= res.address + res.name
+            that.formData.address_latitude= res.latitude
+            that.formData.address_longitude= res.longitude
+          }
+        })
+        // uni.getLocation({
+        //   type: 'wgs84',
+        //   success: function (res) {
+        //     console.log(res)
+        //     console.log('当前位置的经度：' + res.longitude)
+        //     console.log('当前位置的纬度：' + res.latitude)
+            
+        //     that.formData.address_latitude= res.latitude
+        //     that.formData.address_longitude= res.longitude
+            
+        //   }
+        // })
       },
       
+      // 删除图片
+      delImg(index) {
+        this.imgArr.splice(index, 1)
+        this.formData.uploaded.splice(index, 1)
+      },
       // 上传图片
       uploadImg () {
         let that= this
@@ -81,13 +122,33 @@
             sourceType: ['album'], //从相册选择
             success: function (res) {
               
-              console.log(JSON.stringify(res.tempFilePaths))
+              let time= 0,
+                max_time= res.tempFilePaths.length
+              uni.showLoading({
+                  title: '上传图片中..'
+              })
+              // console.log(JSON.stringify(res.tempFilePaths))
               res.tempFilePaths.map((item, index) => {
                 // 上传图片
                 uploadImg(item).then((res)=> {
-                  console.log(res)
+                  time ++
+                  if(time === max_time) {
+                    uni.hideLoading()
+                    uni.showToast({
+                      title: max_time + '张图片上传成功',
+                      icon: 'none'
+                    })
+                  }
                   that.imgArr.push(item)
-                  that.imgUploadID.push(res.file_id)
+                  console.log(JSON.parse(res).data.file_id)
+                  that.formData.uploaded.push(JSON.parse(res).data.file_id)
+                  
+                })
+              }, err => {
+                uni.hideLoading()
+                uni.showToast({
+                  title: '第' + (index + 1) + '张图片上传失败',
+                  icon: 'none'
                 })
               })
             }
@@ -98,7 +159,40 @@
             icon: 'none'
           })
         }
+      },
+      // 发布文章
+      releaseAction() {
+        let that= this
+        if(!that.formData.article_content) {
+          uni.showToast({
+            title: '文章内容不能为空！',
+            icon: 'none'
+          })
+          return
+        }
         
+        let params= {
+          url: that.$api.articleRelease,
+          data: {
+            formData: JSON.stringify(that.formData)
+          },
+          method: 'POST'
+        }
+        that.$httpRequest(params).then(res => {
+          if(res.code === 1) {
+            uni.showToast({
+              title: '发布成功',
+              icon: 'none'
+            })
+            that.goIndex()
+          } else {
+            uni.showToast({
+              title: res.msg,
+              icon: 'none'
+            })
+            return
+          }
+        })
       }
     }
   }
@@ -168,6 +262,9 @@
         width: 460upx;
         padding: 0 20upx;
       }
+      .address{
+        width: 80%;
+      }
     }
     .release-btn{
       position: fixed;
@@ -192,5 +289,8 @@
   }
   .rotate-180{
     transform: rotate(180deg);
+  }
+  .line-40{
+    line-height: 40upx;
   }
 </style>

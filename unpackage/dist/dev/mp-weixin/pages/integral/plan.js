@@ -160,21 +160,24 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
   data: function data() {
     return {
-      articleList: [{
-        name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-        grade: 999 },
-      {
-        name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-        grade: 999 },
-      {
-        name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-        grade: 999 },
-      {
-        name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-        grade: 999 }] };
+      detail: {} // 打卡详情
+    };
+  },
+  onLoad: function onLoad() {
+    this.getDetail();
+  },
+  methods: {
+    getDetail: function getDetail() {
+      var that = this;
+      var params = {
+        url: that.$api.clockInPage };
 
+      that.$httpRequest(params).then(function (res) {
+        console.log(res);
+        that.detail = res.data;
 
-  } };exports.default = _default;
+      });
+    } } };exports.default = _default;
 
 /***/ }),
 

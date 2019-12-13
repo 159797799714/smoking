@@ -211,18 +211,112 @@ var _uploadImg2 = _interopRequireDefault(__webpack_require__(/*! ../../../common
 //
 //
 //
-var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../../components/topBar.vue */ 180));};var _default = { components: { topBar: topBar }, data: function data() {return { imgArr: [], imgUploadID: [], time: 0 };}, methods: { goIndex: function goIndex() {uni.switchTab({ url: '../index' });}, delImg: function delImg(index) {this.imgArr.splice(index, 1);}, // 上传图片
-    uploadImg: function uploadImg() {var that = this;var length = this.imgArr.length;var leavelength = 9 - length;if (leavelength > 0) {uni.chooseImage({ count: leavelength, //默认9
+var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../../components/topBar.vue */ 180));};var _default = { components: { topBar: topBar }, data: function data() {return { formData: { article_title: '', article_content: '', category_id: '', tags: '', address: '', address_latitude: '', address_longitude: '', uploaded: [], source: 'umi' }, imgArr: [], imgUploadID: [], time: 0 };}, methods: { goIndex: function goIndex() {uni.switchTab({ url: '../index' });}, // 获取当前位置信息
+    getAddress: function getAddress() {var that = this;uni.chooseLocation({ success: function success(res) {console.log(res);console.log('位置名称：' + res.name);console.log('详细地址：' + res.address);console.log('纬度：' + res.latitude);console.log('经度：' + res.longitude);that.formData.address = res.address + res.name;that.formData.address_latitude = res.latitude;that.formData.address_longitude = res.longitude;} });
+
+      // uni.getLocation({
+      //   type: 'wgs84',
+      //   success: function (res) {
+      //     console.log(res)
+      //     console.log('当前位置的经度：' + res.longitude)
+      //     console.log('当前位置的纬度：' + res.latitude)
+
+      //     that.formData.address_latitude= res.latitude
+      //     that.formData.address_longitude= res.longitude
+
+      //   }
+      // })
+    },
+
+    // 删除图片
+    delImg: function delImg(index) {
+      this.imgArr.splice(index, 1);
+      this.formData.uploaded.splice(index, 1);
+    },
+    // 上传图片
+    uploadImg: function uploadImg() {
+      var that = this;
+      var length = this.imgArr.length;
+      var leavelength = 9 - length;
+      if (leavelength > 0) {
+
+        uni.chooseImage({
+          count: leavelength, //默认9
           sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
           sourceType: ['album'], //从相册选择
-          success: function success(res) {console.log(JSON.stringify(res.tempFilePaths));res.tempFilePaths.map(function (item, index) {// 上传图片
-              (0, _uploadImg2.default)(item).then(function (res) {console.log(res);that.imgArr.push(item);that.imgUploadID.push(res.file_id);});});} });} else {
+          success: function success(res) {
+
+            var time = 0,
+            max_time = res.tempFilePaths.length;
+            uni.showLoading({
+              title: '上传图片中..' });
+
+            // console.log(JSON.stringify(res.tempFilePaths))
+            res.tempFilePaths.map(function (item, index) {
+              // 上传图片
+              (0, _uploadImg2.default)(item).then(function (res) {
+                time++;
+                if (time === max_time) {
+                  uni.hideLoading();
+                  uni.showToast({
+                    title: max_time + '张图片上传成功',
+                    icon: 'none' });
+
+                }
+                that.imgArr.push(item);
+                console.log(JSON.parse(res).data.file_id);
+                that.formData.uploaded.push(JSON.parse(res).data.file_id);
+
+              });
+            }, function (err) {
+              uni.hideLoading();
+              uni.showToast({
+                title: '第' + (index + 1) + '张图片上传失败',
+                icon: 'none' });
+
+            });
+          } });
+
+      } else {
         uni.showToast({
           title: '最多只能传9张图片哦',
           icon: 'none' });
 
       }
+    },
+    // 发布文章
+    releaseAction: function releaseAction() {
+      var that = this;
+      if (!that.formData.article_content) {
+        uni.showToast({
+          title: '文章内容不能为空！',
+          icon: 'none' });
 
+        return;
+      }
+
+      var params = {
+        url: that.$api.articleRelease,
+        data: {
+          formData: JSON.stringify(that.formData) },
+
+        method: 'POST' };
+
+      that.$httpRequest(params).then(function (res) {
+        if (res.code === 1) {
+          uni.showToast({
+            title: '发布成功',
+            icon: 'none' });
+
+          that.goIndex();
+        } else {
+          uni.showToast({
+            title: res.msg,
+            icon: 'none' });
+
+          return;
+        }
+      });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

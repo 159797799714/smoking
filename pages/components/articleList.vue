@@ -2,18 +2,18 @@
   <view class="articleList">
     <view v-for="(item, index) in articleList" :key="index" class="article-item">
       <view class="article-img">
-        <image src="../../static/mine/discount/null.png" mode="widthFix"></image>
+        <image :src="item.articleimage[0].file_path" mode="widthFix"></image>
       </view>
       <view class="article-info">
-        <view class="article-title f-24 col-6 twolist-hidden">{{item.name}}</view>
+        <view class="article-title f-24 col-6 twolist-hidden">{{item.article_content}}</view>
         <view class="dis-flex flex-x-between flex-y-center f-24 col-f oh">
           <view class="box dis-flex flex-x-between flex-y-center">
-            <image src="../../static/mine/card/china.png" mode="widthFix" class="writer-img"/>
-            <text class="m-l-10 f-24 col-9 onelist-hidden">啦啦啦啦啦</text>
+            <image :src="item.user.avatarUrl" mode="widthFix" class="writer-img"/>
+            <text class="m-l-10 f-24 col-9 onelist-hidden">{{item.user.nickName}}</text>
           </view>
           <view class="box dis-flex flex-x-between flex-y-center">
             <image src="../../static/mine/card/china.png" mode="widthFix" class="writer-img"/>
-            <text class="m-l-4 f-24 col-9 onelist-hidden">222</text>
+            <text class="m-l-7 f-24 col-9 onelist-hidden">{{item.islike_count}}</text>
           </view>
         </view>  
       </view>
@@ -49,7 +49,7 @@
     margin-left: 30upx;
   }
   .article-img{
-    width: 100%;
+    width: calc(100% - 2upx);
     height: 330upx;
     overflow: hidden;
     &>image{
@@ -73,7 +73,7 @@
   .box{
     line-height: 40upx;
   }
-  .m-l-4{
+  .m-l-7{
     margin-left: 4upx;
   }
   
