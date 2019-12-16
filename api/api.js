@@ -38,4 +38,5 @@ export default {
   userIntegralDetailsByDay: 'axapp.center/userIntegralDetailsByDay',   // 查看当日积分获得详情(获得积分)
   
   clockInPage: 'axumi.article/clockInPage',                            // 打卡页面
+  signIn: 'axapp.center/signIn',                                       // 签到
 }

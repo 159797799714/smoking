@@ -68,6 +68,5 @@
       "desc": "获取用户位置信息，从而给用户提供最近的门店查询服务，提升效率"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap19.json"
+  "usingComponents": {}
 }

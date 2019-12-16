@@ -42,41 +42,15 @@
     },
     data () {
       return {
-        info: {},       // 首页详情
-        
-        level: {
-          name: '绚等级',
-          num: 1
-        },
-        spanList: [{
-          name: '积分详情',
-          num: '666',
-          url: './integralDetail'
-        }, {
-          name: '习惯打卡',
-          num: '666',
-          url: './plan'
-        }, {
-          name: '行走步数',
-          num: '666',
-          url: './todayFoot'
-        }],
+        info: {
+          level: 1,
+          integral: 0
+        },       // 首页详情
         goodList: []
       }
     },
     onLoad() {
       this.getDetail()
-      
-      let str= 'a: 乐乐钱, b: 快活林'
-      
-      for(let i= 0; i< str.length; i++) {
-        console.log(str.charCodeAt(i))
-      }
-      
-      // let str2= '{'+ str + '}'
-      // console.log(str2)
-      // let obj= JSON.parse(str2)
-      // console.log(obj)
     },
     methods: {
       getDetail() {

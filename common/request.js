@@ -32,8 +32,7 @@ export default function(obj) {
         } else {
           // console.log(result)
           resolve(result.data)
-        } 
-        
+        }
       }
     ).catch(
       (response) => {

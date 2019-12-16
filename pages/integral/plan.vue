@@ -16,12 +16,11 @@
     <view class="m-t-20 t-c f-30 col-9">无论是健身 戒烟 早起</view>
     
     <view class="m-t-30 t-c">
-      <view class="sign-btn f-40 col-f">今日打卡</view>
+      <view :class="{'sign-btn f-40 col-f': true, 'b-9 col-13': detail.is_clock === 'yes'}" @click="signIn">今日打卡</view>
     </view>
     <view class="m-t-30 t-c f-30 col-6">还有{{31 - detail.clock_in_days}}天就可以领取奖励</view>
     
     <view class="section-title t-c f-32 col-c">打卡墙</view>
-    
     <view class="article">
       <articleList :articleList="detail.list.data"/>
     </view>
@@ -36,13 +35,17 @@
     },
     data () {
       return {
-        detail: {},                 // 打卡详情
+        detail: {
+          clock_in_days: 0,
+          is_clock: ''
+        },                 // 打卡详情
       }
     },
     onLoad() {
       this.getDetail()
     },
     methods: {
+      
       getDetail() {
         let that= this
         let params = {
@@ -52,6 +55,16 @@
           console.log(res)
           that.detail= res.data
           
+        })
+      },
+      signIn() {
+        let that= this
+        let params= {
+          url: that.$api.signIn,
+          method: 'POST'
+        }
+        that.$httpRequest(params).then(res => {
+          console.log(res)
         })
       }
     }

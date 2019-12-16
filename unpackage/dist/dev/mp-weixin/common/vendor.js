@@ -1681,7 +1681,7 @@ store;exports.default = _default;
 
 /***/ }),
 
-/***/ 152:
+/***/ 153:
 /*!********************************************************************!*\
   !*** C:/Users/pc/Desktop/LEI/smoking/static/img/tabbar/index1.png ***!
   \********************************************************************/
@@ -2690,7 +2690,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   userIntegralDetails: 'axapp.center/userIntegralDetails', // 积分总额-当日已获得积分--每日最高可获得积分
   userIntegralDetailsByDay: 'axapp.center/userIntegralDetailsByDay', // 查看当日积分获得详情(获得积分)
 
-  clockInPage: 'axumi.article/clockInPage' // 打卡页面
+  clockInPage: 'axumi.article/clockInPage', // 打卡页面
+  signIn: 'axapp.center/signIn' // 签到
 };exports.default = _default;
 
 /***/ }),
@@ -2738,7 +2739,6 @@ function _default(obj) {
         // console.log(result)
         resolve(result.data);
       }
-
     }).
     catch(
     function (response) {
@@ -8730,43 +8730,6 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 241:
-/*!***********************************************************!*\
-  !*** C:/Users/pc/Desktop/LEI/smoking/common/uploadImg.js ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = _default;var _index = _interopRequireDefault(__webpack_require__(/*! ../store/index.js */ 15));
-var _config = _interopRequireDefault(__webpack_require__(/*! ../api/config.js */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-
-function _default(imgInfo) {
-  var params = {
-    'wxapp_id': '10001',
-    // token: store.state.token
-    token: 'cd3f5492377469fe601f173dwewe' };
-
-  var promise = new Promise(function (resolve, reject) {
-    uni.uploadFile({
-      url: _config.default.devApi + 'ax.upload/image', //仅为示例，非真实的接口地址
-      filePath: imgInfo,
-      name: 'iFile',
-      formData: params,
-      success: function success(res) {
-        resolve(res.data);
-      },
-      fail: function fail(err) {
-        reject(err);
-      } });
-
-  });
-  return promise;
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
 /***/ 3:
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -8807,6 +8770,43 @@ module.exports = g;
 
 "use strict";
 
+
+/***/ }),
+
+/***/ 44:
+/*!***********************************************************!*\
+  !*** C:/Users/pc/Desktop/LEI/smoking/common/uploadImg.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = _default;var _index = _interopRequireDefault(__webpack_require__(/*! ../store/index.js */ 15));
+var _config = _interopRequireDefault(__webpack_require__(/*! ../api/config.js */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+function _default(imgInfo) {
+  var params = {
+    'wxapp_id': '10001',
+    // token: store.state.token
+    token: 'cd3f5492377469fe601f173dwewe' };
+
+  var promise = new Promise(function (resolve, reject) {
+    uni.uploadFile({
+      url: _config.default.devApi + 'ax.upload/image', //仅为示例，非真实的接口地址
+      filePath: imgInfo,
+      name: 'iFile',
+      formData: params,
+      success: function success(res) {
+        resolve(res.data);
+      },
+      fail: function fail(err) {
+        reject(err);
+      } });
+
+  });
+  return promise;
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
