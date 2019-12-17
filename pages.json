@@ -45,7 +45,7 @@
 		}, {
 			"path": "pages/integral/order/orderDetail",
 			"style": {
-				"navigationBarTitleText": "订单详情"
+				"navigationBarTitleText": "经验详情"
 			}
 		}, {
 			"path": "pages/integral/order/success",
@@ -92,7 +92,7 @@
 		}, {
 			"path": "pages/mine/todayExperience",
       "style": {
-      	"navigationBarTitleText": "今日经验"
+      	"navigationBarTitleText": "今日"
       }
 		}, {
 			"path": "pages/mine/personal",

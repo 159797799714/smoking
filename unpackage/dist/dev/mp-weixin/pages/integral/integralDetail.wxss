@@ -328,4 +328,22 @@ text.data-v-20683f62, view.data-v-20683f62 {
   width: 280rpx;
   text-align: left;
 }
+.convert-item.data-v-20683f62 {
+  padding: 20rpx 0;
+}
+.convert-item .good-img.data-v-20683f62 {
+    height: 100rpx;
+    width: 100rpx;
+}
+.convert-item .good-img > image.data-v-20683f62 {
+      height: 100%;
+      width: 100%;
+      background: #ccc;
+}
+.convert-item .good-info.data-v-20683f62 {
+    width: 360rpx;
+}
+.convert-item > text.data-v-20683f62 {
+    line-height: 100rpx;
+}
 

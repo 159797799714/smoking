@@ -14,7 +14,7 @@
       </view>
     </view>
     <view class="t-c">
-      <view class="sign-btn f-40 col-f">签到领积分</view>
+      <view class="sign-btn f-40 col-f"  @click="signIn">{{detail.is_sign === 'yes'? '已签到': '签到领积分'}}</view>
     </view>
     
     <view class="order-main">
@@ -24,11 +24,25 @@
     </view>
     
     <view class="p-left-30">
-      <view v-for="(item, index) in menuList.data" :key="index" class="bar f-26 col-9">
+      <view v-if="tabIndex === 0" v-for="(item, index) in menuList.data" :key="index" class="bar f-26 col-9">
         <text class="fl left-describe">{{item.source_describe}}</text>
         <text>积分{{item.type === 'spending'? '-' + item.integral: '+' + item.integral}}</text>
         <text class="fr">{{item.input_date}}</text>
       </view>
+      
+      <view v-else v-for="(item, index) in convertList.data" :key="index" class="convert-item oh">
+        <view class="oh dis-inline-block">
+          <view class="fl good-img">
+            <image :src="item.goods[0].image.file_path" mode="widthFix"></image>
+          </view>
+          <view class="good-info fl m-l-20 col-9 f-26">
+            <view class="onelist-hidden m-t-15">{{item.goods[0].goods_name}}</view>
+            <view class="m-t-25">{{item.order_no}}</view>
+          </view>
+        </view>
+        <text class="fr f-24 col-9">{{item.create_time}}</text>
+      </view>
+      
     </view>
     
   </view>
@@ -43,7 +57,7 @@
         detail: {
           integral_total: 0,
           today_get_integral_limit_total: 100,
-          today_get_integral_total: 100
+          today_get_integral_total: 0
         },
         left: '',
         menuList: {
@@ -52,7 +66,24 @@
           current_page: 1,
           last_page: 1,
           data: []
+        },                    // 积分明细
+        convertList: {
+          total: 1,
+          per_page: 15,
+          current_page: 1,
+          last_page: 1,
+          data: []
+        }                    // 积分兑换记录
+      }
+    },
+    watch: {
+      tabIndex(val) {
+        if(val === 1) {
+          // 积分明细
+          this.getConvertList()
+          return
         }
+        this.getParticulars()
       }
     },
     onLoad () {
@@ -72,6 +103,18 @@
         })
       },
       
+      // 签到
+      signIn() {
+        let that= this
+        let params= {
+          url: that.$api.signIn,
+          method: 'POST'
+        }
+        that.$httpRequest(params).then(res => {
+          console.log(res)
+        })
+      },
+      
       // 获取积分明细列表
       getParticulars() {
         let that= this,
@@ -87,7 +130,7 @@
         })
       },
       
-      // 获取积分明细列表
+      // 获取积分兑换记录列表
       getConvertList() {
         let that= this,
           params= {
@@ -98,6 +141,11 @@
           }
         that.$httpRequest(params).then(res => {
           console.log('兑换明细', res)
+          let list= res.data.list
+          list.data.map((item, index) => {
+            item.create_time= item.create_time.slice(0, 10)
+          })
+          that.convertList= list
         })
       },
       
@@ -108,7 +156,7 @@
       },
       goDetail() {
         uni.navigateTo({
-          url: '../mine/todayExperience'
+          url: '../mine/todayExperience?type=' + 'integral'
         })
       },
       selectTab(index) {
@@ -175,5 +223,23 @@
   .left-describe{
     width: 280upx;
     text-align: left;
+  }
+  .convert-item{
+    padding: 20upx 0;
+    .good-img{
+      height: 100upx;
+      width: 100upx;
+      &>image{
+        height: 100%;
+        width: 100%;
+        background: #ccc;
+      }
+    }
+    .good-info{
+      width: 360upx;
+    }
+    &>text{
+      line-height: 100upx;
+    }
   }
 </style>

@@ -1,24 +1,24 @@
 <template>
   <view class="my-grade">
-    <view class="t-c f-44 f-w linear-word">Lv1</view>
+    <view class="t-c f-44 f-w linear-word">Lv{{detail.level}}</view>
     <view class="today-experience m-t-20">
       <view class="f-30 col-f">今日经验
-        <text class="f-20 col-6"> (还有80经验可获得）</text>
+        <text class="f-20 col-6"> (还有{{detail.today_get_experience_limit_total - detail.today_get_experience_total}}经验可获得）</text>
       </view>
       <view class="progress">
-        <view class="progress-color-item" :style="{'width': left + 'px'}"></view>
-        <image src="../../static/img/tabbar/index1.png" mode="widthFix"  :style="{'left': left + 'px'}"/>
-        <text class="progress-num f-24 col-f"  :style="{'left': left + 'px'}">20</text>
+        <view class="progress-color-item" :style="{'width': left }"></view>
+        <image src="../../static/img/tabbar/index1.png" mode="widthFix"  :style="{'left': left }"/>
+        <text class="progress-num f-24 col-f"  :style="{'left': left }">{{detail.today_get_experience_total}}</text>
       </view>
     </view>
     
     <view class="more-power">
       <view class="f-30 col-f">经验明细</view>
       <view class="open-menu">
-        <view v-for="(item, index) in menuList" :key="index" class="bar f-26 col-9">
-          <text class="fl">{{item.name}}</text>
-          <text>经验+{{item.num}}</text>
-          <text :class="{'fr': true, 'col-f0f': item.doNum === item.shouldNum}">{{item.doNum}}/{{item.shouldNum}}</text>
+        <view v-for="(item, index) in detail.today_experience_list" :key="index" class="bar f-26 col-9">
+          <text class="fl">{{item.source_describe}}</text>
+          <text>经验+{{item.add_integral}}</text>
+          <text :class="{'fr': true, 'col-f0f': item.completed_num === item.limit_num}">{{item.completed_num}}/{{item.limit_num}}</text>
         </view>
       </view>
     </view>
@@ -29,27 +29,39 @@
   export default {
     data () {
       return {
-        left: 100,
-        menuList:[{
-          name: '获得点赞',
-          num: 10,
-          doNum: 3,
-          shouldNum: 3
-        }, {
-          name: '获得点赞',
-          num: 10,
-          doNum: 2,
-          shouldNum: 4
-        }, {
-          name: '获得点赞',
-          num: 20,
-          doNum: 4,
-          shouldNum: 4
-        }]
+        type: 'experience',
+        left: 0,           // 进度条偏移量
+        detail: {
+          experience_total: 0,
+          level: 1,
+          today_get_experience_limit_total: 100,
+          today_get_experience_total: 0,
+          today_experience_list: []
+        }
       }
-    }, 
+    },
+    onLoad(opt) {
+      console.log(opt)
+      if(opt.type) {
+        this.type= opt.type
+        uni.setNavigationBarTitle({
+          title: '积分详情'
+        })
+      }
+      this.getDetail()
+    },
     methods: {
-      
+      getDetail() {
+        let that= this,
+          params= {
+            url: that.type === 'integral' ? that.$api.userIntegralDetailsByDay: that.$api.userExperienceDetailsByDay
+          }
+        that.$httpRequest(params).then((res) => {
+          let data= res.data
+          that.detail= res.data
+          that.left= data.today_get_experience_total / data.today_get_experience_limit_total * 100 + '%'
+        })
+      }
     }
   }
 </script>

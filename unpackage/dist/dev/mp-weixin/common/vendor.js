@@ -2689,6 +2689,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   lists: 'axapp.center/lists', // 商品兑换记录---订单列表
   userIntegralDetails: 'axapp.center/userIntegralDetails', // 积分总额-当日已获得积分--每日最高可获得积分
   userIntegralDetailsByDay: 'axapp.center/userIntegralDetailsByDay', // 查看当日积分获得详情(获得积分)
+  userExperienceDetailsByDay: 'axapp.center/userExperienceDetailsByDay', // 查看当日经验获得详情(获得经验)
 
   clockInPage: 'axumi.article/clockInPage', // 打卡页面
   signIn: 'axapp.center/signIn' // 签到
@@ -2730,13 +2731,12 @@ function _default(obj) {
           url: '@/page/login/login' });
 
         return;
-      } else if (result.data.code === 0 && result.msg) {
+      } else if (result.data.code === 0 && result.data.msg) {
         uni.showToast({
-          title: result.msg,
+          title: result.data.msg,
           icon: 'none' });
 
       } else {
-        // console.log(result)
         resolve(result.data);
       }
     }).
@@ -9716,7 +9716,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@^2.0.0-alpha-24420191128001","_id"
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationStyle": "custom" }, "pages/login/login": { "navigationStyle": "custom" }, "pages/index/release/release": { "navigationStyle": "custom", "navigationBarTitleText": "文章发布" }, "pages/index/release/center": { "navigationStyle": "custom" }, "pages/index/article/detail": { "navigationStyle": "custom" }, "pages/integral/integral": { "navigationStyle": "custom", "navigationBarTitleText": "积分" }, "pages/integral/goodDetail": { "navigationBarTitleText": "详情" }, "pages/integral/order/orderSure": { "navigationBarTitleText": "订单确认" }, "pages/integral/order/orderDetail": { "navigationBarTitleText": "订单详情" }, "pages/integral/order/success": { "navigationStyle": "custom" }, "pages/integral/plan": { "navigationBarTitleText": "打卡计划" }, "pages/integral/todayFoot": { "navigationBarTitleText": "今日步数" }, "pages/integral/rules": { "navigationBarTitleText": "积分规则说明" }, "pages/integral/integralDetail": { "navigationBarTitleText": "积分详情" }, "pages/store/store": { "navigationStyle": "custom", "navigationBarTitleText": "" }, "pages/mine/mine": { "navigationStyle": "custom", "navigationBarTitleText": "" }, "pages/mine/member": { "navigationBarTitleText": "我的会员等级" }, "pages/mine/todayExperience": { "navigationBarTitleText": "今日经验" }, "pages/mine/personal": { "navigationBarTitleText": "个人信息" } }, "globalStyle": { "navigationBarTextStyle": "white", "backgroundColor": "#131313", "navigationBarBackgroundColor": "#131313" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationStyle": "custom", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" } }, "pages/login/login": { "navigationStyle": "custom", "usingComponents": {} }, "pages/index/release/release": { "navigationStyle": "custom", "navigationBarTitleText": "文章发布", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/index/release/center": { "navigationStyle": "custom", "usingComponents": {} }, "pages/index/article/detail": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar", "banner": "/pages/components/banner" } }, "pages/integral/integral": { "navigationStyle": "custom", "navigationBarTitleText": "积分", "usingComponents": { "top-bar": "/pages/components/topBar", "good-list": "/pages/components/goodList" } }, "pages/integral/goodDetail": { "navigationBarTitleText": "详情", "usingComponents": { "banner": "/pages/components/banner", "uni-popup": "/pages/components/uni-popup/uni-popup" } }, "pages/integral/order/orderSure": { "navigationBarTitleText": "订单确认", "usingComponents": {} }, "pages/integral/order/orderDetail": { "navigationBarTitleText": "经验详情", "usingComponents": {} }, "pages/integral/order/success": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/integral/plan": { "navigationBarTitleText": "打卡计划", "usingComponents": { "article-list": "/pages/components/articleList" } }, "pages/integral/todayFoot": { "navigationBarTitleText": "今日步数", "usingComponents": { "article-list": "/pages/components/articleList" } }, "pages/integral/rules": { "navigationBarTitleText": "积分规则说明", "usingComponents": {} }, "pages/integral/integralDetail": { "navigationBarTitleText": "积分详情", "usingComponents": {} }, "pages/store/store": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": {} }, "pages/mine/mine": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "top-bar": "/pages/components/topBar", "article-list": "/pages/components/articleList" } }, "pages/mine/member": { "navigationBarTitleText": "我的会员等级", "usingComponents": {} }, "pages/mine/todayExperience": { "navigationBarTitleText": "今日", "usingComponents": {} }, "pages/mine/personal": { "navigationBarTitleText": "个人信息", "usingComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "white", "backgroundColor": "#131313", "navigationBarBackgroundColor": "#131313" } };exports.default = _default;
 
 /***/ }),
 

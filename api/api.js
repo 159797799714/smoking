@@ -36,6 +36,7 @@ export default {
   lists: 'axapp.center/lists',                                         // 商品兑换记录---订单列表
   userIntegralDetails: 'axapp.center/userIntegralDetails',             // 积分总额-当日已获得积分--每日最高可获得积分
   userIntegralDetailsByDay: 'axapp.center/userIntegralDetailsByDay',   // 查看当日积分获得详情(获得积分)
+  userExperienceDetailsByDay: 'axapp.center/userExperienceDetailsByDay',   // 查看当日经验获得详情(获得经验)
   
   clockInPage: 'axumi.article/clockInPage',                            // 打卡页面
   signIn: 'axapp.center/signIn',                                       // 签到

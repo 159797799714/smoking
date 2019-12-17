@@ -180,16 +180,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         that.detail = res.data;
 
       });
-    },
-    signIn: function signIn() {
-      var that = this;
-      var params = {
-        url: that.$api.signIn,
-        method: 'POST' };
-
-      that.$httpRequest(params).then(function (res) {
-        console.log(res);
-      });
     } } };exports.default = _default;
 
 /***/ }),

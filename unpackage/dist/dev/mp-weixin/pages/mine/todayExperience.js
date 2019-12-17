@@ -122,7 +122,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -153,26 +153,40 @@ var _default =
 {
   data: function data() {
     return {
-      left: 100,
-      menuList: [{
-        name: '获得点赞',
-        num: 10,
-        doNum: 3,
-        shouldNum: 3 },
-      {
-        name: '获得点赞',
-        num: 10,
-        doNum: 2,
-        shouldNum: 4 },
-      {
-        name: '获得点赞',
-        num: 20,
-        doNum: 4,
-        shouldNum: 4 }] };
+      type: 'experience',
+      left: 0, // 进度条偏移量
+      detail: {
+        experience_total: 0,
+        level: 1,
+        today_get_experience_limit_total: 100,
+        today_get_experience_total: 0,
+        today_experience_list: [] } };
 
 
   },
-  methods: {} };exports.default = _default;
+  onLoad: function onLoad(opt) {
+    console.log(opt);
+    if (opt.type) {
+      this.type = opt.type;
+      uni.setNavigationBarTitle({
+        title: '积分详情' });
+
+    }
+    this.getDetail();
+  },
+  methods: {
+    getDetail: function getDetail() {
+      var that = this,
+      params = {
+        url: that.type === 'integral' ? that.$api.userIntegralDetailsByDay : that.$api.userExperienceDetailsByDay };
+
+      that.$httpRequest(params).then(function (res) {
+        var data = res.data;
+        that.detail = res.data;
+        that.left = data.today_get_experience_total / data.today_get_experience_limit_total * 100 + '%';
+      });
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

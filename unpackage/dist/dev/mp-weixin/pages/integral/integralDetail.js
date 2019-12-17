@@ -158,6 +158,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -167,7 +181,7 @@ var _default =
       detail: {
         integral_total: 0,
         today_get_integral_limit_total: 100,
-        today_get_integral_total: 100 },
+        today_get_integral_total: 0 },
 
       left: '',
       menuList: {
@@ -175,10 +189,27 @@ var _default =
         per_page: 15,
         current_page: 1,
         last_page: 1,
-        data: [] } };
-
-
+        data: [] },
+      // 积分明细
+      convertList: {
+        total: 1,
+        per_page: 15,
+        current_page: 1,
+        last_page: 1,
+        data: []
+        // 积分兑换记录
+      } };
   },
+  watch: {
+    tabIndex: function tabIndex(val) {
+      if (val === 1) {
+        // 积分明细
+        this.getConvertList();
+        return;
+      }
+      this.getParticulars();
+    } },
+
   onLoad: function onLoad() {
     this.getDetail();
     // 积分明细
@@ -193,6 +224,18 @@ var _default =
       that.$httpRequest(params).then(function (res) {
         that.detail = res.data;
         that.left = res.data.today_get_integral_total / res.data.today_get_integral_limit_total * 100 + '%';
+      });
+    },
+
+    // 签到
+    signIn: function signIn() {
+      var that = this;
+      var params = {
+        url: that.$api.signIn,
+        method: 'POST' };
+
+      that.$httpRequest(params).then(function (res) {
+        console.log(res);
       });
     },
 
@@ -211,7 +254,7 @@ var _default =
       });
     },
 
-    // 获取积分明细列表
+    // 获取积分兑换记录列表
     getConvertList: function getConvertList() {
       var that = this,
       params = {
@@ -222,6 +265,11 @@ var _default =
 
       that.$httpRequest(params).then(function (res) {
         console.log('兑换明细', res);
+        var list = res.data.list;
+        list.data.map(function (item, index) {
+          item.create_time = item.create_time.slice(0, 10);
+        });
+        that.convertList = list;
       });
     },
 
@@ -232,7 +280,7 @@ var _default =
     },
     goDetail: function goDetail() {
       uni.navigateTo({
-        url: '../mine/todayExperience' });
+        url: '../mine/todayExperience?type=' + 'integral' });
 
     },
     selectTab: function selectTab(index) {

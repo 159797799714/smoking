@@ -24,13 +24,12 @@ export default function(obj) {
             url: '@/page/login/login'
           })
           return
-        } else if(result.data.code === 0 && result.msg) {
+        } else if(result.data.code === 0 && result.data.msg) {
           uni.showToast({
-            title: result.msg,
+            title: result.data.msg,
             icon: 'none'
           })
         } else {
-          // console.log(result)
           resolve(result.data)
         }
       }
