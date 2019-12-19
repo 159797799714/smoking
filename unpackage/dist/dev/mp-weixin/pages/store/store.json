@@ -1,5 +1,8 @@
 {
   "navigationStyle": "custom",
   "navigationBarTitleText": "",
-  "usingComponents": {}
+  "usingComponents": {
+    "banner": "/pages/components/banner",
+    "top-bar": "/pages/components/topBar"
+  }
 }

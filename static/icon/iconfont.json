@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2836781",
+      "name": "地球_1",
+      "font_class": "diqiu_",
+      "unicode": "e64d",
+      "unicode_decimal": 58957
+    },
+    {
       "icon_id": "5062013",
       "name": "爱心",
       "font_class": "aixin",
@@ -32,6 +39,13 @@
       "font_class": "shezhi",
       "unicode": "e676",
       "unicode_decimal": 58998
+    },
+    {
+      "icon_id": "7892153",
+      "name": "位置",
+      "font_class": "weizhi",
+      "unicode": "e604",
+      "unicode_decimal": 58884
     },
     {
       "icon_id": "8433705",

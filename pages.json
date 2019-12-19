@@ -78,6 +78,11 @@
         "navigationStyle": "custom",
 				"navigationBarTitleText": ""
 			}
+		},  {
+			"path": "pages/store/storeDetail",
+			"style": {
+				"navigationBarTitleText": "门店详情"
+			}
 		}, {
 			"path": "pages/mine/mine",
 			"style": {

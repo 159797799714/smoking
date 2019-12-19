@@ -15,6 +15,7 @@
     "pages/integral/rules",
     "pages/integral/integralDetail",
     "pages/store/store",
+    "pages/store/storeDetail",
     "pages/mine/mine",
     "pages/mine/member",
     "pages/mine/todayExperience",

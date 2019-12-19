@@ -14,7 +14,7 @@
       </view>
     </view>
     <view class="t-c">
-      <view class="sign-btn f-40 col-f"  @click="signIn">{{detail.is_sign === 'yes'? '已签到': '签到领积分'}}</view>
+      <view class="sign-btn f-40 col-f"  @click="signIn">{{detail.is_sign === 'yes'? '今日已签到': '签到领积分'}}</view>
     </view>
     
     <view class="order-main">
@@ -107,8 +107,7 @@
       signIn() {
         let that= this
         let params= {
-          url: that.$api.signIn,
-          method: 'POST'
+          url: that.$api.signIn
         }
         that.$httpRequest(params).then(res => {
           console.log(res)

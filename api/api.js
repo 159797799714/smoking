@@ -27,6 +27,11 @@ export default {
   commentReplyLike: 'axumi.article/commentreplylike',                  // 评论回复点赞
   commentreplyunlike: 'axumi.article/commentreplyunlike',              // 评论回复取消点赞
   
+  // 门店
+  axstoreLists: 'axstore.shop/lists',                                  // 店铺列表
+  axstoreDetail: 'axstore.shop/detail',                                // 查看门店详情
+  axhomeBanners: 'axstore.homebanner/gethomebanners',                  // 门店首页轮播图
+  
   // 积分
   integralIndex: 'ax.goods/goodsList',                                 // 积分--商城（产品列表）首页
   goodDetail: 'ax.goods/detail',                                       // 商品详情
@@ -40,4 +45,7 @@ export default {
   
   clockInPage: 'axumi.article/clockInPage',                            // 打卡页面
   signIn: 'axapp.center/signIn',                                       // 签到
+  
+  // 个人中心
+  userInfo: 'axapp.center/userHomePage',                               // 我的首页个人信息
 }

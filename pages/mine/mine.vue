@@ -3,16 +3,16 @@
     <!-- 头部 -->
     <topBar :isindex="true"/>
     
-    <view class="t-c f-36 col-f">风一样的男人</view>
-    <view class="t-c f-24 col-9">ID: 000000</view>
+    <view class="t-c f-36 col-f">{{userInfo.nickName}}</view>
+    <view class="t-c f-24 col-9">phone: {{userInfo.mobile}}</view>
     <view class="p-re head m-t-20 oh">
-      <image class="fl userImg" src="../../static/mine/card/china.png" mode="widthFix" @click="goPersonal"></image>
+      <image class="fl userImg" :src="userInfo.avatarUrl" mode="widthFix" @click="goPersonal"></image>
       <view class="m-l-10 fl oh">
         <view class="grade f-20 f-w">
           <text class="linear-word">LV1</text>
           <text class="grade-btn m-l-10 b-f0f col-f" @click="goMember">查看特权</text>
         </view>
-        <view class="sign m-t-20 f-24 col-f">个性签名：越努力越幸福！</view>
+        <view class="sign m-t-20 f-24 col-f">个性签名：{{userInfo.sign}}</view>
       </view>
       
     </view>
@@ -20,13 +20,6 @@
       <view v-for="(item, index) in topicList" :key="index" class="span-item">
         <view class="num f-28 col-f">{{item.num}}</view>
         <view class="m-t-10 f-26 col-6">{{item.name}}</view>
-      </view>
-      <view class="convent">
-        <view class="convent-one">
-          <view class="convent-two">
-          	<view class="convent-three t-c f-28 col-f0f" @click="orderDetail">兑换订单</view>
-          </view>
-        </view>
       </view>
     </view>
     <view class="tabBar">
@@ -49,10 +42,11 @@
     },
     data() {
       return {
-        userinfo: {
+        userInfo: {
           avatarUrl: '',
           nickName: '',
           mobile: '',
+          sign: ''
         },
         topicList: [{
           num: 1000,
@@ -83,10 +77,28 @@
         tabList: ['分享', '点赞'],
         tabIndex: 0
       }
-      
     },
-    
+    onLoad() {
+      let that= this
+      that.getDetail()
+    },
     methods: {
+      getDetail() {
+        let that= this,
+          params= {
+            url: that.$api.userInfo
+          }
+        that.$httpRequest(params).then(res => {
+          let userInfo= res.data.userInfo
+          for(let item in that.userInfo) {
+            that.userInfo[item]= userInfo[item]
+          }
+          
+          console.log(res.data)
+          
+        })
+      },
+      
       orderDetail() {
         uni.navigateTo({
           url: '../integral/integralDetail'
@@ -132,7 +144,7 @@
     line-height: 1;
   }
   .menu{
-    padding: 39upx 140upx 50upx 40upx;
+    padding: 39upx 40upx 50upx;
     line-height: 1;
   }
   .convent{

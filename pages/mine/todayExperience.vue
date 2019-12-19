@@ -1,8 +1,8 @@
 <template>
   <view class="my-grade">
-    <view class="t-c f-44 f-w linear-word">Lv{{detail.level}}</view>
+    <view class="t-c f-44 f-w linear-word">{{detail.level? 'Lv' + detail.level: detail.experience_total}}</view>
     <view class="today-experience m-t-20">
-      <view class="f-30 col-f">今日经验
+      <view class="f-30 col-f">今日{{type === 'integral'? '积分': '经验'}}
         <text class="f-20 col-6"> (还有{{detail.today_get_experience_limit_total - detail.today_get_experience_total}}经验可获得）</text>
       </view>
       <view class="progress">
@@ -13,9 +13,15 @@
     </view>
     
     <view class="more-power">
-      <view class="f-30 col-f">经验明细</view>
+      <view class="f-30 col-f">{{type === 'integral'? '积分': '经验'}}明细</view>
       <view class="open-menu">
         <view v-for="(item, index) in detail.today_experience_list" :key="index" class="bar f-26 col-9">
+          <text class="fl">{{item.source_describe}}</text>
+          <text>经验+{{item.add_integral}}</text>
+          <text :class="{'fr': true, 'col-f0f': item.completed_num === item.limit_num}">{{item.completed_num}}/{{item.limit_num}}</text>
+        </view>
+        
+        <view v-for="(item, index) in detail.today_integral_list" :key="index" class="bar f-26 col-9">
           <text class="fl">{{item.source_describe}}</text>
           <text>经验+{{item.add_integral}}</text>
           <text :class="{'fr': true, 'col-f0f': item.completed_num === item.limit_num}">{{item.completed_num}}/{{item.limit_num}}</text>
@@ -32,11 +38,12 @@
         type: 'experience',
         left: 0,           // 进度条偏移量
         detail: {
-          experience_total: 0,
-          level: 1,
-          today_get_experience_limit_total: 100,
-          today_get_experience_total: 0,
-          today_experience_list: []
+          experience_total: '',
+          level: '',
+          today_get_experience_limit_total: '',
+          today_get_experience_total: '',
+          today_experience_list: [],
+          today_integral_list: []
         }
       }
     },
@@ -57,9 +64,17 @@
             url: that.type === 'integral' ? that.$api.userIntegralDetailsByDay: that.$api.userExperienceDetailsByDay
           }
         that.$httpRequest(params).then((res) => {
+          console.log(that.type, res)
           let data= res.data
-          that.detail= res.data
-          that.left= data.today_get_experience_total / data.today_get_experience_limit_total * 100 + '%'
+          if(that.type === 'integral') {
+            that.detail.experience_total= data.integral_total
+            that.detail.today_get_experience_limit_total= data.today_get_integral_limit_total
+            that.detail.today_get_experience_total= data.today_get_integral_total
+            that.detail.today_integral_list= data.today_integral_list
+          } else {
+            that.detail= res.data
+          }
+          that.left= that.detail.today_get_experience_total / that.detail.today_get_experience_limit_total * 100 + '%'
         })
       }
     }

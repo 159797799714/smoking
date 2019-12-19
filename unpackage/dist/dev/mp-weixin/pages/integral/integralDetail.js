@@ -231,8 +231,7 @@ var _default =
     signIn: function signIn() {
       var that = this;
       var params = {
-        url: that.$api.signIn,
-        method: 'POST' };
+        url: that.$api.signIn };
 
       that.$httpRequest(params).then(function (res) {
         console.log(res);

@@ -1681,17 +1681,6 @@ store;exports.default = _default;
 
 /***/ }),
 
-/***/ 153:
-/*!********************************************************************!*\
-  !*** C:/Users/pc/Desktop/LEI/smoking/static/img/tabbar/index1.png ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,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"
-
-/***/ }),
-
 /***/ 16:
 /*!********************************************!*\
   !*** ./node_modules/vuex/dist/vuex.esm.js ***!
@@ -2643,6 +2632,17 @@ var index_esm = {
 
 /***/ }),
 
+/***/ 163:
+/*!********************************************************************!*\
+  !*** C:/Users/pc/Desktop/LEI/smoking/static/img/tabbar/index1.png ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,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"
+
+/***/ }),
+
 /***/ 17:
 /*!**************************************************!*\
   !*** C:/Users/pc/Desktop/LEI/smoking/api/api.js ***!
@@ -2680,6 +2680,11 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   commentReplyLike: 'axumi.article/commentreplylike', // 评论回复点赞
   commentreplyunlike: 'axumi.article/commentreplyunlike', // 评论回复取消点赞
 
+  // 门店
+  axstoreLists: 'axstore.shop/lists', // 店铺列表
+  axstoreDetail: 'axstore.shop/detail', // 查看门店详情
+  axhomeBanners: 'axstore.homebanner/gethomebanners', // 门店首页轮播图
+
   // 积分
   integralIndex: 'ax.goods/goodsList', // 积分--商城（产品列表）首页
   goodDetail: 'ax.goods/detail', // 商品详情
@@ -2692,7 +2697,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   userExperienceDetailsByDay: 'axapp.center/userExperienceDetailsByDay', // 查看当日经验获得详情(获得经验)
 
   clockInPage: 'axumi.article/clockInPage', // 打卡页面
-  signIn: 'axapp.center/signIn' // 签到
+  signIn: 'axapp.center/signIn', // 签到
+
+  // 个人中心
+  userInfo: 'axapp.center/userHomePage' // 我的首页个人信息
 };exports.default = _default;
 
 /***/ }),
@@ -9716,7 +9724,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@^2.0.0-alpha-24420191128001","_id"
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationStyle": "custom", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" } }, "pages/login/login": { "navigationStyle": "custom", "usingComponents": {} }, "pages/index/release/release": { "navigationStyle": "custom", "navigationBarTitleText": "文章发布", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/index/release/center": { "navigationStyle": "custom", "usingComponents": {} }, "pages/index/article/detail": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar", "banner": "/pages/components/banner" } }, "pages/integral/integral": { "navigationStyle": "custom", "navigationBarTitleText": "积分", "usingComponents": { "top-bar": "/pages/components/topBar", "good-list": "/pages/components/goodList" } }, "pages/integral/goodDetail": { "navigationBarTitleText": "详情", "usingComponents": { "banner": "/pages/components/banner", "uni-popup": "/pages/components/uni-popup/uni-popup" } }, "pages/integral/order/orderSure": { "navigationBarTitleText": "订单确认", "usingComponents": {} }, "pages/integral/order/orderDetail": { "navigationBarTitleText": "经验详情", "usingComponents": {} }, "pages/integral/order/success": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/integral/plan": { "navigationBarTitleText": "打卡计划", "usingComponents": { "article-list": "/pages/components/articleList" } }, "pages/integral/todayFoot": { "navigationBarTitleText": "今日步数", "usingComponents": { "article-list": "/pages/components/articleList" } }, "pages/integral/rules": { "navigationBarTitleText": "积分规则说明", "usingComponents": {} }, "pages/integral/integralDetail": { "navigationBarTitleText": "积分详情", "usingComponents": {} }, "pages/store/store": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": {} }, "pages/mine/mine": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "top-bar": "/pages/components/topBar", "article-list": "/pages/components/articleList" } }, "pages/mine/member": { "navigationBarTitleText": "我的会员等级", "usingComponents": {} }, "pages/mine/todayExperience": { "navigationBarTitleText": "今日", "usingComponents": {} }, "pages/mine/personal": { "navigationBarTitleText": "个人信息", "usingComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "white", "backgroundColor": "#131313", "navigationBarBackgroundColor": "#131313" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationStyle": "custom" }, "pages/login/login": { "navigationStyle": "custom" }, "pages/index/release/release": { "navigationStyle": "custom", "navigationBarTitleText": "文章发布" }, "pages/index/release/center": { "navigationStyle": "custom" }, "pages/index/article/detail": { "navigationStyle": "custom" }, "pages/integral/integral": { "navigationStyle": "custom", "navigationBarTitleText": "积分" }, "pages/integral/goodDetail": { "navigationBarTitleText": "详情" }, "pages/integral/order/orderSure": { "navigationBarTitleText": "订单确认" }, "pages/integral/order/orderDetail": { "navigationBarTitleText": "经验详情" }, "pages/integral/order/success": { "navigationStyle": "custom" }, "pages/integral/plan": { "navigationBarTitleText": "打卡计划" }, "pages/integral/todayFoot": { "navigationBarTitleText": "今日步数" }, "pages/integral/rules": { "navigationBarTitleText": "积分规则说明" }, "pages/integral/integralDetail": { "navigationBarTitleText": "积分详情" }, "pages/store/store": { "navigationStyle": "custom", "navigationBarTitleText": "" }, "pages/store/storeDetail": { "navigationBarTitleText": "门店详情" }, "pages/mine/mine": { "navigationStyle": "custom", "navigationBarTitleText": "" }, "pages/mine/member": { "navigationBarTitleText": "我的会员等级" }, "pages/mine/todayExperience": { "navigationBarTitleText": "今日" }, "pages/mine/personal": { "navigationBarTitleText": "个人信息" } }, "globalStyle": { "navigationBarTextStyle": "white", "backgroundColor": "#131313", "navigationBarBackgroundColor": "#131313" } };exports.default = _default;
 
 /***/ }),
 

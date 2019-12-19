@@ -4,7 +4,7 @@
     <topBar :isindex="true" />
 
     <scroll-view scroll-y="true" class="content bg-black" @scrolltolower="lower">
-      <view class="banner-swiper bg-black">
+      <view v-if="swiperList && swiperList.length > 0" class="banner-swiper bg-black">
         <banner :swiperList="swiperList"></banner>
       </view>
       <view class="TabNav dis-flex flex-x-around bg-black col-cc">
@@ -56,7 +56,7 @@
     },
     data() {
       return {
-        swiperList: [], // 轮播图
+        swiperList: '', // 轮播图
         tabList: [{
           name: '发现',
           category_id: 0
