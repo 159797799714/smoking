@@ -68,6 +68,11 @@
         time: 0,
       }
     },
+    onLoad(params) {
+      if(params.type) {
+        this.formData.source= params.type
+      }
+    },
     methods: {
       goIndex() {
         uni.switchTab({

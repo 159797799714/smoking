@@ -4,9 +4,11 @@
     <topBar :isindex="true"/>
     
     <view class="t-c f-36 col-f">{{userInfo.nickName}}</view>
-    <view class="t-c f-24 col-9">phone: {{userInfo.mobile}}</view>
+    <view class="t-c f-24 col-9">ID: {{userInfo.mobile}}</view>
     <view class="p-re head m-t-20 oh">
-      <image class="fl userImg" :src="userInfo.avatarUrl" mode="widthFix" @click="goPersonal"></image>
+      <view class="fl userImg">
+        <image :src="userInfo.avatarUrl" mode="widthFix" @click="goPersonal"></image>
+      </view>
       <view class="m-l-10 fl oh">
         <view class="grade f-20 f-w">
           <text class="linear-word">LV1</text>
@@ -17,9 +19,9 @@
       
     </view>
     <view class="menu p-re">
-      <view v-for="(item, index) in topicList" :key="index" class="span-item">
+      <view v-for="(item, index) in mycircle" :key="index" class="span-item">
         <view class="num f-28 col-f">{{item.num}}</view>
-        <view class="m-t-10 f-26 col-6">{{item.name}}</view>
+        <view class="m-t-10 f-26 col-6">{{item.title}}</view>
       </view>
     </view>
     <view class="tabBar">
@@ -27,7 +29,7 @@
     </view>
     
     <view class="good-main">
-      <articleList :articleList="articleList"/>
+      <articleList :articleList="tabIndex === 0? articleList: like_article_list"/>
     </view>
   </view>
 </template>
@@ -48,32 +50,21 @@
           mobile: '',
           sign: ''
         },
-        topicList: [{
-          num: 1000,
-          name: '关注'
+        mycircle: [{
+          num: 0,
+          name: 'focus_num',
+          title: '关注'
         }, {
-          num: 222,
-          name: '收藏'
+          num: 0,
+          title: '粉丝',
+          name: 'fans'
         }, {
-          num: 1000,
-          name: '点赞'
-        }, {
-          num: 222,
-          name: '粉丝'
-        }],
-        articleList: [{
-          name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-          grade: 999
-        }, {
-          name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-          grade: 999
-        }, {
-          name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-          grade: 999
-        }, {
-          name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-          grade: 999
-        }],
+          num: 0,
+          title: '点赞',
+          name: 'like_num'
+        }],                               // 信息菜单栏
+        articleList: '',                  // 分享文章列表
+        like_article_list: '',            // 点赞文章列表
         tabList: ['分享', '点赞'],
         tabIndex: 0
       }
@@ -89,13 +80,20 @@
             url: that.$api.userInfo
           }
         that.$httpRequest(params).then(res => {
-          let userInfo= res.data.userInfo
+          let response= res.data
           for(let item in that.userInfo) {
-            that.userInfo[item]= userInfo[item]
+            that.userInfo[item]= response.userInfo[item]
           }
+          console.log(response)
+          that.articleList= response.article_list
           
-          console.log(res.data)
+          that.articleList= that.articleList.concat(response.article_list)
           
+          that.like_article_list= response.like_article_list
+          
+          that.mycircle.map(item => {
+            item.num= response.mycircle[item.name]
+          })
         })
       },
       
@@ -129,7 +127,13 @@
   .userImg{
     heigth: 114upx;
     width: 114upx;
+    overflow: hidden;
+    
     border-radius: 100%;
+    &>image{
+      height: 100%;
+      width: 100%;
+    }
   }
   .grade{
     padding-top: 38upx;
@@ -196,7 +200,7 @@
   }
   .span-item{
     display: inline-block;
-    width: 25%;
+    width: 33%;
     text-align: center;
   }
   .good-main{

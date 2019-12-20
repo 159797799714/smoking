@@ -159,6 +159,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 {
   components: {
     topBar: topBar,
@@ -172,32 +174,21 @@ __webpack_require__.r(__webpack_exports__);
         mobile: '',
         sign: '' },
 
-      topicList: [{
-        num: 1000,
-        name: '关注' },
+      mycircle: [{
+        num: 0,
+        name: 'focus_num',
+        title: '关注' },
       {
-        num: 222,
-        name: '收藏' },
+        num: 0,
+        title: '粉丝',
+        name: 'fans' },
       {
-        num: 1000,
-        name: '点赞' },
-      {
-        num: 222,
-        name: '粉丝' }],
-
-      articleList: [{
-        name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-        grade: 999 },
-      {
-        name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-        grade: 999 },
-      {
-        name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-        grade: 999 },
-      {
-        name: '金佛安工构建工具公司估计哦附近奥解耦股简爱狗狗进欧冠九宫格解耦股就',
-        grade: 999 }],
-
+        num: 0,
+        title: '点赞',
+        name: 'like_num' }],
+      // 信息菜单栏
+      articleList: '', // 分享文章列表
+      like_article_list: '', // 点赞文章列表
       tabList: ['分享', '点赞'],
       tabIndex: 0 };
 
@@ -213,13 +204,20 @@ __webpack_require__.r(__webpack_exports__);
         url: that.$api.userInfo };
 
       that.$httpRequest(params).then(function (res) {
-        var userInfo = res.data.userInfo;
+        var response = res.data;
         for (var item in that.userInfo) {
-          that.userInfo[item] = userInfo[item];
+          that.userInfo[item] = response.userInfo[item];
         }
+        console.log(response);
+        that.articleList = response.article_list;
 
-        console.log(res.data);
+        that.articleList = that.articleList.concat(response.article_list);
 
+        that.like_article_list = response.like_article_list;
+
+        that.mycircle.map(function (item) {
+          item.num = response.mycircle[item.name];
+        });
       });
     },
 

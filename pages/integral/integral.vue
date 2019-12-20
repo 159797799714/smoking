@@ -15,11 +15,11 @@
       
       <view class="fr rightBox">
         <navigator url="./plan" class="dis-inline-block t-c m-r-43">
-          <image class="iconImg" src="../../static/mine/card/china.png" mode="widthFix"></image>
+          <image class="iconImg" src="../../static/img/card.png" mode="widthFix"></image>
           <view class="m-t-20 col-f t-c">习惯打卡</view>
         </navigator>
         <navigator url="./todayFoot" class="dis-inline-block t-c">
-          <image class="iconImg" src="../../static/mine/card/china.png" mode="widthFix"></image>
+          <image class="iconImg" src="../../static/img/foot.png" mode="widthFix"></image>
           <view class="m-t-20 col-f t-c">行走步数</view>
         </navigator>
       </view>

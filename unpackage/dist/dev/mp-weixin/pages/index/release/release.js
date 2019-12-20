@@ -211,8 +211,13 @@ var _uploadImg2 = _interopRequireDefault(__webpack_require__(/*! ../../../common
 //
 //
 //
-var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../../components/topBar.vue */ 191));};var _default = { components: { topBar: topBar }, data: function data() {return { formData: { article_title: '', article_content: '', category_id: '', tags: '', address: '', address_latitude: '', address_longitude: '', uploaded: [], source: 'umi' }, imgArr: [], imgUploadID: [], time: 0 };}, methods: { goIndex: function goIndex() {uni.switchTab({ url: '../index' });}, // 获取当前位置信息
-    getAddress: function getAddress() {var that = this;uni.chooseLocation({ success: function success(res) {console.log(res);console.log('位置名称：' + res.name);console.log('详细地址：' + res.address);console.log('纬度：' + res.latitude);console.log('经度：' + res.longitude);that.formData.address = res.address + res.name;that.formData.address_latitude = res.latitude;that.formData.address_longitude = res.longitude;} });
+var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../../components/topBar.vue */ 191));};var _default = { components: { topBar: topBar }, data: function data() {return { formData: { article_title: '', article_content: '', category_id: '', tags: '', address: '', address_latitude: '', address_longitude: '', uploaded: [], source: 'umi' }, imgArr: [], imgUploadID: [], time: 0 };}, onLoad: function onLoad(params) {if (params.type) {this.formData.source = params.type;}}, methods: { goIndex: function goIndex() {uni.switchTab({ url: '../index' });}, // 获取当前位置信息
+    getAddress: function getAddress() {var that = this;uni.chooseLocation({ success: function success(res) {console.log(res);console.log('位置名称：' + res.name);console.log('详细地址：' + res.address);console.log('纬度：' + res.latitude);console.log('经度：' + res.longitude);
+
+          that.formData.address = res.address + res.name;
+          that.formData.address_latitude = res.latitude;
+          that.formData.address_longitude = res.longitude;
+        } });
 
       // uni.getLocation({
       //   type: 'wgs84',

@@ -277,7 +277,12 @@ text.data-v-f0d853de, view.data-v-f0d853de {
 .userImg.data-v-f0d853de {
   heigth: 114rpx;
   width: 114rpx;
+  overflow: hidden;
   border-radius: 100%;
+}
+.userImg > image.data-v-f0d853de {
+    height: 100%;
+    width: 100%;
 }
 .grade.data-v-f0d853de {
   padding-top: 38rpx;
@@ -346,7 +351,7 @@ text.data-v-f0d853de, view.data-v-f0d853de {
 }
 .span-item.data-v-f0d853de {
   display: inline-block;
-  width: 25%;
+  width: 33%;
   text-align: center;
 }
 .good-main.data-v-f0d853de {

@@ -16,7 +16,7 @@
     <view class="m-t-20 t-c f-30 col-9">无论是健身 戒烟 早起</view>
     
     <view class="m-t-30 t-c">
-      <view :class="{'sign-btn f-40 col-f': true, 'b-9 col-13': detail.is_clock === 'yes'}">今日打卡</view>
+      <view :class="{'sign-btn f-40 col-f': true, 'b-9 col-13': detail.is_clock === 'yes'}" @click="goRelease">今日打卡</view>
     </view>
     <view class="m-t-30 t-c f-30 col-6">还有{{31 - detail.clock_in_days}}天就可以领取奖励</view>
     
@@ -55,6 +55,13 @@
           console.log(res)
           that.detail= res.data
           
+        })
+      },
+      
+      // 去打卡
+      goRelease() {
+        uni.navigateTo({
+          url: '../index/release/release?type=Clock_in'
         })
       }
     }

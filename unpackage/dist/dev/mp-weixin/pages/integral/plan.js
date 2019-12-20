@@ -122,7 +122,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var articleList = function articleList() {return __webpack_require__.e(/*! import() | pages/components/articleList */ "pages/components/articleList").then(__webpack_require__.bind(null, /*! ../components/articleList.vue */ 212));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var articleList = function articleList() {return __webpack_require__.e(/*! import() | pages/components/articleList */ "pages/components/articleList").then(__webpack_require__.bind(null, /*! ../components/articleList.vue */ 212));};var _default =
 
 
 
@@ -180,7 +180,15 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         that.detail = res.data;
 
       });
+    },
+
+    // 去打卡
+    goRelease: function goRelease() {
+      uni.navigateTo({
+        url: '../index/release/release?type=Clock_in' });
+
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

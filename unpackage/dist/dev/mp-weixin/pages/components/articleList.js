@@ -128,16 +128,67 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
-var _default =
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default2 =
 {
   props: {
-    articleList: Array },
+    articleList: {
+      type: Array,
+      default: function _default() {
+        return [];
+      } } },
+
 
   data: function data() {
-    return {};
+    return {
+      leftBox: [],
+      rightBox: [] };
+
+  },
+  watch: {
+    articleList: {
+      deep: true,
+      handler: function handler() {
+        this.filterArr();
+      } } },
 
 
-  } };exports.default = _default;
+  methods: {
+    filterArr: function filterArr() {
+      var list = this.articleList,
+      that = this;
+      list.map(function (item, index) {
+        if (index % 2 === 0) {
+          that.leftBox.push(item);
+        } else {
+          that.rightBox.push(item);
+        }
+      });
+    },
+    likeArticle: function likeArticle() {
+      console.log('点赞');
+    } } };exports.default = _default2;
 
 /***/ }),
 
