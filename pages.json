@@ -90,6 +90,11 @@
 				"navigationBarTitleText": ""
 			}
 		}, {
+			"path": "pages/mine/setting",
+			"style": {
+				"navigationBarTitleText": "设置"
+			}
+		}, {
 			"path": "pages/mine/member",
 			"style": {
 				"navigationBarTitleText": "我的会员等级"

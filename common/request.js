@@ -9,7 +9,7 @@ export default function(obj) {
   }
   let data ={...obj.data, ...params}
   let httpDefaultData = {
-    url: API.devApi + obj.url,
+    url: API.conductApi + obj.url,
     data: data,
     method: obj.method? obj.method : 'GET',
     header: obj.header? obj.header : {'content-type': 'application/x-www-form-urlencoded; charset=UTF-8', 'Access-Control-Allow-Origin': '*'}

@@ -370,7 +370,4 @@
   .b-20{
     border-bottom: 20upx solid #333;
   }
-  .rotate-180{
-    transform: rotate(180deg);
-  }
 </style>

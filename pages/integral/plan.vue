@@ -16,7 +16,7 @@
     <view class="m-t-20 t-c f-30 col-9">无论是健身 戒烟 早起</view>
     
     <view class="m-t-30 t-c">
-      <view :class="{'sign-btn f-40 col-f': true, 'b-9 col-13': detail.is_clock === 'yes'}" @click="goRelease">今日打卡</view>
+      <view :class="{'sign-btn f-40 col-f': true,'b-linear': detail.is_clock === 'no', 'b-9 col-13': detail.is_clock === 'yes'}" @click="goRelease(detail.is_clock)">{{detail.is_clock === 'yes'? '已打卡':'今日打卡' }}</view>
     </view>
     <view class="m-t-30 t-c f-30 col-6">还有{{31 - detail.clock_in_days}}天就可以领取奖励</view>
     
@@ -59,7 +59,14 @@
       },
       
       // 去打卡
-      goRelease() {
+      goRelease(status) {
+        if(status === 'yes') {
+          uni.showToast({
+            title: '今天已经打过卡了哦',
+            icon: 'none'
+          })
+          return
+        }
         uni.navigateTo({
           url: '../index/release/release?type=Clock_in'
         })
@@ -101,6 +108,8 @@
     display: inline-block;
     padding: 18upx 15upx;
     border-radius: 38upx;
+  }
+  .b-linear{
     background:linear-gradient(-90deg,rgba(82,95,247,1),rgba(251,0,240,1));
   }
   .section-title{

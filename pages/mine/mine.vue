@@ -14,7 +14,11 @@
           <text class="linear-word">LV1</text>
           <text class="grade-btn m-l-10 b-f0f col-f" @click="goMember">查看特权</text>
         </view>
-        <view class="sign m-t-20 f-24 col-f">个性签名：{{userInfo.sign}}</view>
+        <view class="sign m-t-20 f-24 col-f">个性签名：{{userInfo.sign? userInfo.sign: '暂未设置个性签名'}}</view>
+      </view>
+      
+      <view class="fr setting-icon" @click="goSetting">
+        <text class="iconfont f-34 col-9">&#xe676;</text>
       </view>
       
     </view>
@@ -64,7 +68,7 @@
           name: 'like_num'
         }],                               // 信息菜单栏
         articleList: '',                  // 分享文章列表
-        like_article_list: '',            // 点赞文章列表
+        like_article_list: [],            // 点赞文章列表
         tabList: ['分享', '点赞'],
         tabIndex: 0
       }
@@ -112,6 +116,12 @@
           url: './member'
         })
       },
+      goSetting() {
+        let user= this.userInfo
+        uni.navigateTo({
+          url: './setting?nickName=' + user.nickName + '&avatarUrl=' + user.avatarUrl
+        })
+      },
       selectTab(index) {
         this.tabIndex = index
       }
@@ -123,12 +133,14 @@
 <style lang="scss" scoped>
   .head{
     padding: 0 65upx;
+    .setting-icon{
+      padding-top: 38upx;
+    }
   }
   .userImg{
     heigth: 114upx;
     width: 114upx;
     overflow: hidden;
-    
     border-radius: 100%;
     &>image{
       height: 100%;

@@ -27,6 +27,11 @@
     
     <view class="good-main">
       <goodList :goodList="goodList"/>
+      
+      <view v-if="goodList.length < 1" class="null dis-flex flex-dir-col  flex-y-center">
+         <view class="iconfont f-60 col-f">&#xe698;</view>
+         <view class="m-t-30 col-f font-32">亲，暂无可兑换商品哦！</view>
+       </view>
     </view>
     
   </view>

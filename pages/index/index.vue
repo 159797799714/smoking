@@ -18,22 +18,30 @@
           <view class="item-words">
             <view v-if="item.article_title" class="title f-36 col-f twolist-hidden" @click="goInfo(item.article_id)">{{ item.article_title }}</view>
             <view v-if="item.article_content" class="info f-24 col-6 twolist-hidden" @click="goInfo(item.article_id)">{{ item.article_content }}</view>
-            <view class="control f-24 col-6">
-              <view class="look">
-                <text class="search-icon iconfont">&#xe6cc;</text>
-                <text>{{ item.show_views }}</text>
+            <view class="control m-t-20 dis-flex flex-x-between flex-y-center f-24 col-6">
+              
+              <view class="dis-flex flex-x-between flex-y-center">
+                <image :src="item.user.avatarUrl" mode="widthFix" class="writer-img"/>
+                <text class="m-l-10 f-24 col-9 onelist-hidden">{{item.user.nickName}}</text>
               </view>
-              <view class="zan">
-                <text :class="{'search-icon': true, iconfont: true, isZan: item.islike !== 'no'}" @click="zanAction(item, index)">&#xe63a;</text>
-                <text class="col-6">{{ item.islike_count }}</text>
+              <view>
+                <view class="look dis-inline-block">
+                  <text class="search-icon iconfont">&#xe668;</text>
+                  <text class="m-l-10">{{ item.show_views }}</text>
+                </view>
+                <view class="zan dis-inline-block">
+                  <text :class="{'search-icon': true, iconfont: true, isZan: item.islike !== 'no'}" @click="zanAction(item, index)">&#xe610;</text>
+                  <text class="m-l-10 col-6">{{ item.islike_count }}</text>
+                </view>  
               </view>
+              
             </view>
           </view>
         </view>
         
-       <view v-if="articleList !== '' && articleList.length < 1" class="null dis-flex flex-dir-column  flex-y-center">
-          <view class="iconfont font-88 col-f">&#xe698;</view>
-          <view class="col-f font-32">亲，暂无相关文章哦！</view>
+       <view v-if="articleList.length < 1" class="null dis-flex flex-dir-col  flex-y-center">
+          <view class="iconfont f-60 col-f">&#xe698;</view>
+          <view class="m-t-30 col-f font-32">亲，暂无相关文章哦！</view>
         </view>
 
         <!-- 发布按钮 -->
@@ -68,7 +76,7 @@
           category_id: 2
         }],                // 菜单
         category_id: 0,    // 菜单选中
-        articleList: '',   // 文章列表
+        articleList: [],   // 文章列表
         page: {
           total: 1,
           current_page: 1,
@@ -77,16 +85,34 @@
         }
       }
     },
-    
     onLoad() {
       this.getBanner()
       this.getFindList()
     },
+    onShow() {
+      console.log(this.category_id)
+      let that= this,
+        id= this.category_id
+      that.page.current_page= 1
+      that.articleList= []
+      switch (id) {
+        case 0:
+          that.getFindList()
+          break
+        case 1:
+          that.getNewList()
+          break
+        case 2:
+          that.getFocusList()
+          break
+      }  
+    },
     watch: {
       category_id (val) {
+        console.log('变了', val)
         let that= this
         that.page.current_page= 1
-        that.articleList= ''
+        that.articleList= []
         switch (val) {
           case 0:
             that.getFindList()
@@ -117,6 +143,8 @@
               break
             case 2:
               that.getFocusList()
+              break
+            default:
               break
           }  
         } else {
@@ -224,12 +252,12 @@
           }
         }
         that.$httpRequest(params).then(res => {
-          if(res.code === 1) {
-            console.log('关注文章列表', res.data.list)
+          console.log('关注文章列表', res)
+          if(res.code === 1 ) {
             if(that.page.current_page >= res.data.list.last_page && that.articleList.length < 1) {
               that.articleList= res.data.list.data
-            } else {
-              that.articleList= that.articleList.concat(res.data.list.data)
+            } else if(res.data.list){
+              that.articleList= that.articleList.concat(res.data.list)
             }
             // 设置页面信息
             that.setPage(res.data.list)
@@ -345,10 +373,13 @@
       }
 
       .control {
-        display: flex;
-        justify-content: flex-end;
         line-height: 25upx;
-
+        .writer-img{
+          height: 40upx;
+          width: 40upx;
+          border-radius: 100%;
+          overflow: hidden;
+        }
         .look {
           height: 29upx;
         }
@@ -373,7 +404,9 @@
       }
     }
   }
-
+  .null{
+    margin-top: 50upx;
+  }
   .release-btn {
     position: fixed;
     bottom: 83upx;

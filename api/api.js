@@ -48,4 +48,23 @@ export default {
   
   // 个人中心
   userInfo: 'axapp.center/userHomePage',                               // 我的首页个人信息
+  
+  // 设置
+  getUserInfo: 'axapp.center/getuserinfo',                             // 设置中个人信息
+  editInfo: 'axapp.center/modifypersonalinfo',                         // 修改个人信息
+  editSign: 'axapp.center/modifyWxUserInfo',                           // 修改个性签名
+  
+  // 地址
+  addressLists: 'ax.address/listse',                                   // 地址列表
+  addressDetail: 'ax.address/detail',                                  // 地址详情
+  addAddress: 'ax.address/add',                                        // 添加新地址
+  editAddress: 'ax.address/edit',                                      // 修改地址
+  setDefault: 'ax.address/setDefault',                                 // 设置默认地址
+  delAddress: 'ax.address/delete',                                     // 删除地址
+  setTags: 'ax.address/setTags',                                       // 用户设置地址标签
+  tagsList: 'ax.address/tagsList',                                     // 用户地址标签列表
+  editTags: 'ax.address/editTags',                                     // 编辑修改地址标签
+  
+  
+  
 }

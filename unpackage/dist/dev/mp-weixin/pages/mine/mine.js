@@ -161,6 +161,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 {
   components: {
     topBar: topBar,
@@ -188,7 +192,7 @@ __webpack_require__.r(__webpack_exports__);
         name: 'like_num' }],
       // 信息菜单栏
       articleList: '', // 分享文章列表
-      like_article_list: '', // 点赞文章列表
+      like_article_list: [], // 点赞文章列表
       tabList: ['分享', '点赞'],
       tabIndex: 0 };
 
@@ -234,6 +238,12 @@ __webpack_require__.r(__webpack_exports__);
     goMember: function goMember() {
       uni.navigateTo({
         url: './member' });
+
+    },
+    goSetting: function goSetting() {
+      var user = this.userInfo;
+      uni.navigateTo({
+        url: './setting?nickName=' + user.nickName + '&avatarUrl=' + user.avatarUrl });
 
     },
     selectTab: function selectTab(index) {

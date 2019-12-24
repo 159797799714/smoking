@@ -92,14 +92,14 @@
     display: flex;
     justify-content: space-between;
     .leftBox,.rightBox{
-      width: calc(50% - 16upx);
+      width: calc(50% - 8upx);
     }
   }
   .article-item{
     width: 100%;
     box-sizing: border-box;
     padding-bottom: 30upx;
-    margin-bottom: 20upx;
+    margin-bottom: 11upx;
     border: 1upx solid #999;
   }
   .article-img{

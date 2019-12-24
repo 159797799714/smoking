@@ -139,24 +139,48 @@ var _default =
 {
   data: function data() {
     return {
+      avatarUrl: '',
       menuList: [{
         title: '用户昵称',
-        content: '风一样男人' },
+        name: 'nickName',
+        content: '' },
       {
         title: '性别',
-        content: '女' },
-      {
-        title: '生日',
-        content: '2019-10-10' },
+        name: 'gender',
+        content: '' },
       {
         title: '个性签名',
-        content: '我想像风一样自由' },
+        name: 'sign',
+        content: '' },
       {
         title: '绑定手机',
-        content: '110' }] };
+        name: 'mobile',
+        content: '' }] };
 
 
-  } };exports.default = _default;
+  },
+  onLoad: function onLoad() {
+    var that = this;
+    that.getUserInfo();
+  },
+  methods: {
+    getUserInfo: function getUserInfo() {
+      var that = this,
+      params = {
+        url: that.$api.getUserInfo };
+
+      that.$httpRequest(params).then(function (res) {
+        console.log(res.data);
+        var info = res.data.info,
+        list = that.menuList;
+        list.map(function (obj, index) {
+          console.log(obj.name, info[obj.name], 'obj');
+          obj.content = info[obj.name];
+        });
+        that.avatarUrl = info.avatarUrl;
+        that.menuList = list;
+      });
+    } } };exports.default = _default;
 
 /***/ }),
 

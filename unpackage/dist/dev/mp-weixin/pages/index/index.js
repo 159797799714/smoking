@@ -173,6 +173,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
 {
   components: {
     banner: banner,
@@ -192,7 +200,7 @@ __webpack_require__.r(__webpack_exports__);
         category_id: 2 }],
       // 菜单
       category_id: 0, // 菜单选中
-      articleList: '', // 文章列表
+      articleList: [], // 文章列表
       page: {
         total: 1,
         current_page: 1,
@@ -201,16 +209,34 @@ __webpack_require__.r(__webpack_exports__);
 
 
   },
-
   onLoad: function onLoad() {
     this.getBanner();
     this.getFindList();
   },
+  onShow: function onShow() {
+    console.log(this.category_id);
+    var that = this,
+    id = this.category_id;
+    that.page.current_page = 1;
+    that.articleList = [];
+    switch (id) {
+      case 0:
+        that.getFindList();
+        break;
+      case 1:
+        that.getNewList();
+        break;
+      case 2:
+        that.getFocusList();
+        break;}
+
+  },
   watch: {
     category_id: function category_id(val) {
+      console.log('变了', val);
       var that = this;
       that.page.current_page = 1;
-      that.articleList = '';
+      that.articleList = [];
       switch (val) {
         case 0:
           that.getFindList();
@@ -241,6 +267,8 @@ __webpack_require__.r(__webpack_exports__);
             break;
           case 2:
             that.getFocusList();
+            break;
+          default:
             break;}
 
       } else {
@@ -348,12 +376,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
       that.$httpRequest(params).then(function (res) {
+        console.log('关注文章列表', res);
         if (res.code === 1) {
-          console.log('关注文章列表', res.data.list);
           if (that.page.current_page >= res.data.list.last_page && that.articleList.length < 1) {
             that.articleList = res.data.list.data;
-          } else {
-            that.articleList = that.articleList.concat(res.data.list.data);
+          } else if (res.data.list) {
+            that.articleList = that.articleList.concat(res.data.list);
           }
           // 设置页面信息
           that.setPage(res.data.list);

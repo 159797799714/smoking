@@ -183,7 +183,14 @@ __webpack_require__.r(__webpack_exports__);
     },
 
     // 去打卡
-    goRelease: function goRelease() {
+    goRelease: function goRelease(status) {
+      if (status === 'yes') {
+        uni.showToast({
+          title: '今天已经打过卡了哦',
+          icon: 'none' });
+
+        return;
+      }
       uni.navigateTo({
         url: '../index/release/release?type=Clock_in' });
 

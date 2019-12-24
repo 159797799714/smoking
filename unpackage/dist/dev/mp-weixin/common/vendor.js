@@ -2700,7 +2700,23 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   signIn: 'axapp.center/signIn', // 签到
 
   // 个人中心
-  userInfo: 'axapp.center/userHomePage' // 我的首页个人信息
+  userInfo: 'axapp.center/userHomePage', // 我的首页个人信息
+
+  // 设置
+  getUserInfo: 'axapp.center/getuserinfo', // 设置中个人信息
+  editInfo: 'axapp.center/modifypersonalinfo', // 修改个人信息
+  editSign: 'axapp.center/modifyWxUserInfo', // 修改个性签名
+
+  // 地址
+  addressLists: 'ax.address/listse', // 地址列表
+  addressDetail: 'ax.address/detail', // 地址详情
+  addAddress: 'ax.address/add', // 添加新地址
+  editAddress: 'ax.address/edit', // 修改地址
+  setDefault: 'ax.address/setDefault', // 设置默认地址
+  delAddress: 'ax.address/delete', // 删除地址
+  setTags: 'ax.address/setTags', // 用户设置地址标签
+  tagsList: 'ax.address/tagsList', // 用户地址标签列表
+  editTags: 'ax.address/editTags' // 编辑修改地址标签
 };exports.default = _default;
 
 /***/ }),
@@ -2724,7 +2740,7 @@ function _default(obj) {
 
   var data = _objectSpread({}, obj.data, params);
   var httpDefaultData = {
-    url: _config.default.devApi + obj.url,
+    url: _config.default.conductApi + obj.url,
     data: data,
     method: obj.method ? obj.method : 'GET',
     header: obj.header ? obj.header : { 'content-type': 'application/x-www-form-urlencoded; charset=UTF-8', 'Access-Control-Allow-Origin': '*' } };
@@ -8800,7 +8816,7 @@ function _default(imgInfo) {
 
   var promise = new Promise(function (resolve, reject) {
     uni.uploadFile({
-      url: _config.default.devApi + 'ax.upload/image', //仅为示例，非真实的接口地址
+      url: _config.default.conductApi + 'ax.upload/image', //仅为示例，非真实的接口地址
       filePath: imgInfo,
       name: 'iFile',
       formData: params,
@@ -9724,7 +9740,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@^2.0.0-alpha-24420191128001","_id"
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationStyle": "custom" }, "pages/login/login": { "navigationStyle": "custom" }, "pages/index/release/release": { "navigationStyle": "custom", "navigationBarTitleText": "文章发布" }, "pages/index/release/center": { "navigationStyle": "custom" }, "pages/index/article/detail": { "navigationStyle": "custom" }, "pages/integral/integral": { "navigationStyle": "custom", "navigationBarTitleText": "积分" }, "pages/integral/goodDetail": { "navigationBarTitleText": "详情" }, "pages/integral/order/orderSure": { "navigationBarTitleText": "订单确认" }, "pages/integral/order/orderDetail": { "navigationBarTitleText": "经验详情" }, "pages/integral/order/success": { "navigationStyle": "custom" }, "pages/integral/plan": { "navigationBarTitleText": "打卡计划" }, "pages/integral/todayFoot": { "navigationBarTitleText": "今日步数" }, "pages/integral/rules": { "navigationBarTitleText": "积分规则说明" }, "pages/integral/integralDetail": { "navigationBarTitleText": "积分详情" }, "pages/store/store": { "navigationStyle": "custom", "navigationBarTitleText": "" }, "pages/store/storeDetail": { "navigationBarTitleText": "门店详情" }, "pages/mine/mine": { "navigationStyle": "custom", "navigationBarTitleText": "" }, "pages/mine/member": { "navigationBarTitleText": "我的会员等级" }, "pages/mine/todayExperience": { "navigationBarTitleText": "今日" }, "pages/mine/personal": { "navigationBarTitleText": "个人信息" } }, "globalStyle": { "navigationBarTextStyle": "white", "backgroundColor": "#131313", "navigationBarBackgroundColor": "#131313" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationStyle": "custom", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" } }, "pages/login/login": { "navigationStyle": "custom", "usingComponents": {} }, "pages/index/release/release": { "navigationStyle": "custom", "navigationBarTitleText": "文章发布", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/index/release/center": { "navigationStyle": "custom", "usingComponents": {} }, "pages/index/article/detail": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar", "banner": "/pages/components/banner" } }, "pages/integral/integral": { "navigationStyle": "custom", "navigationBarTitleText": "积分", "usingComponents": { "top-bar": "/pages/components/topBar", "good-list": "/pages/components/goodList" } }, "pages/integral/goodDetail": { "navigationBarTitleText": "详情", "usingComponents": { "banner": "/pages/components/banner", "uni-popup": "/pages/components/uni-popup/uni-popup" } }, "pages/integral/order/orderSure": { "navigationBarTitleText": "订单确认", "usingComponents": {} }, "pages/integral/order/orderDetail": { "navigationBarTitleText": "经验详情", "usingComponents": {} }, "pages/integral/order/success": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/integral/plan": { "navigationBarTitleText": "打卡计划", "usingComponents": { "article-list": "/pages/components/articleList" } }, "pages/integral/todayFoot": { "navigationBarTitleText": "今日步数", "usingComponents": { "article-list": "/pages/components/articleList" } }, "pages/integral/rules": { "navigationBarTitleText": "积分规则说明", "usingComponents": {} }, "pages/integral/integralDetail": { "navigationBarTitleText": "积分详情", "usingComponents": {} }, "pages/store/store": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" } }, "pages/store/storeDetail": { "navigationBarTitleText": "门店详情", "usingComponents": {} }, "pages/mine/mine": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "top-bar": "/pages/components/topBar", "article-list": "/pages/components/articleList" } }, "pages/mine/member": { "navigationBarTitleText": "我的会员等级", "usingComponents": {} }, "pages/mine/todayExperience": { "navigationBarTitleText": "今日", "usingComponents": {} }, "pages/mine/personal": { "navigationBarTitleText": "个人信息", "usingComponents": {} }, "pages/mine/setting": { "navigationBarTitleText": "设置", "usingComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "white", "backgroundColor": "#131313", "navigationBarBackgroundColor": "#131313" } };exports.default = _default;
 
 /***/ }),
 

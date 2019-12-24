@@ -38,12 +38,12 @@
   }
   .good-item{
     display: inline-block;
-    width: 330upx;
+    width: 338upx;
     height: 450upx;
-    margin-bottom: 30upx;
+    margin-bottom: 11upx;
   }
   .good-item:nth-of-type(2n) {
-    margin-left: 28upx;
+    margin-left: 12upx;
   }
   .good-img{
     width: 100%;

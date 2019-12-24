@@ -95,18 +95,6 @@
             that.formData.address_longitude= res.longitude
           }
         })
-        // uni.getLocation({
-        //   type: 'wgs84',
-        //   success: function (res) {
-        //     console.log(res)
-        //     console.log('当前位置的经度：' + res.longitude)
-        //     console.log('当前位置的纬度：' + res.latitude)
-            
-        //     that.formData.address_latitude= res.latitude
-        //     that.formData.address_longitude= res.longitude
-            
-        //   }
-        // })
       },
       
       // 删除图片
@@ -186,7 +174,7 @@
         that.$httpRequest(params).then(res => {
           if(res.code === 1) {
             uni.showToast({
-              title: '发布成功',
+              title: '发布成功,即将自动返回',
               icon: 'none'
             })
             that.goIndex()
@@ -291,9 +279,6 @@
         text-align: center;
       }
     }
-  }
-  .rotate-180{
-    transform: rotate(180deg);
   }
   .line-40{
     line-height: 40upx;
