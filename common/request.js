@@ -1,10 +1,16 @@
 import store from '../store/index.js'
 import API from '../api/config.js'
 
+let isLogin= false
 export default function(obj) {
+  // let isDefault= token ? token === '6d96b9408fe75c9da42fd4d1b9582993': true;  // 是否是默认账号
+  
+  let token=  uni.getStorageSync('token')
+  
   let params = {
     'wxapp_id': '10001',
     // token: store.state.token
+    // token ? token: '6d96b9408fe75c9da42fd4d1b9582993'
     token: 'cd3f5492377469fe601f173dwewe'
   }
   let data ={...obj.data, ...params}
@@ -19,9 +25,10 @@ export default function(obj) {
       (res) => {
         let result = res[1]
         if(result.data.code === -1) {
+          console.log('xxxxxxxxxx')
           // 未登录或者登陆失效，重定向到登陆
-          uni.reLaunch({
-            url: '@/page/login/login'
+          uni.navigateTo({
+            url: '../login/login'
           })
           return
         } else if(result.data.code === 0 && result.data.msg) {
@@ -34,8 +41,8 @@ export default function(obj) {
         }
       }
     ).catch(
-      (response) => {
-        reject(response)
+      (err) => {
+        reject(err)
       }
     )
   })

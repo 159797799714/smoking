@@ -202,6 +202,9 @@ text.data-v-2cd3e376, view.data-v-2cd3e376 {
 .b-9.data-v-2cd3e376 {
   background: #999;
 }
+.b-6.data-v-2cd3e376 {
+  background: #666;
+}
 .b-13.data-v-2cd3e376 {
   background: #131313;
 }
@@ -258,6 +261,10 @@ text.data-v-2cd3e376, view.data-v-2cd3e376 {
 .rotate-180.data-v-2cd3e376 {
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
+}
+.b-linear.data-v-2cd3e376 {
+  background: -webkit-linear-gradient(right, #525ff7, #fb00f0);
+  background: linear-gradient(-90deg, #525ff7, #fb00f0);
 }
 .linear-word.data-v-2cd3e376 {
   background-image: -webkit-linear-gradient(#0CDDFE, #4269F8, #923EF4, #EC08F1);
@@ -353,6 +360,46 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked.data-v-2cd3e376::before {
   transform: translate(-50%, -50%) scale(1);
   -webkit-transform: translate(-50%, -50%) scale(1);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -32,8 +32,9 @@
       <view v-for="(item, index) in tabList" :key="index" :class="{'tabs f-32 col-f': true, 'f-40 col-f0f': tabIndex === index}" @click="selectTab(index)">{{item}}</view>
     </view>
     
-    <view class="good-main">
+    <view class="good-main col-f">
       <articleList :articleList="tabIndex === 0? articleList: like_article_list"/>
+      
     </view>
   </view>
 </template>
@@ -67,7 +68,8 @@
           title: '点赞',
           name: 'like_num'
         }],                               // 信息菜单栏
-        articleList: '',                  // 分享文章列表
+        
+        articleList: [],                  // 分享文章列表
         like_article_list: [],            // 点赞文章列表
         tabList: ['分享', '点赞'],
         tabIndex: 0
@@ -90,8 +92,6 @@
           }
           console.log(response)
           that.articleList= response.article_list
-          
-          that.articleList= that.articleList.concat(response.article_list)
           
           that.like_article_list= response.like_article_list
           

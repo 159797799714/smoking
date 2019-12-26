@@ -14,8 +14,8 @@
       </checkbox-group>
       <view class="f-26 col-6">已经阅读并同意<text class="col-9" catchtap="goRegisterWord">《相关用户服务协议》</text></view>
     </view>
-    <button class="m-t-30 login-btn b-90f col-f" openType="getUserInfo" lang="zh_CN" bindgetuserinfo="authorLogin">允许</button>
-    <button class="m-t-20 login-btn col-13 b-9" catchtap="reject">拒绝并返回首页</button>
+    <button class="m-t-30 login-btn b-90f col-f" open-type="getUserInfo" lang="zh_CN" @getuserinfo="authorLogin">允许</button>
+    <button class="m-t-20 login-btn col-13 b-9" @click="reject">拒绝并返回首页</button>
   </view>
 </template>
 
@@ -25,6 +25,46 @@
       return {
         checked: true
       }
+    },
+    methods: {
+      // 登录
+      authorLogin(e) {
+        console.log('获取到了', e.detail)
+        let that= this,
+          params= {
+            url: that.$api.login,
+            method: 'POST',
+            data: {
+              code: '',
+              user_info: e.detail.rawData,
+              encrypted_data: e.detail.encryptedData,
+              iv: e.detail.iv,
+              signature: e.detail.signature,
+              referee_id: wx.getStorageSync('referee_id')
+            }
+          }
+        // 调起登录
+        
+        uni.login({
+          provider: 'weixin',
+          success: function (loginRes) {
+            console.log(loginRes)
+            params.data.code= loginRes.code
+            that.$httpRequest(params).then(res => {
+              uni.setStorageSync('token', res.data.token)
+              uni.navigateBack({
+                delta: 1
+              })
+            })
+          }
+        })
+        
+      }
+    },
+    reject() {
+      uni.redirectTo({
+        url: '@/index/index'
+      })
     }
   }
 </script>

@@ -201,6 +201,9 @@ text.data-v-277d5829, view.data-v-277d5829 {
 .b-9.data-v-277d5829 {
   background: #999;
 }
+.b-6.data-v-277d5829 {
+  background: #666;
+}
 .b-13.data-v-277d5829 {
   background: #131313;
 }
@@ -257,6 +260,10 @@ text.data-v-277d5829, view.data-v-277d5829 {
 .rotate-180.data-v-277d5829 {
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
+}
+.b-linear.data-v-277d5829 {
+  background: -webkit-linear-gradient(right, #525ff7, #fb00f0);
+  background: linear-gradient(-90deg, #525ff7, #fb00f0);
 }
 .linear-word.data-v-277d5829 {
   background-image: -webkit-linear-gradient(#0CDDFE, #4269F8, #923EF4, #EC08F1);

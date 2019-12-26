@@ -235,9 +235,9 @@
       likeArticle() {
         console.log('文章点赞')
         let that= this
-        let url = this.$api.articleunLike
+        let url = this.$api.articleLike
         if (this.detail.isLike) {
-          url = this.$api.articleLike
+          url = this.$api.articleunLike
         }
         let params= {
           url: url,

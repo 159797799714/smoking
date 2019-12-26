@@ -109,9 +109,6 @@
     padding: 18upx 15upx;
     border-radius: 38upx;
   }
-  .b-linear{
-    background:linear-gradient(-90deg,rgba(82,95,247,1),rgba(251,0,240,1));
-  }
   .section-title{
     margin: 80upx 0 52upx;
   }

@@ -201,6 +201,9 @@ text.data-v-3791c9ce, view.data-v-3791c9ce {
 .b-9.data-v-3791c9ce {
   background: #999;
 }
+.b-6.data-v-3791c9ce {
+  background: #666;
+}
 .b-13.data-v-3791c9ce {
   background: #131313;
 }
@@ -257,6 +260,10 @@ text.data-v-3791c9ce, view.data-v-3791c9ce {
 .rotate-180.data-v-3791c9ce {
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
+}
+.b-linear.data-v-3791c9ce {
+  background: -webkit-linear-gradient(right, #525ff7, #fb00f0);
+  background: linear-gradient(-90deg, #525ff7, #fb00f0);
 }
 .linear-word.data-v-3791c9ce {
   background-image: -webkit-linear-gradient(#0CDDFE, #4269F8, #923EF4, #EC08F1);

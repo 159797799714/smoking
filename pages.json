@@ -95,6 +95,16 @@
 				"navigationBarTitleText": "设置"
 			}
 		}, {
+			"path": "pages/mine/address/address",
+			"style": {
+				"navigationBarTitleText": "收货地址"
+			}
+		}, {
+			"path": "pages/mine/address/addAddress",
+			"style": {
+        "navigationStyle": "custom"
+			}
+		}, {
 			"path": "pages/mine/member",
 			"style": {
 				"navigationBarTitleText": "我的会员等级"

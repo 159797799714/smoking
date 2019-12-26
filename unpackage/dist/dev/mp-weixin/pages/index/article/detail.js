@@ -122,7 +122,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../../components/topBar.vue */ 191));};var banner = function banner() {return __webpack_require__.e(/*! import() | pages/components/banner */ "pages/components/banner").then(__webpack_require__.bind(null, /*! ../../components/banner.vue */ 182));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../../components/topBar.vue */ 215));};var banner = function banner() {return __webpack_require__.e(/*! import() | pages/components/banner */ "pages/components/banner").then(__webpack_require__.bind(null, /*! ../../components/banner.vue */ 206));};var _default =
 
 
 
@@ -359,9 +359,9 @@ __webpack_require__.r(__webpack_exports__);
     likeArticle: function likeArticle() {
       console.log('文章点赞');
       var that = this;
-      var url = this.$api.articleunLike;
+      var url = this.$api.articleLike;
       if (this.detail.isLike) {
-        url = this.$api.articleLike;
+        url = this.$api.articleunLike;
       }
       var params = {
         url: url,

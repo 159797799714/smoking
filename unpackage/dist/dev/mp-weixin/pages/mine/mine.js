@@ -122,7 +122,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../components/topBar.vue */ 191));};var articleList = function articleList() {return __webpack_require__.e(/*! import() | pages/components/articleList */ "pages/components/articleList").then(__webpack_require__.bind(null, /*! ../components/articleList.vue */ 212));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../components/topBar.vue */ 215));};var articleList = function articleList() {return __webpack_require__.e(/*! import() | pages/components/articleList */ "pages/components/articleList").then(__webpack_require__.bind(null, /*! ../components/articleList.vue */ 236));};var _default =
+
 
 
 
@@ -191,7 +192,8 @@ __webpack_require__.r(__webpack_exports__);
         title: '点赞',
         name: 'like_num' }],
       // 信息菜单栏
-      articleList: '', // 分享文章列表
+
+      articleList: [], // 分享文章列表
       like_article_list: [], // 点赞文章列表
       tabList: ['分享', '点赞'],
       tabIndex: 0 };
@@ -214,8 +216,6 @@ __webpack_require__.r(__webpack_exports__);
         }
         console.log(response);
         that.articleList = response.article_list;
-
-        that.articleList = that.articleList.concat(response.article_list);
 
         that.like_article_list = response.like_article_list;
 

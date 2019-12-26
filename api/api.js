@@ -1,6 +1,7 @@
 
 export default {
   uploadImage: 'upload/image',                                         // 图片上传
+  login: 'ax.user/login',                                              // 登录
   
   // 首页文章
   homebanners: 'axumi.homebanner/gethomebanners',                      // 首页轮播图列表
@@ -55,7 +56,7 @@ export default {
   editSign: 'axapp.center/modifyWxUserInfo',                           // 修改个性签名
   
   // 地址
-  addressLists: 'ax.address/listse',                                   // 地址列表
+  addressLists: 'ax.address/lists',                                   // 地址列表
   addressDetail: 'ax.address/detail',                                  // 地址详情
   addAddress: 'ax.address/add',                                        // 添加新地址
   editAddress: 'ax.address/edit',                                      // 修改地址
@@ -66,5 +67,5 @@ export default {
   editTags: 'ax.address/editTags',                                     // 编辑修改地址标签
   
   
-  
 }
+

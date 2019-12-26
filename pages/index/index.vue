@@ -39,7 +39,7 @@
           </view>
         </view>
         
-       <view v-if="articleList.length < 1" class="null dis-flex flex-dir-col  flex-y-center">
+        <view v-if="articleList.length < 1" class="null dis-flex flex-dir-col  flex-y-center">
           <view class="iconfont f-60 col-f">&#xe698;</view>
           <view class="m-t-30 col-f font-32">亲，暂无相关文章哦！</view>
         </view>

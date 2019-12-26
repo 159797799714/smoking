@@ -18,6 +18,8 @@
     "pages/store/storeDetail",
     "pages/mine/mine",
     "pages/mine/setting",
+    "pages/mine/address/address",
+    "pages/mine/address/addAddress",
     "pages/mine/member",
     "pages/mine/todayExperience",
     "pages/mine/personal"
@@ -70,6 +72,5 @@
       "desc": "获取用户位置信息，从而给用户提供最近的门店查询服务，提升效率"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap84.json"
+  "usingComponents": {}
 }

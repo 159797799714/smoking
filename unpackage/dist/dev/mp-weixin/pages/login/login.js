@@ -124,7 +124,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -151,7 +151,48 @@ var _default =
     return {
       checked: true };
 
+  },
+  methods: {
+    // 登录
+    authorLogin: function authorLogin(e) {
+      console.log('获取到了', e.detail);
+      var that = this,
+      params = {
+        url: that.$api.login,
+        method: 'POST',
+        data: {
+          code: '',
+          user_info: e.detail.rawData,
+          encrypted_data: e.detail.encryptedData,
+          iv: e.detail.iv,
+          signature: e.detail.signature,
+          referee_id: wx.getStorageSync('referee_id') }
+
+
+        // 调起登录
+      };
+      uni.login({
+        provider: 'weixin',
+        success: function success(loginRes) {
+          console.log(loginRes);
+          params.data.code = loginRes.code;
+          that.$httpRequest(params).then(function (res) {
+            uni.setStorageSync('token', res.data.token);
+            uni.navigateBack({
+              delta: 1 });
+
+          });
+        } });
+
+
+    } },
+
+  reject: function reject() {
+    uni.redirectTo({
+      url: '@/index/index' });
+
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

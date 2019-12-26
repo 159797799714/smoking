@@ -734,7 +734,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -2632,17 +2632,6 @@ var index_esm = {
 
 /***/ }),
 
-/***/ 163:
-/*!********************************************************************!*\
-  !*** C:/Users/pc/Desktop/LEI/smoking/static/img/tabbar/index1.png ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,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"
-
-/***/ }),
-
 /***/ 17:
 /*!**************************************************!*\
   !*** C:/Users/pc/Desktop/LEI/smoking/api/api.js ***!
@@ -2654,6 +2643,7 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAzCAYAAAA+
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
   uploadImage: 'upload/image', // 图片上传
+  login: 'ax.user/login', // 登录
 
   // 首页文章
   homebanners: 'axumi.homebanner/gethomebanners', // 首页轮播图列表
@@ -2708,7 +2698,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   editSign: 'axapp.center/modifyWxUserInfo', // 修改个性签名
 
   // 地址
-  addressLists: 'ax.address/listse', // 地址列表
+  addressLists: 'ax.address/lists', // 地址列表
   addressDetail: 'ax.address/detail', // 地址详情
   addAddress: 'ax.address/add', // 添加新地址
   editAddress: 'ax.address/edit', // 修改地址
@@ -2732,10 +2722,16 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = _default;var _index = _interopRequireDefault(__webpack_require__(/*! ../store/index.js */ 15));
 var _config = _interopRequireDefault(__webpack_require__(/*! ../api/config.js */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 
+var isLogin = false;
 function _default(obj) {
+  // let isDefault= token ? token === '6d96b9408fe75c9da42fd4d1b9582993': true;  // 是否是默认账号
+
+  var token = uni.getStorageSync('token');
+
   var params = {
     'wxapp_id': '10001',
     // token: store.state.token
+    // token ? token: '6d96b9408fe75c9da42fd4d1b9582993'
     token: 'cd3f5492377469fe601f173dwewe' };
 
   var data = _objectSpread({}, obj.data, params);
@@ -2750,9 +2746,10 @@ function _default(obj) {
     function (res) {
       var result = res[1];
       if (result.data.code === -1) {
+        console.log('xxxxxxxxxx');
         // 未登录或者登陆失效，重定向到登陆
-        uni.reLaunch({
-          url: '@/page/login/login' });
+        uni.navigateTo({
+          url: '../login/login' });
 
         return;
       } else if (result.data.code === 0 && result.data.msg) {
@@ -2765,14 +2762,25 @@ function _default(obj) {
       }
     }).
     catch(
-    function (response) {
-      reject(response);
+    function (err) {
+      reject(err);
     });
 
   });
   return promise;
 }
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 187:
+/*!********************************************************************!*\
+  !*** C:/Users/pc/Desktop/LEI/smoking/static/img/tabbar/index1.png ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAzCAYAAAA+VOAXAAAHEElEQVRoge2Zf2xbVxXHP/c9/4jtJG660qTe2sylrIvY1A7KylSLDU2TgA0omiaMoLImITQJUP+AVQiBhCYhAf9UQgwJ8QeyBJO3IX5tQ0xMEwgjmCiIRbSjW5OXpJmTtEnzw3bs9/Pyx7PT1+TFfk6cf1C+0lOUc84993x97z3n3PdgF7vYxS6CIqXJR1OavJjSpExpcjKlySd3ai6xE05TmjwB/A0IrVM9XkqLX3V7PqXbDgHClvl1NhIgZNvndmK+rpPIFYof2VMuf8ZPFzX0E7lC8eFuz9lVErlC8UvAawPllYiffqC8ogJ/aNh1DV05E7lCMQScB74C4CgKF0buYbm3b80mXq/zoUujREyzKToPPJ3PZuztzr9tErlCcS/wAuDdJhUzFMr96YMnE8C9wPipN/91PV6v/Qzo89i9Anwun82UtxPDtkjkCsUR4HfAEY94AvhkPpv5j4/9vcBLwLBHPAp8Kp/NTG41ji2TyBWKjwLPAf0e8Z+Bx/PZzILXNqVJAaiAuP/i6GBftfKigA+DREgA5oDT+Wzm71uJZUskcoXi08D3uDUx/AT4aj6bMRuBh4ADwCDQ6x0fMc3I0cnxc1HTfFg4DhHLpMcw6orjPJnPZgo7SiJXKEaBnwJnPGILOJvPZn7cCF4AtwN34lMr1iaWUtw9MX4mUa+5lVxKoqZJj6E/ozjOd/LZjOw6iVyhOAT8BjjpEd8AnshnM683CISB9wN7gvp97/TUR/eUV74hIAKgOA7xeu2XYcs6k89m6l0jkSsUPwD8FrjDI76EeyDHGgSiwHEgFpRAE7dfmxsZvDH/XUXKAQCkJFGrXYhY5mP5bGau3fi2xS5XKH4WKK4j8DLwgIeAiptKOyYA8O7+wbcmUnc8ZSvKOABCUI3FTtiq+o9GRmuJTVciVygK4BngW+tUPwC+6S1SKU0exT3E20KPrseOTmnfDlvWAwCKbZOsVipANp/NvLLZuDUSjWxyCti7b2nx4n2XL30fOO2x1YEv5rOZn3sdpDSZBO7bLoEmFMdRRibGnorp+hMusToxXXeAr/3x5KkXgftxz+JfS2lhrZFIafIA8HvcPY2QUt41pYlDszNN37O4efyN9ZOmNHkMGOgWiSbeNzXxWH+1claRMpSslLk6OMTbh9KOFKJ5BP4NfKKUFjNNwbNNAgBSCHF5+DDleALgn8CJTQjEdoIAwDuH7nz5+sDec45Qyjf6klwePoyHAI14n4WbK2EA4fWODs7NjN49Mf4Q0MzZZj6bqXpIHAIOdzN4IaWI1+uJ5v+J+upA2LR++O7+Qb+0bZbSItJk5ttJTg8eeA44Cyw2nl+sM0l2Ie5bsHdleXBkYuyl5nNt4Lars/v2/XoTcxtuptjnfQxMCe2ukvGtBtsJbEV9HTB9VM/DTRJngVc9ymXgC6W0eMfPaUqT4ZQm9+O2FsONv4eAIdxWu9t392ncVmfZI3u1Ebfb25TSYhn4WEqTadyG7c1SWtTWe3KEEClN3oVbE0TDVjk4N/NpxZFr+xgpZdQ0a1HTaNk2rCR6X5s8kLoQkMgLuG3/MWCulBZaU3FLg9ZQaPjAVhQW+5N7gJRXDChRwzimOs6GLGUrCjFDR0j/Xq7HqF8BgpKg8cNuaNcD3bFtRaGcSOAoirpOZbQcp6rUolECt6MtUEqLTd1s2io3IYUQ1VgcKXz51oCEV6CHI6O2qix5ZfVwpBbT9QpA1DQeVKTcFyjym1htpWxLohxP9Nnq+gVYwwpwS0BLvX1/Wervv+Jj+1+gfvztt44ott0piYVWyrbbqdoT62+hLuOf+vzwnoB2fmjZjrckkdJkyFbVVqslgWsBA9lqYbxRSotKK4N2K9F2uwHziuMEObshOq0fblYba2fWjkSQ7CVjum4FialTxHSdUlpU29m1CzLQL6c6tuwx9ECBBUXEMAjqs912cYJOGrbWFmPbZSFqGMTrGxqGTdFuJTraJmHLIq7XpgG/dsOhPUHrtqXFK50QgDYkSmlhKtLp6IWvajs6cBm3afNW9JUWwyzgKvDG8GxpvpP5IED2SdRqZUfp+AuABOZxi1QPbss+BhgR0zBDtoOQDorjzONeM1dKaeFu3UKx07nak+hbra6U4wm2QARcMjVgqpQWFwGShaIn29SXSmmx5D80ONqSUBzHSdRWKccTCCmTB2dnjvuYrX1USVYrD8Ynx9fekqu2bQ4tLEyrheIjDZH3/dWRXKH40DpfQx3EDwQrZoRsm97aKpVY/J7BxYXzrWx7DP10T+MkKI5NX7WKskkrDny58WwLQfbIBcAJWxbJaoWQFSBhSUnUMOhvTSAINnzj8EPQd7GfB37UtLdCIaGHw8JSQ8JWFAHEhJRCdRzClkXUNFCcQCWmzuZ3kivAx/PZzPUgjnaxi138n+F/QmikYkJXnGIAAAAASUVORK5CYII="
 
 /***/ }),
 
@@ -8273,7 +8281,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8294,14 +8302,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8377,7 +8385,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -9740,7 +9748,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@^2.0.0-alpha-24420191128001","_id"
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationStyle": "custom", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" } }, "pages/login/login": { "navigationStyle": "custom", "usingComponents": {} }, "pages/index/release/release": { "navigationStyle": "custom", "navigationBarTitleText": "文章发布", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/index/release/center": { "navigationStyle": "custom", "usingComponents": {} }, "pages/index/article/detail": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar", "banner": "/pages/components/banner" } }, "pages/integral/integral": { "navigationStyle": "custom", "navigationBarTitleText": "积分", "usingComponents": { "top-bar": "/pages/components/topBar", "good-list": "/pages/components/goodList" } }, "pages/integral/goodDetail": { "navigationBarTitleText": "详情", "usingComponents": { "banner": "/pages/components/banner", "uni-popup": "/pages/components/uni-popup/uni-popup" } }, "pages/integral/order/orderSure": { "navigationBarTitleText": "订单确认", "usingComponents": {} }, "pages/integral/order/orderDetail": { "navigationBarTitleText": "经验详情", "usingComponents": {} }, "pages/integral/order/success": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/integral/plan": { "navigationBarTitleText": "打卡计划", "usingComponents": { "article-list": "/pages/components/articleList" } }, "pages/integral/todayFoot": { "navigationBarTitleText": "今日步数", "usingComponents": { "article-list": "/pages/components/articleList" } }, "pages/integral/rules": { "navigationBarTitleText": "积分规则说明", "usingComponents": {} }, "pages/integral/integralDetail": { "navigationBarTitleText": "积分详情", "usingComponents": {} }, "pages/store/store": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" } }, "pages/store/storeDetail": { "navigationBarTitleText": "门店详情", "usingComponents": {} }, "pages/mine/mine": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "top-bar": "/pages/components/topBar", "article-list": "/pages/components/articleList" } }, "pages/mine/member": { "navigationBarTitleText": "我的会员等级", "usingComponents": {} }, "pages/mine/todayExperience": { "navigationBarTitleText": "今日", "usingComponents": {} }, "pages/mine/personal": { "navigationBarTitleText": "个人信息", "usingComponents": {} }, "pages/mine/setting": { "navigationBarTitleText": "设置", "usingComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "white", "backgroundColor": "#131313", "navigationBarBackgroundColor": "#131313" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationStyle": "custom", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" } }, "pages/login/login": { "navigationStyle": "custom", "usingComponents": {} }, "pages/index/release/release": { "navigationStyle": "custom", "navigationBarTitleText": "文章发布", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/index/release/center": { "navigationStyle": "custom", "usingComponents": {} }, "pages/index/article/detail": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar", "banner": "/pages/components/banner" } }, "pages/integral/integral": { "navigationStyle": "custom", "navigationBarTitleText": "积分", "usingComponents": { "top-bar": "/pages/components/topBar", "good-list": "/pages/components/goodList" } }, "pages/integral/goodDetail": { "navigationBarTitleText": "详情", "usingComponents": { "banner": "/pages/components/banner", "uni-popup": "/pages/components/uni-popup/uni-popup" } }, "pages/integral/order/orderSure": { "navigationBarTitleText": "订单确认", "usingComponents": {} }, "pages/integral/order/orderDetail": { "navigationBarTitleText": "经验详情", "usingComponents": {} }, "pages/integral/order/success": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/integral/plan": { "navigationBarTitleText": "打卡计划", "usingComponents": { "article-list": "/pages/components/articleList" } }, "pages/integral/todayFoot": { "navigationBarTitleText": "今日步数", "usingComponents": { "article-list": "/pages/components/articleList" } }, "pages/integral/rules": { "navigationBarTitleText": "积分规则说明", "usingComponents": {} }, "pages/integral/integralDetail": { "navigationBarTitleText": "积分详情", "usingComponents": {} }, "pages/store/store": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" } }, "pages/store/storeDetail": { "navigationBarTitleText": "门店详情", "usingComponents": {} }, "pages/mine/mine": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "top-bar": "/pages/components/topBar", "article-list": "/pages/components/articleList" } }, "pages/mine/setting": { "navigationBarTitleText": "设置", "usingComponents": {} }, "pages/mine/address/address": { "navigationBarTitleText": "收货地址", "usingComponents": {} }, "pages/mine/address/addAddress": { "navigationStyle": "custom", "usingComponents": {} }, "pages/mine/member": { "navigationBarTitleText": "我的会员等级", "usingComponents": {} }, "pages/mine/todayExperience": { "navigationBarTitleText": "今日", "usingComponents": {} }, "pages/mine/personal": { "navigationBarTitleText": "个人信息", "usingComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "white", "backgroundColor": "#131313", "navigationBarBackgroundColor": "#131313" } };exports.default = _default;
 
 /***/ }),
 

@@ -81,6 +81,7 @@ text, view{
 // 背景颜色
 .b-f{background: #fff;}
 .b-9{background: #999;}
+.b-6{background: #666;}
 .b-13{background: #131313;}
 .b-33{background: #333333;}
 .b-00{background: #000;}
@@ -124,7 +125,9 @@ text, view{
 .rotate-180{
   transform: rotate(180deg);
 }
-
+.b-linear{
+  background:linear-gradient(-90deg,rgba(82,95,247,1),rgba(251,0,240,1));
+}
 // 等级文字颜色渐变
 .linear-word{
   background-image: linear-gradient(#0CDDFE,#4269F8,#923EF4,#EC08F1);
