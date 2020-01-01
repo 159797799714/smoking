@@ -368,6 +368,16 @@ text.data-v-f0d853de, view.data-v-f0d853de {
   width: 33%;
   text-align: center;
 }
+.menu-item.data-v-f0d853de {
+  display: inline-block;
+  margin-top: 40rpx;
+  width: 25%;
+  text-align: center;
+}
+.menu-item > image.data-v-f0d853de {
+    height: 90rpx;
+    width: 90rpx;
+}
 .good-main.data-v-f0d853de {
   padding: 0 28rpx;
 }

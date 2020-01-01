@@ -287,6 +287,8 @@ var topBar = function topBar() {return __webpack_require__.e(/*! import() | page
 
         return;
       }
+      uni.showLoading({
+        title: '发布中' });
 
       var params = {
         url: that.$api.articleRelease,
@@ -296,7 +298,9 @@ var topBar = function topBar() {return __webpack_require__.e(/*! import() | page
         method: 'POST' };
 
       that.$httpRequest(params).then(function (res) {
+        uni.hideLoading();
         if (res.code === 1) {
+
           uni.showToast({
             title: '发布成功,即将自动返回',
             icon: 'none' });

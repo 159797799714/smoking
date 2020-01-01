@@ -162,8 +162,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
 {
   components: {
     topBar: topBar,
@@ -178,8 +176,10 @@ __webpack_require__.r(__webpack_exports__);
       goodList: [] };
 
   },
-  onLoad: function onLoad() {
-    this.getDetail();
+  onShow: function onShow() {
+    if (!this.info.user) {
+      this.getDetail();
+    }
   },
   methods: {
     getDetail: function getDetail() {
@@ -188,7 +188,6 @@ __webpack_require__.r(__webpack_exports__);
         url: that.$api.integralIndex };
 
       that.$httpRequest(params).then(function (res) {
-        console.log(res.data.info);
         that.info = res.data.info;
         var list = res.data.info.goods_list.data,
         arr = [];

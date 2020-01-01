@@ -308,8 +308,8 @@ text.data-v-d7cb6f86, view.data-v-d7cb6f86 {
 .today-experience .progress .progress-num.data-v-d7cb6f86 {
     position: absolute;
     bottom: -30rpx;
-    -webkit-transform: translateX(-12rpx);
-            transform: translateX(-12rpx);
+    -webkit-transform: translateX(-8rpx);
+            transform: translateX(-8rpx);
 }
 .today-experience .progress > image.data-v-d7cb6f86 {
     position: absolute;

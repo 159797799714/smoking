@@ -734,7 +734,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1653,9 +1653,14 @@ var store = new _vuex.default.Store({
     type: '',
     mobile: '',
     token: '',
+    isLogin: false, // 是否已经在登录页
     statusBarHeight: 20, // 状态栏高度
     windowHeight: '', // 屏幕高度,
     fontSize: 16 // 默认系统字体大小
+    // footData: {
+    //   encryptedData: '',
+    //   iv: ''
+    // },           // 记录步数的参数
   },
   mutations: {
     login: function login(state, userinfo) {
@@ -1673,7 +1678,13 @@ var store = new _vuex.default.Store({
       state.statusBarHeight = res.statusBarHeight;
       state.windowHeight = res.windowHeight;
       state.fontSize = res.fontSizeSetting;
+    },
+    redirectLoginPage: function redirectLoginPage(state, res) {
+      state.isLogin = res.status;
     } } });var _default =
+
+
+
 
 
 
@@ -2685,9 +2696,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   userIntegralDetails: 'axapp.center/userIntegralDetails', // 积分总额-当日已获得积分--每日最高可获得积分
   userIntegralDetailsByDay: 'axapp.center/userIntegralDetailsByDay', // 查看当日积分获得详情(获得积分)
   userExperienceDetailsByDay: 'axapp.center/userExperienceDetailsByDay', // 查看当日经验获得详情(获得经验)
+  userExperienceDetails: 'axapp.center/userExperienceDetails', // 会员等级--用户当前总经验---当日已获得经验--每日最高可获得经验
 
   clockInPage: 'axumi.article/clockInPage', // 打卡页面
   signIn: 'axapp.center/signIn', // 签到
+  setpCount: 'ax.user_stepcount/add', // 获取--记录步数数据
+  getFootCount: 'ax.user_stepcount/stepCountPage', // 用户步数页面数据
+  receiveIntegral: 'ax.user_stepcount/receiveIntegral', // 步数领取积分
 
   // 个人中心
   userInfo: 'axapp.center/userHomePage', // 我的首页个人信息
@@ -2720,19 +2735,21 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = _default;var _index = _interopRequireDefault(__webpack_require__(/*! ../store/index.js */ 15));
-var _config = _interopRequireDefault(__webpack_require__(/*! ../api/config.js */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+var _config = _interopRequireDefault(__webpack_require__(/*! ../api/config.js */ 19));
+var _needLoginApi = _interopRequireDefault(__webpack_require__(/*! ../api/needLoginApi.js */ 281));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 
-var isLogin = false;
+// let isLogin= store.state.isLogin        // 是否已经在登录中
 function _default(obj) {
   // let isDefault= token ? token === '6d96b9408fe75c9da42fd4d1b9582993': true;  // 是否是默认账号
 
-  var token = uni.getStorageSync('token');
-
+  var token = uni.getStorageSync('token'),
+  isneed = _needLoginApi.default.indexOf(obj.url) !== -1; // url是否需要登录才能
+  if (!isneed && !token) {
+    token = 'cd3f5492377469fe601f173dwewe';
+  }
   var params = {
     'wxapp_id': '10001',
-    // token: store.state.token
-    // token ? token: '6d96b9408fe75c9da42fd4d1b9582993'
-    token: 'cd3f5492377469fe601f173dwewe' };
+    token: token };
 
   var data = _objectSpread({}, obj.data, params);
   var httpDefaultData = {
@@ -2746,11 +2763,13 @@ function _default(obj) {
     function (res) {
       var result = res[1];
       if (result.data.code === -1) {
-        console.log('xxxxxxxxxx');
-        // 未登录或者登陆失效，重定向到登陆
-        uni.navigateTo({
-          url: '../login/login' });
+        // 未登录或者登陆失效，重定向到登陆)
+        if (!_index.default.state.isLogin) {
+          _index.default.commit('redirectLoginPage', { status: true });
+          uni.navigateTo({
+            url: '../login/login' });
 
+        }
         return;
       } else if (result.data.code === 0 && result.data.msg) {
         uni.showToast({
@@ -8281,7 +8300,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8302,14 +8321,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8385,7 +8404,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8759,6 +8778,46 @@ internalMixin(Vue);
 /* harmony default export */ __webpack_exports__["default"] = (Vue);
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3)))
+
+/***/ }),
+
+/***/ 281:
+/*!***********************************************************!*\
+  !*** C:/Users/pc/Desktop/LEI/smoking/api/needLoginApi.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+module.exports = [
+'upload/image',
+'axumi.article/release',
+'axumi.article/delete',
+'axumi.article/addcomments',
+'axumi.article/focusList', // 关注文章列表
+'axumi.article/like',
+'axumi.article/unLike',
+'axumi.article/collection',
+'axumi.article/unCollection',
+'axumi.article/focus',
+'axumi.article/unFocus',
+'axumi.article/commentreply',
+'axumi.article/commentlike',
+'axumi.article/commentunlike',
+'axumi.article/commentreplylike',
+'axumi.article/commentreplyunlike',
+'ax.goods/goodsList', // 积分--商城（产品列表）首页
+'ax.order/buyNow',
+'ax.order/buyNowinventory', // 点击兑换--库存与积分检测接口
+'axapp.center/integralLogs', // 用户积分明细
+'axapp.center/lists', // 商品兑换记录---订单列表
+'axapp.center/userIntegralDetails', // 积分总额-当日已获得积分--每日最高可获得积分
+'axapp.center/userIntegralDetailsByDay', // 查看当日积分获得详情(获得积分)
+'axapp.center/userExperienceDetailsByDay', // 查看当日经验获得详情(获得经验)
+'axumi.article/clockInPage', // 打卡页面
+'axapp.center/signIn', // 签到
+'axapp.center/userHomePage', // 我的首页个人信息
+'axapp.center/getuserinfo'];
 
 /***/ }),
 
@@ -9748,7 +9807,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@^2.0.0-alpha-24420191128001","_id"
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationStyle": "custom", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" } }, "pages/login/login": { "navigationStyle": "custom", "usingComponents": {} }, "pages/index/release/release": { "navigationStyle": "custom", "navigationBarTitleText": "文章发布", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/index/release/center": { "navigationStyle": "custom", "usingComponents": {} }, "pages/index/article/detail": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar", "banner": "/pages/components/banner" } }, "pages/integral/integral": { "navigationStyle": "custom", "navigationBarTitleText": "积分", "usingComponents": { "top-bar": "/pages/components/topBar", "good-list": "/pages/components/goodList" } }, "pages/integral/goodDetail": { "navigationBarTitleText": "详情", "usingComponents": { "banner": "/pages/components/banner", "uni-popup": "/pages/components/uni-popup/uni-popup" } }, "pages/integral/order/orderSure": { "navigationBarTitleText": "订单确认", "usingComponents": {} }, "pages/integral/order/orderDetail": { "navigationBarTitleText": "经验详情", "usingComponents": {} }, "pages/integral/order/success": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/integral/plan": { "navigationBarTitleText": "打卡计划", "usingComponents": { "article-list": "/pages/components/articleList" } }, "pages/integral/todayFoot": { "navigationBarTitleText": "今日步数", "usingComponents": { "article-list": "/pages/components/articleList" } }, "pages/integral/rules": { "navigationBarTitleText": "积分规则说明", "usingComponents": {} }, "pages/integral/integralDetail": { "navigationBarTitleText": "积分详情", "usingComponents": {} }, "pages/store/store": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" } }, "pages/store/storeDetail": { "navigationBarTitleText": "门店详情", "usingComponents": {} }, "pages/mine/mine": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "top-bar": "/pages/components/topBar", "article-list": "/pages/components/articleList" } }, "pages/mine/setting": { "navigationBarTitleText": "设置", "usingComponents": {} }, "pages/mine/address/address": { "navigationBarTitleText": "收货地址", "usingComponents": {} }, "pages/mine/address/addAddress": { "navigationStyle": "custom", "usingComponents": {} }, "pages/mine/member": { "navigationBarTitleText": "我的会员等级", "usingComponents": {} }, "pages/mine/todayExperience": { "navigationBarTitleText": "今日", "usingComponents": {} }, "pages/mine/personal": { "navigationBarTitleText": "个人信息", "usingComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "white", "backgroundColor": "#131313", "navigationBarBackgroundColor": "#131313" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationStyle": "custom" }, "pages/login/login": { "navigationStyle": "custom" }, "pages/index/release/release": { "navigationStyle": "custom", "navigationBarTitleText": "文章发布" }, "pages/index/release/center": { "navigationStyle": "custom" }, "pages/index/article/detail": { "navigationStyle": "custom" }, "pages/integral/integral": { "navigationStyle": "custom", "navigationBarTitleText": "积分" }, "pages/integral/goodDetail": { "navigationBarTitleText": "详情" }, "pages/integral/order/orderSure": { "navigationBarTitleText": "订单确认" }, "pages/integral/order/orderDetail": { "navigationBarTitleText": "经验详情" }, "pages/integral/order/success": { "navigationStyle": "custom" }, "pages/integral/plan": { "navigationBarTitleText": "打卡计划" }, "pages/integral/todayFoot": { "navigationBarTitleText": "今日步数" }, "pages/integral/rules": { "navigationBarTitleText": "积分规则说明" }, "pages/integral/integralDetail": { "navigationBarTitleText": "积分详情" }, "pages/store/store": { "navigationStyle": "custom", "navigationBarTitleText": "" }, "pages/store/storeDetail": { "navigationBarTitleText": "门店详情" }, "pages/mine/mine": { "navigationStyle": "custom", "navigationBarTitleText": "" }, "pages/mine/setting": { "navigationBarTitleText": "设置" }, "pages/mine/address/address": { "navigationBarTitleText": "收货地址" }, "pages/mine/address/addAddress": { "navigationStyle": "custom" }, "pages/mine/member": { "navigationBarTitleText": "我的会员等级" }, "pages/mine/todayExperience": { "navigationBarTitleText": "今日" }, "pages/mine/personal": { "navigationBarTitleText": "个人信息" } }, "globalStyle": { "navigationBarTextStyle": "white", "backgroundColor": "#131313", "navigationBarBackgroundColor": "#131313" } };exports.default = _default;
 
 /***/ }),
 

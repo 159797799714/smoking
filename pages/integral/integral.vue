@@ -4,27 +4,25 @@
     <topBar :isindex="false" :title="info.user.nickName"/>
     
     <view class="info oh col-c f-26">
-      <view class="leftBox fl oh">
+      <view class="leftBox fl oh dis-flex flex-y-center">
         <image class="userImg" :src="info.user.avatarUrl" mode="widthFix"></image>
-        <view class="dis-inline-block m-l-20">
-          <view>绚等级 <text class="m-l-10 f-32 col-90f">Lv{{info.level}}</text></view>
-          <view class="m-t-25">积分详情 <text class="m-l-10 f-32 col-f">{{info.integral}}</text></view>  
-        </view>
-        
+        <navigator url="./integralDetail" class="flex-box t-c">
+          <view class="col-f f-32">{{info.integral}}</view>
+          <view class="m-t-20 col-c f-26">积分</view>
+        </navigator>
       </view>
       
-      <view class="fr rightBox">
+      <view class="fr rightBox dis-flex flex-y-center">
         <navigator url="./plan" class="dis-inline-block t-c m-r-43">
-          <image class="iconImg" src="../../static/img/card.png" mode="widthFix"></image>
-          <view class="m-t-20 col-f t-c">习惯打卡</view>
+          <text class="btn b-90f f-26 col-c">兑换记录</text>
         </navigator>
-        <navigator url="./todayFoot" class="dis-inline-block t-c">
-          <image class="iconImg" src="../../static/img/foot.png" mode="widthFix"></image>
-          <view class="m-t-20 col-f t-c">行走步数</view>
+        <navigator url="./integralDetail" class="dis-inline-block t-c">
+          <text class="btn b-90f f-26 col-c">积分详情</text>
         </navigator>
       </view>
     </view>
     
+    <view class="f-32 col-c t-c">积分商品</view>
     <view class="good-main">
       <goodList :goodList="goodList"/>
       
@@ -54,8 +52,10 @@
         goodList: []
       }
     },
-    onLoad() {
-      this.getDetail()
+    onShow() {
+      if(!this.info.user) {
+        this.getDetail()
+      }
     },
     methods: {
       getDetail() {
@@ -64,7 +64,6 @@
           url: that.$api.integralIndex
         }
         that.$httpRequest(params).then(res => {
-          console.log(res.data.info)
           that.info= res.data.info
           let list= res.data.info.goods_list.data,
             arr= []
@@ -102,23 +101,24 @@
     border-radius: 100%;
   }
   .info{
-    padding: 0 50upx;
+    padding: 24upx 50upx 0;
     margin-bottom: 80upx;
     line-height: 1;
-    .leftBox,.rightBox{
-      display: inline-block;
-    }
     .leftBox{
-      padding-top: 24upx;
+      width: 345upx;
     }
     .rightBox{
-      .iconImg{
-        height: 90upx;
-        width: 90upx;
+      height: 114upx;
+      .btn{
+        display: block;
+        padding: 0 15upx;
+        line-height: 35upx;
+        border-radius: 18upx;
       }
     }
   }
   .good-main{
+    margin-top: 40upx;
     padding: 0 30upx;
   }
 </style>

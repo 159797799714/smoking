@@ -1,9 +1,9 @@
 <template>
   <view class="plan">
     <view class="t-r f-32 col-9">步数规则</view>
-    <view class="progress-circle">
+    <view v-show="user_steps" class="progress-circle">
       <view class="small-circle b-13 col-90f">
-        <view class="day t-c f-50">12000
+        <view class="day t-c f-50">{{user_steps.step_count}}
           <view class="small-word f-20">
             <view>步</view>
           </view>
@@ -15,22 +15,22 @@
     <view class="m-t-20 t-c f-30 col-9">加入我们  千里之行始于足下</view>
     
     <view class="m-t-30 t-c">
-      <view class="sign-btn f-40 col-f">步数领取积分</view>
+      <view :class="{'sign-btn f-40 col-f': true, 'b-linear-row': user_steps.is_receive < 1, 'b-9 col-13':  user_steps.is_receive > 0}" @click="receiveIntegral(user_steps.input_date, user_steps.ranking)">{{user_steps.is_receive > 0? '积分已领取': '步数领取积分'}}</view>
     </view>
     <view class="m-t-30 t-c f-30 col-6">走的越多 积分越多</view>
     
     <view class="section-title t-c f-32 col-c">今日步数排行榜</view>
     
     <view class="ranking">
-      <view v-for="(item, index) in rankList" :key="index" class="item oh">
+      <view v-for="(item, index) in list.nowadays_list" :key="index" class="item oh">
         <view class="fl foot-user p-re">
-          <text class="rank-num f-40 col-c">{{item + 1}}</text>
+          <text class="rank-num f-40 col-c">{{item.ranking}}</text>
           <view class="dis-inline-block p-ab user">
-            <image src="../../static/mine/card/china.png" mode="width" class="user-img"></image>
-            <view class="m-t-15 user-name t-c f-24 col-9">啦啦</view>
+            <image :src="item.avatarUrl" mode="width" class="user-img"></image>
+            <view class="m-t-15 user-name t-c f-24 col-9">{{item.nickName}}</view>
           </view>
         </view>
-        <view class="fr foot-num f-36 col-c">20000步</view>
+        <view class="fr foot-num f-36 col-c">{{item.step_count}}步</view>
       </view>
     </view>
   </view>
@@ -44,8 +44,55 @@
     },
     data () {
       return {
-        rankList: 10
+        rankList: 10,
+        user_steps: '',
+        list: ''
       }
+    },
+    onLoad() {
+      this.getFootDetail()
+    },
+    methods: {
+      // 获取步数详情
+      getFootDetail() {
+        let that= this,
+          params= {
+            url: that.$api.getFootCount
+          }
+        that.$httpRequest(params).then(res => {
+          that.user_steps= res.data.user_steps
+          that.list= res.data.list
+        })
+      },
+      
+      // 领取积分
+      receiveIntegral(date, ranking) {
+        let that= this,
+          params= {
+            url: that.$api.receiveIntegral,
+            data: {
+              input_date: date,
+              ranking: ranking
+            }
+          }
+        // 检查是否已经领取过
+        if(that.user_steps.is_receive > 0) {
+          uni.showToast({
+            title: '不要太贪心哦',
+            icon: 'none'
+          })
+          return
+        }
+        
+        that.$httpRequest(params).then(res => {
+          uni.showToast({
+            title: res.data,
+            icon: 'none'
+          })
+          that.user_steps.is_receive += 1
+        })
+      }
+        
     }
   }
 </script>
@@ -83,7 +130,6 @@
     display: inline-block;
     padding: 18upx 15upx;
     border-radius: 38upx;
-    background:linear-gradient(-90deg,rgba(82,95,247,1),rgba(251,0,240,1));
   }
   .section-title{
     margin: 80upx 0 52upx;
@@ -109,8 +155,8 @@
         line-height: 132upx;
       }
       .user-name{
-        width: 70upx;
-        text-align: center;
+        width:200upx;
+        text-align: left;
         overflow: visible;
       }
       .foot-num{

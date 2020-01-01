@@ -166,6 +166,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
 {
   components: {
     topBar: topBar,
@@ -193,13 +199,36 @@ __webpack_require__.r(__webpack_exports__);
         name: 'like_num' }],
       // 信息菜单栏
 
+      menuList: [{
+        imgUrl: 'card',
+        title: '习惯打卡',
+        open: 'navigate',
+        url: '../integral/plan' },
+      {
+        imgUrl: 'foot',
+        title: '行走步数',
+        open: 'navigate',
+        url: '../integral/todayFoot' },
+      {
+        imgUrl: 'discount',
+        title: '优惠券',
+        open: 'navigate',
+        url: '../integral/coupon' },
+      {
+        imgUrl: 'prize',
+        title: '兑换奖品',
+        open: 'switchTab',
+        url: '../integral/integral' }],
+
+
       articleList: [], // 分享文章列表
       like_article_list: [], // 点赞文章列表
       tabList: ['分享', '点赞'],
       tabIndex: 0 };
 
   },
-  onLoad: function onLoad() {
+
+  onShow: function onShow() {
     var that = this;
     that.getDetail();
   },

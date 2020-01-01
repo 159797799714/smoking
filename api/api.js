@@ -42,10 +42,14 @@ export default {
   lists: 'axapp.center/lists',                                         // 商品兑换记录---订单列表
   userIntegralDetails: 'axapp.center/userIntegralDetails',             // 积分总额-当日已获得积分--每日最高可获得积分
   userIntegralDetailsByDay: 'axapp.center/userIntegralDetailsByDay',   // 查看当日积分获得详情(获得积分)
-  userExperienceDetailsByDay: 'axapp.center/userExperienceDetailsByDay',   // 查看当日经验获得详情(获得经验)
+  userExperienceDetailsByDay: 'axapp.center/userExperienceDetailsByDay',// 查看当日经验获得详情(获得经验)
+  userExperienceDetails: 'axapp.center/userExperienceDetails',         // 会员等级--用户当前总经验---当日已获得经验--每日最高可获得经验
   
   clockInPage: 'axumi.article/clockInPage',                            // 打卡页面
   signIn: 'axapp.center/signIn',                                       // 签到
+  setpCount: 'ax.user_stepcount/add',                                  // 获取--记录步数数据
+  getFootCount: 'ax.user_stepcount/stepCountPage',                     // 用户步数页面数据
+  receiveIntegral: 'ax.user_stepcount/receiveIntegral',                // 步数领取积分
   
   // 个人中心
   userInfo: 'axapp.center/userHomePage',                               // 我的首页个人信息
@@ -56,7 +60,7 @@ export default {
   editSign: 'axapp.center/modifyWxUserInfo',                           // 修改个性签名
   
   // 地址
-  addressLists: 'ax.address/lists',                                   // 地址列表
+  addressLists: 'ax.address/lists',                                    // 地址列表
   addressDetail: 'ax.address/detail',                                  // 地址详情
   addAddress: 'ax.address/add',                                        // 添加新地址
   editAddress: 'ax.address/edit',                                      // 修改地址

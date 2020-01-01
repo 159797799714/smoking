@@ -1,27 +1,28 @@
 <template>
-  <view class="my-grade">
+  <view v-if="detail" class="my-grade">
     <!-- 头部 -->
     <!-- <topBar :isindex="true"/> -->
     
     <!-- <view class="t-c f-30 col-f">我的会员等级</view> -->
-    <view class="m-t-25 t-c f-44 f-w linear-word">Lv1</view>
+    <view class="m-t-25 t-c f-44 f-w linear-word">Lv{{detail.level}}</view>
     <view class="m-t-25 level-column t-c">
-      <view class="level-span b-linear">LV1</view>
+      <view v-for="item in level" :key="item" :class="{'level-span b-33': true, 'b-linear': detail.level-1 === item , 'b-9': detail.level === item}">LV{{item + 1}}</view>
+      <!-- <view class="level-span b-linear">LV1</view>
       <view class="level-span b-9">LV2</view>
       <view class="level-span b-33">LV3</view>
       <view class="level-span b-33">LV4</view>
-      <view class="level-span b-33">LV5</view>
+      <view class="level-span b-33">LV5</view> -->
     </view>
     
     
     <view class="today-experience">
       <view class="f-30 col-f">今日经验
-        <text class="f-20 col-6"> (还有80经验可获得）</text>
+        <text class="f-20 col-6"> (还有{{detail.today_get_experience_limit_total-detail.today_get_experience_total}}经验可获得）</text>
       </view>
       <view class="detail t-r f-24 col-90f" @click="goDetail">查看详情</view>
       <view class="progress">
-        <image src="../../static/img/tabbar/index1.png" mode="widthFix"/>
-        <text class="progress-num f-24 col-f">20</text>
+        <image src="../../static/img/tabbar/index1.png" mode="widthFix" :style="{'margin-left': left}"/>
+        <text class="progress-num f-24 col-f" :style="{'left': left}">{{detail.today_get_experience_total}}</text>
       </view>
     </view>
     
@@ -46,6 +47,9 @@
     // },
     data () {
       return {
+        level: 5,
+        detail: '',
+        left: '',
         menuList: [{
           name: '新品尝鲜',
           imgUrl: require('@/static/img/tabbar/index1.png')
@@ -72,7 +76,18 @@
           imgUrl: require('@/static/img/tabbar/index1.png')
         }]
       }
-    }, 
+    },
+    onLoad() {
+      let that= this,
+        params= {
+          url: that.$api.userExperienceDetails
+        }
+      that.$httpRequest(params).then(res => {
+        that.detail= res.data
+        that.left=  res.data.today_get_experience_total / res.data.today_get_experience_limit_total * 100 + '%'
+        
+      })
+    },
     methods: {
       goDetail() {
         uni.navigateTo({
@@ -140,12 +155,11 @@
       background:linear-gradient(-90deg,rgba(12,221,254,1),rgba(66,105,248,1),rgba(146,62,244,1),rgba(236,8,241,1));
       .progress-num{
         position: absolute;
+        padding-left: 4upx;
         bottom: -30upx;
-        left: 300upx;
       }
       &>image{
         padding: 0;
-        margin-left: 300upx;
         transform: translateY(-50%);
         height: 25upx;
         width: 25upx;

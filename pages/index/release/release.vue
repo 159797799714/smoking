@@ -163,7 +163,9 @@
           })
           return
         }
-        
+        uni.showLoading({
+          title: '发布中'
+        })
         let params= {
           url: that.$api.articleRelease,
           data: {
@@ -172,7 +174,9 @@
           method: 'POST'
         }
         that.$httpRequest(params).then(res => {
+          uni.hideLoading()
           if(res.code === 1) {
+            
             uni.showToast({
               title: '发布成功,即将自动返回',
               icon: 'none'

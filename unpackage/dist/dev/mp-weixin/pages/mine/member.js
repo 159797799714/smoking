@@ -162,6 +162,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 // import topBar from '../components/topBar.vue'
 var _default = {
@@ -170,6 +171,9 @@ var _default = {
   // },
   data: function data() {
     return {
+      level: 5,
+      detail: '',
+      left: '',
       menuList: [{
         name: '新品尝鲜',
         imgUrl: __webpack_require__(/*! @/static/img/tabbar/index1.png */ 187) },
@@ -196,6 +200,17 @@ var _default = {
         imgUrl: __webpack_require__(/*! @/static/img/tabbar/index1.png */ 187) }] };
 
 
+  },
+  onLoad: function onLoad() {
+    var that = this,
+    params = {
+      url: that.$api.userExperienceDetails };
+
+    that.$httpRequest(params).then(function (res) {
+      that.detail = res.data;
+      that.left = res.data.today_get_experience_total / res.data.today_get_experience_limit_total * 100 + '%';
+
+    });
   },
   methods: {
     goDetail: function goDetail() {

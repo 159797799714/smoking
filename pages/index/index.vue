@@ -86,11 +86,11 @@
       }
     },
     onLoad() {
-      this.getBanner()
-      this.getFindList()
+      let that= this
+      that.getBanner()
+      that.getFindList()
     },
     onShow() {
-      console.log(this.category_id)
       let that= this,
         id= this.category_id
       that.page.current_page= 1
@@ -103,13 +103,16 @@
           that.getNewList()
           break
         case 2:
-          that.getFocusList()
+          if(that.$store.state.token) {
+            that.getFocusList()
+          } else {
+            this.category_id= 0
+          }
           break
       }  
     },
     watch: {
       category_id (val) {
-        console.log('变了', val)
         let that= this
         that.page.current_page= 1
         that.articleList= []

@@ -120,6 +120,23 @@ __webpack_require__.r(__webpack_exports__);
         // .statusBarHeight
       } });
 
+
+    // 步数授权，记录步数
+    uni.authorize({
+      scope: 'scope.werun',
+      success: function success(res) {
+        wx.getWeRunData({
+          success: function success(res) {
+            // 拿 encryptedData 到开发者后台解密开放数据
+            var encryptedData = res.encryptedData;
+            // 或拿 cloudID 通过云调用直接获取开放数据
+            var iv = res.iv;
+            uni.setStorage({ key: 'encryptedData', data: encryptedData });
+            uni.setStorage({ key: 'iv', data: iv });
+          } });
+
+      } });
+
   },
   onShow: function onShow() {
     console.log('App Show');

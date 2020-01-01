@@ -54,6 +54,10 @@
         uni.setNavigationBarTitle({
           title: '积分详情'
         })
+      } else {
+        uni.setNavigationBarTitle({
+          title: '经验详情'
+        })
       }
       this.getDetail()
     },
@@ -107,7 +111,7 @@
       .progress-num{
         position: absolute;
         bottom: -30upx;
-        transform: translateX(-12upx);
+        transform: translateX(-8upx);
       }
       &>image{
         position: absolute;

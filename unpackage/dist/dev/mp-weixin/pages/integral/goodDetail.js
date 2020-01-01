@@ -237,7 +237,7 @@ __webpack_require__.r(__webpack_exports__);
         richtext = richtext.replace(regex, "img style=\"max-width: 100%;\"");
         that.detail.content = richtext;
 
-        if (that.specData) {
+        if (res.data.specData) {
           // 默认选中的规格，以及规格名称
           that.specData.spec_attr.map(function (item, index) {
             that.select_arr.push(item.spec_items[0].item_id);
@@ -250,7 +250,6 @@ __webpack_require__.r(__webpack_exports__);
           that.specData.spec_list.map(function (item, index) {
             if (item.spec_sku_id === _id) {
               obj.goods_price = item.form.goods_price;
-              obj.goods_price = item.form.goods_price;
               if (item.form.image_path) {
                 obj.image_path = item.form.image_path;
                 console.log(item.form.image_path);
@@ -258,7 +257,10 @@ __webpack_require__.r(__webpack_exports__);
             }
           });
           that.goods = obj;
-
+        } else {
+          that.select_arr.push(res.data.detail.sku[0].goods_sku_id);
+          that.goods.goods_price = res.data.detail.sku[0].goods_price;
+          that.goods.image_path = res.data.detail.image[0].file_path;
         }
       });
     },

@@ -339,12 +339,11 @@ text.data-v-1059a150, view.data-v-1059a150 {
 }
 .today-experience .progress .progress-num.data-v-1059a150 {
       position: absolute;
+      padding-left: 4rpx;
       bottom: -30rpx;
-      left: 300rpx;
 }
 .today-experience .progress > image.data-v-1059a150 {
       padding: 0;
-      margin-left: 300rpx;
       -webkit-transform: translateY(-50%);
               transform: translateY(-50%);
       height: 25rpx;

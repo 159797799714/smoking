@@ -29,7 +29,6 @@
     methods: {
       // 登录
       authorLogin(e) {
-        console.log('获取到了', e.detail)
         let that= this,
           params= {
             url: that.$api.login,
@@ -43,28 +42,63 @@
               referee_id: wx.getStorageSync('referee_id')
             }
           }
+          
+        uni.removeStorageSync('token')
+         
         // 调起登录
-        
+        uni.showLoading({
+            title: '登录中'
+        })
         uni.login({
           provider: 'weixin',
           success: function (loginRes) {
             console.log(loginRes)
             params.data.code= loginRes.code
+            
+            // 请求登录接口
             that.$httpRequest(params).then(res => {
+              that.$store.commit('setToken', res.data.token)
+              that.$store.commit('redirectLoginPage', {status: false})
               uni.setStorageSync('token', res.data.token)
               uni.navigateBack({
-                delta: 1
+                delta: 1,
+                success: function() {
+                  uni.hideLoading()
+                  
+                  uni.login({
+                    provider: 'weixin',
+                    success: function (loginRes) {
+                      // 记录步数
+                      let encryptedData= uni.getStorageSync('encryptedData'),
+                        iv= uni.getStorageSync('iv'),
+                        data= {
+                        url: that.$api.setpCount,
+                        method: 'POST',
+                        data: {
+                          encryptedData: encryptedData,
+                          iv: iv,
+                          code: loginRes.code
+                        }
+                      }
+                      that.$httpRequest(data).then(res => {
+                        console.log(res)
+                      })
+                    }
+                  })
+                  
+                }
               })
             })
           }
         })
         
+      },
+      reject() {
+        this.$store.commit('redirectLoginPage', {status: false})
+        uni.switchTab({
+          url: '../index/index'
+        })
       }
-    },
-    reject() {
-      uni.redirectTo({
-        url: '@/index/index'
-      })
     }
   }
 </script>

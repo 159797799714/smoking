@@ -210,11 +210,11 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   onLoad: function onLoad() {
-    this.getBanner();
-    this.getFindList();
+    var that = this;
+    that.getBanner();
+    that.getFindList();
   },
   onShow: function onShow() {
-    console.log(this.category_id);
     var that = this,
     id = this.category_id;
     that.page.current_page = 1;
@@ -227,13 +227,16 @@ __webpack_require__.r(__webpack_exports__);
         that.getNewList();
         break;
       case 2:
-        that.getFocusList();
+        if (that.$store.state.token) {
+          that.getFocusList();
+        } else {
+          this.category_id = 0;
+        }
         break;}
 
   },
   watch: {
     category_id: function category_id(val) {
-      console.log('变了', val);
       var that = this;
       that.page.current_page = 1;
       that.articleList = [];

@@ -178,6 +178,10 @@ var _default =
       uni.setNavigationBarTitle({
         title: '积分详情' });
 
+    } else {
+      uni.setNavigationBarTitle({
+        title: '经验详情' });
+
     }
     this.getDetail();
   },

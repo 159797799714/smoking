@@ -295,21 +295,24 @@ text.data-v-5ab69b9e {
   border-radius: 100%;
 }
 .info.data-v-5ab69b9e {
-  padding: 0 50rpx;
+  padding: 24rpx 50rpx 0;
   margin-bottom: 80rpx;
   line-height: 1;
 }
-.info .leftBox.data-v-5ab69b9e, .info .rightBox.data-v-5ab69b9e {
-    display: inline-block;
-}
 .info .leftBox.data-v-5ab69b9e {
-    padding-top: 24rpx;
+    width: 345rpx;
 }
-.info .rightBox .iconImg.data-v-5ab69b9e {
-    height: 90rpx;
-    width: 90rpx;
+.info .rightBox.data-v-5ab69b9e {
+    height: 114rpx;
+}
+.info .rightBox .btn.data-v-5ab69b9e {
+      display: block;
+      padding: 0 15rpx;
+      line-height: 35rpx;
+      border-radius: 18rpx;
 }
 .good-main.data-v-5ab69b9e {
+  margin-top: 40rpx;
   padding: 0 30rpx;
 }
 

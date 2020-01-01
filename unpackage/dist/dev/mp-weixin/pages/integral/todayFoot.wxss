@@ -315,8 +315,6 @@ text.data-v-295f281a, view.data-v-295f281a {
   display: inline-block;
   padding: 18rpx 15rpx;
   border-radius: 38rpx;
-  background: -webkit-linear-gradient(right, #525ff7, #fb00f0);
-  background: linear-gradient(-90deg, #525ff7, #fb00f0);
 }
 .section-title.data-v-295f281a {
   margin: 80rpx 0 52rpx;
@@ -344,8 +342,8 @@ text.data-v-295f281a, view.data-v-295f281a {
       line-height: 132rpx;
 }
 .ranking .item .user-name.data-v-295f281a {
-      width: 70rpx;
-      text-align: center;
+      width: 200rpx;
+      text-align: left;
       overflow: visible;
 }
 .ranking .item .foot-num.data-v-295f281a {

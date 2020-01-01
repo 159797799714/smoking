@@ -1,17 +1,19 @@
 import store from '../store/index.js'
 import API from '../api/config.js'
+import NeedLoginApi from '../api/needLoginApi.js'
 
-let isLogin= false
+// let isLogin= store.state.isLogin        // 是否已经在登录中
 export default function(obj) {
   // let isDefault= token ? token === '6d96b9408fe75c9da42fd4d1b9582993': true;  // 是否是默认账号
   
-  let token=  uni.getStorageSync('token')
-  
+  let token=  uni.getStorageSync('token'),
+    isneed= NeedLoginApi.indexOf(obj.url) !== -1      // url是否需要登录才能
+  if(!isneed && !token) {
+    token= 'cd3f5492377469fe601f173dwewe'
+  }
   let params = {
     'wxapp_id': '10001',
-    // token: store.state.token
-    // token ? token: '6d96b9408fe75c9da42fd4d1b9582993'
-    token: 'cd3f5492377469fe601f173dwewe'
+    token: token
   }
   let data ={...obj.data, ...params}
   let httpDefaultData = {
@@ -25,11 +27,13 @@ export default function(obj) {
       (res) => {
         let result = res[1]
         if(result.data.code === -1) {
-          console.log('xxxxxxxxxx')
-          // 未登录或者登陆失效，重定向到登陆
-          uni.navigateTo({
-            url: '../login/login'
-          })
+          // 未登录或者登陆失效，重定向到登陆)
+          if(!store.state.isLogin) {
+            store.commit('redirectLoginPage', {status: true})
+            uni.navigateTo({
+              url: '../login/login'
+            })  
+          }
           return
         } else if(result.data.code === 0 && result.data.msg) {
           uni.showToast({

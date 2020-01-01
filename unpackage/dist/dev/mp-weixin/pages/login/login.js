@@ -155,7 +155,6 @@ var _default =
   methods: {
     // 登录
     authorLogin: function authorLogin(e) {
-      console.log('获取到了', e.detail);
       var that = this,
       params = {
         url: that.$api.login,
@@ -166,32 +165,66 @@ var _default =
           encrypted_data: e.detail.encryptedData,
           iv: e.detail.iv,
           signature: e.detail.signature,
-          referee_id: wx.getStorageSync('referee_id') }
+          referee_id: wx.getStorageSync('referee_id') } };
 
 
-        // 调起登录
-      };
+
+      uni.removeStorageSync('token');
+
+      // 调起登录
+      uni.showLoading({
+        title: '登录中' });
+
       uni.login({
         provider: 'weixin',
         success: function success(loginRes) {
           console.log(loginRes);
           params.data.code = loginRes.code;
+
+          // 请求登录接口
           that.$httpRequest(params).then(function (res) {
+            that.$store.commit('setToken', res.data.token);
+            that.$store.commit('redirectLoginPage', { status: false });
             uni.setStorageSync('token', res.data.token);
             uni.navigateBack({
-              delta: 1 });
+              delta: 1,
+              success: function success() {
+                uni.hideLoading();
+
+                uni.login({
+                  provider: 'weixin',
+                  success: function success(loginRes) {
+                    // 记录步数
+                    var encryptedData = uni.getStorageSync('encryptedData'),
+                    iv = uni.getStorageSync('iv'),
+                    data = {
+                      url: that.$api.setpCount,
+                      method: 'POST',
+                      data: {
+                        encryptedData: encryptedData,
+                        iv: iv,
+                        code: loginRes.code } };
+
+
+                    that.$httpRequest(data).then(function (res) {
+                      console.log(res);
+                    });
+                  } });
+
+
+              } });
 
           });
         } });
 
 
-    } },
+    },
+    reject: function reject() {
+      this.$store.commit('redirectLoginPage', { status: false });
+      uni.switchTab({
+        url: '../index/index' });
 
-  reject: function reject() {
-    uni.redirectTo({
-      url: '@/index/index' });
-
-  } };exports.default = _default;
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

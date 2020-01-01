@@ -23,10 +23,17 @@
       
     </view>
     <view class="menu p-re">
+      
       <view v-for="(item, index) in mycircle" :key="index" class="span-item">
         <view class="num f-28 col-f">{{item.num}}</view>
         <view class="m-t-10 f-26 col-6">{{item.title}}</view>
       </view>
+      
+      <navigator v-for="(item, index) in menuList" :key="index" :open-type="item.open" :url="item.url" class="menu-item">
+        <image :src="'../../static/img/'+item.imgUrl+'.png'" mode=""></image>
+        <view class="m-t-15 f-26 col-6">{{item.title}}</view>
+      </navigator>
+      
     </view>
     <view class="tabBar">
       <view v-for="(item, index) in tabList" :key="index" :class="{'tabs f-32 col-f': true, 'f-40 col-f0f': tabIndex === index}" @click="selectTab(index)">{{item}}</view>
@@ -34,7 +41,6 @@
     
     <view class="good-main col-f">
       <articleList :articleList="tabIndex === 0? articleList: like_article_list"/>
-      
     </view>
   </view>
 </template>
@@ -69,13 +75,36 @@
           name: 'like_num'
         }],                               // 信息菜单栏
         
+        menuList: [{
+          imgUrl: 'card',
+          title: '习惯打卡',
+          open: 'navigate',
+          url: '../integral/plan'
+        }, {
+          imgUrl: 'foot',
+          title: '行走步数',
+          open: 'navigate',
+          url: '../integral/todayFoot'
+        }, {
+          imgUrl: 'discount',
+          title: '优惠券',
+          open: 'navigate',
+          url: '../integral/coupon'
+        }, {
+          imgUrl: 'prize',
+          title: '兑换奖品',
+          open: 'switchTab',
+          url: '../integral/integral'
+        }],    
+        
         articleList: [],                  // 分享文章列表
         like_article_list: [],            // 点赞文章列表
         tabList: ['分享', '点赞'],
         tabIndex: 0
       }
     },
-    onLoad() {
+    
+    onShow() {
       let that= this
       that.getDetail()
     },
@@ -214,6 +243,16 @@
     display: inline-block;
     width: 33%;
     text-align: center;
+  }
+  .menu-item{
+    display: inline-block;
+    margin-top: 40upx;
+    width: 25%;
+    text-align: center;
+    &>image{
+      height: 90upx;
+      width: 90upx;
+    }
   }
   .good-main{
     padding: 0 28upx;
