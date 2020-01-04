@@ -14,7 +14,7 @@
       </view>
     </view>
     <view class="t-c">
-      <view class="sign-btn f-40 col-f"  @click="signIn">{{detail.is_sign === 'yes'? '今日已签到': '签到领积分'}}</view>
+      <view v-if="detail.is_sign" :class="{'sign-btn f-40 col-f': true, 'b-linear-row': detail.is_sign === 'no', 'b-9': detail.is_sign !== 'no'}"  @click="signIn">{{detail.is_sign === 'yes'? '今日已签到': '签到领积分'}}</view>
     </view>
     
     <view class="order-main">
@@ -25,15 +25,15 @@
     
     <view class="p-left-30">
       <view v-if="tabIndex === 0" v-for="(item, index) in menuList.data" :key="index" class="bar f-26 col-9">
-        <text class="fl left-describe">{{item.source_describe}}</text>
+        <text class="fl left-describe onelist-hidden">{{item.source_describe}}</text>
         <text>积分{{item.type === 'spending'? '-' + item.integral: '+' + item.integral}}</text>
         <text class="fr">{{item.input_date}}</text>
       </view>
       
-      <view v-else v-for="(item, index) in convertList.data" :key="index" class="convert-item oh">
+      <navigator v-else v-for="(item, index) in convertList.data" :key="index" :url="'./order/orderDetail?order_id='+item.order_id" class="convert-item oh">
         <view class="oh dis-inline-block">
           <view class="fl good-img">
-            <image :src="item.goods[0].image.file_path" mode="widthFix"></image>
+            <image :src="item.goods[0].image.file_path" mode="aspectFit"></image>
           </view>
           <view class="good-info fl m-l-20 col-9 f-26">
             <view class="onelist-hidden m-t-15">{{item.goods[0].goods_name}}</view>
@@ -41,7 +41,7 @@
           </view>
         </view>
         <text class="fr f-24 col-9">{{item.create_time}}</text>
-      </view>
+      </navigator>
       
     </view>
     
@@ -56,6 +56,7 @@
         tabIndex: 0,
         detail: {
           integral_total: 0,
+          is_sign: '',
           today_get_integral_limit_total: 100,
           today_get_integral_total: 0
         },
@@ -202,7 +203,6 @@
     padding: 18upx 15upx;
     margin: 56upx 0 60upx;
     border-radius: 38upx;
-    background:linear-gradient(-90deg,rgba(82,95,247,1),rgba(251,0,240,1));
   }
   .tabs{
     .tab{

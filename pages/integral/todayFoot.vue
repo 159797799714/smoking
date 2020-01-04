@@ -151,7 +151,7 @@
         margin: auto 0;
       }
       .rank-num{
-        margin-right: 12upx;
+        margin-right: 30upx;
         line-height: 132upx;
       }
       .user-name{

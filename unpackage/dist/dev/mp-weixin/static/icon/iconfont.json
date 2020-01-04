@@ -69,6 +69,13 @@
       "unicode_decimal": 58899
     },
     {
+      "icon_id": "9924279",
+      "name": "错",
+      "font_class": "cuo",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
       "icon_id": "10459924",
       "name": "返 回",
       "font_class": "fanhui",

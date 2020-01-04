@@ -1,6 +1,6 @@
 <template>
   <view class="detail">
-    <view class="swiper-box">
+    <view class="swiper-box b-2-3">
       <banner :swiperList="swiperList" :borderWidth="''"/>
     </view>
     
@@ -41,6 +41,8 @@
             <image :src="goods.image_path" mode="widthFix"></image>
           </view>
           <text class="f-32 col-f0f">积分{{goods.goods_price * 100 / 100}}</text>
+          
+          <text class="fr iconfont f-28 col-6" @click="close()">&#xe612;</text>
         </view>
         <view v-for="(item, index) in specData.spec_attr" :key="index" class="norm-item">
           <view class="norm-title f-24 col-c">{{ item.group_name }}</view>
@@ -200,6 +202,9 @@
       open(){
         // 需要在 popup 组件，指定 ref 为 popup
         this.$refs.popup.open()
+      },
+      close() {
+        this.$refs.popup.close()
       },
       // 商品规格
       selectNorm(shu, li, num) {
@@ -364,12 +369,18 @@
         }
       }
       &>text{
-        display: block;
+        display: inline-block;
         padding-top: 108upx;
+      }
+      .iconfont{
+        padding-top: 0;
       }
     }
   }
   .b-20{
     border-bottom: 20upx solid #333;
+  }
+  .b-2-3{
+    border-bottom: 2upx solid #333;
   }
 </style>

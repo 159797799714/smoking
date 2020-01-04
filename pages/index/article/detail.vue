@@ -7,7 +7,9 @@
           <image :src="detail.user.avatarUrl" mode="aspectFill" class="b-9"></image>
           <text class="name onelist-hidden">{{ detail.user.nickName }}</text>
         </view>
-        <text class="iconfont" @click="goShare">&#xe6b6;</text>
+        <button type="" plain="true" open-type="share"  class="dis-inline-block share-btn">
+          <text class="iconfont">&#xe6b6;</text>
+        </button>
         <text class="iconfont m-l-30">&#xe613;</text>
       </view>
     </topBar>
@@ -353,6 +355,9 @@
         margin-right: 27upx;
         border-radius: 100%;
       }
+    }
+    .share-btn{
+      opacity: 0;
     }
   }
   .banners{

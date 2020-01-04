@@ -216,3 +216,8 @@
     line-height: 36upx;
   }
 </style>
+<style>
+picker .wx-picker-action.wx-picker-action-confirm{  
+  color: #131313 !important;  
+}
+</style>

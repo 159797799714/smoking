@@ -1,8 +1,8 @@
 <template>
-  <view class="orderDetail">
-    <view class="t-c f-38 col-90f">已完成</view>
+  <view v-if="detail" class="orderDetail">
+    <view class="t-c f-38 col-90f">{{detail.state_text}}</view>
     
-    <view class="m-t-25 t-c f-22 col-f">订单编号：345271883874464</view>
+    <view class="m-t-25 t-c f-22 col-f">订单编号：{{detail.order_no}}</view>
     
     <view class="m-t-30 express t-c">
       <view class="fl express-icon">
@@ -15,37 +15,37 @@
         <view class="express-time">2019-05-22  09:10:34</view>
       </view>
       <view class="fr left-arrow">
-        <image src="../../../static/img/tabbar/index1.png" mode=""></image>
+        <text class="iconfont rotate-180 f-20 col-c">&#xe61b;</text>
       </view>
     </view>
     
-    <view class="good-detail m-t-15 oh">
+    <view v-for="item in detail.goods" :key="item" class="good-detail m-t-15 oh">
       <view class="good-img fl dis-inline-block">
-        <image src="../../../static/mine/card/china_bg.png" mode="aspectFill"></image>
+        <image :src="item.image.file_path" mode="aspectFill"></image>
       </view>
       <view class="info-box fl dis-inline-block">
-        <view class="good-name f-24 col-c">{{good.name}}</view>
+        <view class="good-name f-24 col-c">{{item.goods_name}}</view>
         <view>
-          <text class="tag_name b-90f col-13 f-24">{{good.norm?good.norm: '默认'}}</text>
+          <text class="tag_name b-90f col-13 f-24">{{item.goods_attr?item.goods_attr: '默认'}}</text>
         </view>
         <view class="bottom-num oh">
-          <text class="fl f-24 col-f0f">积分{{good.integral}}</text>
+          <text class="fl f-24 col-f0f">积分{{item.goods_price}}</text>
         </view>
-        <view class="num t-r f-30 col-c">X{{good.num}}</view>
+        <view class="num t-r f-30 col-c">X{{item.total_num}}</view>
       </view>
     </view>
     
     <view class="column-item f-30 col-c oh">
       <text class="fl">商品金额</text>
-      <text class="fr">积 分{{good.integral}}</text>
+      <text class="fr">积 分{{detail.total_price}}</text>
     </view>
     <view class="column-item f-30 col-c oh">
       <text class="fl">运费金额</text>
-      <text class="fr">{{good.fare}}</text>
+      <text class="fr">{{detail.express_price}}</text>
     </view>
     <view class="column-item f-30 col-c oh">
       <text class="fl">优惠金额</text>
-      <text class="fr">0.00</text>
+      <text class="fr">{{detail.coupon_price}}</text>
     </view>
   </view>
 </template>
@@ -54,6 +54,8 @@
   export default{
     data() {
       return {
+        order_id: '',
+        detail: '',
         good: {
           name: '电子烟电子烟',
           norm: '黑色普通版',
@@ -61,6 +63,28 @@
           num: 1,
           fare: 100
         }
+      }
+    },
+    onLoad(opt) {
+      console.log('订单详情', opt)
+      this.order_id= opt.order_id
+      this.getDetail(opt.order_id)
+    },
+    methods: {
+      
+      // 获取订单详情
+      getDetail(id) {
+        let that= this,
+          params = {
+            url: that.$api.orderDetail,
+            data: {
+              order_id: id
+            }
+          }
+        that.$httpRequest(params).then(res => {
+          console.log(res)
+          that.detail= res.data.order
+        })
       }
     }
   }

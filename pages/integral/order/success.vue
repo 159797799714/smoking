@@ -7,7 +7,7 @@
     <view class="imgBox t-c">
       <image src="../../../static/img/success.png" class="banner"></image>
       <view class="m-t-30 f-50 col-f t-c">兑换成功</view>
-      <view class="m-t-30 f-28 col-9 t-c">实付7000积分</view>
+      <view class="m-t-30 f-28 col-9 t-c">实付{{num}}积分</view>
       <view class="btn">
         <text class="b-90f f-30 col-c" @click="achieve">返回首页</text>
         <text class="b-90f f-30 col-c" @click="orderDetail">查看订单</text>
@@ -25,7 +25,20 @@
   import topBar from '../../components/topBar.vue'
   export default {
     components: {
-      topBar: topBar
+      topBar: topBar,
+    },
+    data() {
+      return {
+        num: 0,                // 当前订单消耗积分数量
+        order_id: '',          // 订单id
+      }
+    },
+    onLoad(opt) {
+      console.log(opt.num)
+      if(opt.num) {
+        this.num= opt.num
+        this.order_id= opt.order_id
+      }
     },
     methods: {
       // 完成，返回首页
@@ -37,7 +50,7 @@
       },
       orderDetail() {
         uni.navigateTo({
-          url: 'orderDetail'
+          url: 'orderDetail?order_id=' + this.order_id
         })
       }
     }

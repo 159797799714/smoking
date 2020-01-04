@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/index/age_18",
     "pages/login/login",
     "pages/index/release/release",
     "pages/index/release/center",
@@ -17,6 +18,9 @@
     "pages/store/store",
     "pages/store/storeDetail",
     "pages/mine/mine",
+    "pages/mine/coupon/center",
+    "pages/mine/coupon/mycoupon",
+    "pages/mine/coupon/couponDetail",
     "pages/mine/setting",
     "pages/mine/address/address",
     "pages/mine/address/addAddress",
@@ -72,6 +76,5 @@
       "desc": "获取用户位置信息，从而给用户提供最近的门店查询服务，提升效率"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap96.json"
+  "usingComponents": {}
 }

@@ -11,7 +11,7 @@
       </view>
       <view class="m-l-10 fl oh">
         <view class="grade f-20 f-w">
-          <text class="linear-word">LV1</text>
+          <text class="linear-word">LV{{userInfo.level}}</text>
           <text class="grade-btn m-l-10 b-f0f col-f" @click="goMember">查看特权</text>
         </view>
         <view class="sign m-t-20 f-24 col-f">个性签名：{{userInfo.sign? userInfo.sign: '暂未设置个性签名'}}</view>
@@ -59,7 +59,8 @@
           avatarUrl: '',
           nickName: '',
           mobile: '',
-          sign: ''
+          sign: '',
+          level: ''
         },
         mycircle: [{
           num: 0,
@@ -89,12 +90,12 @@
           imgUrl: 'discount',
           title: '优惠券',
           open: 'navigate',
-          url: '../integral/coupon'
+          url: './coupon/center'
         }, {
           imgUrl: 'prize',
           title: '兑换奖品',
-          open: 'switchTab',
-          url: '../integral/integral'
+          open: 'navigate',
+          url: './coupon/mycoupon'
         }],    
         
         articleList: [],                  // 分享文章列表

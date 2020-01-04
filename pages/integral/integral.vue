@@ -13,10 +13,10 @@
       </view>
       
       <view class="fr rightBox dis-flex flex-y-center">
-        <navigator url="./plan" class="dis-inline-block t-c m-r-43">
+        <navigator url="./integralDetail" class="dis-inline-block t-c m-r-43">
           <text class="btn b-90f f-26 col-c">兑换记录</text>
         </navigator>
-        <navigator url="./integralDetail" class="dis-inline-block t-c">
+        <navigator url="../mine/todayExperience?type=integral" class="dis-inline-block t-c">
           <text class="btn b-90f f-26 col-c">积分详情</text>
         </navigator>
       </view>

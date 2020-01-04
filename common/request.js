@@ -20,7 +20,7 @@ export default function(obj) {
     url: API.conductApi + obj.url,
     data: data,
     method: obj.method? obj.method : 'GET',
-    header: obj.header? obj.header : {'content-type': 'application/x-www-form-urlencoded; charset=UTF-8', 'Access-Control-Allow-Origin': '*'}
+    header: obj.header? obj.header : {'content-type': 'application/json; charset=UTF-8', 'Access-Control-Allow-Origin': '*'}
   }
   let promise = new Promise(function(resolve, reject) {
     uni.request(httpDefaultData).then(

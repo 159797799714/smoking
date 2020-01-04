@@ -112,6 +112,9 @@
       
       // 确认购兑换
       goPuy() {
+        uni.showLoading({
+          title: '正在提交订单'
+        })
         let that= this,
           obj= this.opt
         if(!this.buyStatus) {
@@ -123,9 +126,10 @@
             method: 'POST'
           }
           that.$httpRequest(params).then(res => {
+            uni.hideLoading()
             if(res.code === 1) {
               uni.navigateTo({
-                url: 'success'
+                url: 'success?num=' + that.order_pay_price + '&order_id=' + res.data.order_id
               })
             } else {
               uni.showToast({
@@ -134,7 +138,6 @@
               })
             }
           })
-          
           setTimeout(function() {
             that.buyStatus= false
           }.bind(that), 1000)

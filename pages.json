@@ -6,6 +6,11 @@
         "navigationStyle": "custom"
 			}
 		}, {
+			"path": "pages/index/age_18",
+      "style": {
+      	"navigationStyle": "custom"
+      }
+		}, {
 			"path": "pages/login/login",
 			"style": {
         "navigationStyle": "custom"
@@ -16,7 +21,7 @@
         "navigationStyle": "custom",
         "navigationBarTitleText": "文章发布"
 			}
-		}, {
+		},  {
 			"path": "pages/index/release/center",
 			"style": {
         "navigationStyle": "custom"
@@ -45,7 +50,7 @@
 		}, {
 			"path": "pages/integral/order/orderDetail",
 			"style": {
-				"navigationBarTitleText": "经验详情"
+				"navigationBarTitleText": "订单详情"
 			}
 		}, {
 			"path": "pages/integral/order/success",
@@ -90,6 +95,21 @@
 				"navigationBarTitleText": ""
 			}
 		}, {
+    	"path": "pages/mine/coupon/center",
+    	"style": {
+    		"navigationBarTitleText": "领券中心"
+    	}
+    }, {
+    	"path": "pages/mine/coupon/mycoupon",
+    	"style": {
+    		"navigationBarTitleText": "我的优惠券"
+    	}
+    }, {
+    	"path": "pages/mine/coupon/couponDetail",
+    	"style": {
+    		"navigationBarTitleText": "使用优惠券"
+    	}
+    }, {
 			"path": "pages/mine/setting",
 			"style": {
 				"navigationBarTitleText": "设置"

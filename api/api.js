@@ -45,6 +45,10 @@ export default {
   userExperienceDetailsByDay: 'axapp.center/userExperienceDetailsByDay',// 查看当日经验获得详情(获得经验)
   userExperienceDetails: 'axapp.center/userExperienceDetails',         // 会员等级--用户当前总经验---当日已获得经验--每日最高可获得经验
   
+  
+  orderDetail: 'axuser.order/detail',                                  // 订单详情
+  
+  
   clockInPage: 'axumi.article/clockInPage',                            // 打卡页面
   signIn: 'axapp.center/signIn',                                       // 签到
   setpCount: 'ax.user_stepcount/add',                                  // 获取--记录步数数据
@@ -53,6 +57,13 @@ export default {
   
   // 个人中心
   userInfo: 'axapp.center/userHomePage',                               // 我的首页个人信息
+  
+  // 优惠券
+  couponCenter: 'ax.coupon/couponCenter',                              // 领券中心
+  couponBanners: 'ax.coupon/gethomebanners',                           // 领券中心轮播图
+  myCoupon: 'axuser.coupon/lists',                                     // 我的优惠券
+  receiveCoupon: 'axuser.coupon/receive',                              // 领取优惠券
+  couponDetail: 'axuser.coupon/couponDetails',                         // 优惠券详情
   
   // 设置
   getUserInfo: 'axapp.center/getuserinfo',                             // 设置中个人信息

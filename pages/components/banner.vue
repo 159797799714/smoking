@@ -18,7 +18,7 @@
       swiperList: Array,
       borderWidth: {
         type: String,
-        default: 'padding: 2px'
+        default: 'padding: 1px'
       }
     },
     data() {
