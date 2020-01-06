@@ -208,7 +208,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 {
   components: {
     topBar: topBar,
@@ -220,6 +219,7 @@ __webpack_require__.r(__webpack_exports__);
       isHeadShow: true, // 头部作者名
       title: '',
       article_id: '', // 文章ID
+      isAuthor: false, // 是否是此文章的作者
       indicatorDots: true,
       autoplay: true,
       interval: 2000,
@@ -266,25 +266,34 @@ __webpack_require__.r(__webpack_exports__);
     },
 
     // 获取文章详情
-    getDetail: function getDetail(id) {var _this = this;
+    getDetail: function getDetail(id) {
+      var that = this;
       var params = {
-        url: this.$api.articleDetail,
+        url: that.$api.articleDetail,
         data: {
           article_id: id } };
 
 
-      this.$httpRequest(params).then(function (res) {
-        console.log(res.data.detail);
-        _this.detail = res.data.detail;
+      that.$httpRequest(params).then(function (res) {
+        that.detail = res.data.detail;
+        // 判断是否是作者本人
+        uni.getStorage({
+          key: 'user_id',
+          success: function success(result) {
+            if (result.data === res.data.detail.user_id) {
+              that.isAuthor = true;
+            }
+          } });
+
 
         var richtext = res.data.detail.article_content;
         var regex = new RegExp('img');
         richtext = richtext.replace(regex, "img style=\"max-width: 100%;\"");
-        _this.strings = richtext;
+        that.strings = richtext;
       });
     },
     // 评论点赞
-    zanAction: function zanAction(item, index) {var _this2 = this;
+    zanAction: function zanAction(item, index) {var _this = this;
       console.log('点赞', item, item.islike, index);
       var that = this;
       var url = this.$api.commentUnlike;
@@ -299,18 +308,18 @@ __webpack_require__.r(__webpack_exports__);
 
       that.$httpRequest(params).then(function (res) {
         console.log('成功了', res);
-        switch (_this2.detail.comments_show[index].islike) {
+        switch (_this.detail.comments_show[index].islike) {
           case 'yes':
-            _this2.detail.comments_show[index].islike = 'no';
-            _this2.detail.comments_show[index].likenum -= 1;
+            _this.detail.comments_show[index].islike = 'no';
+            _this.detail.comments_show[index].likenum -= 1;
             uni.showToast({
               title: '取消点赞成功',
               icon: 'none' });
 
             break;
           case 'no':
-            _this2.detail.comments_show[index].islike = 'yes';
-            _this2.detail.comments_show[index].likenum += 1;
+            _this.detail.comments_show[index].islike = 'yes';
+            _this.detail.comments_show[index].likenum += 1;
             uni.showToast({
               title: '点赞成功',
               icon: 'none' });
@@ -321,7 +330,7 @@ __webpack_require__.r(__webpack_exports__);
     },
 
     // 评论回复点赞
-    commentZanAction: function commentZanAction(li, index, num) {var _this3 = this;
+    commentZanAction: function commentZanAction(li, index, num) {var _this2 = this;
       console.log('点赞', li, li.isreplylike, index, num);
       var that = this;
       var url = this.$api.commentreplyunlike;
@@ -336,18 +345,18 @@ __webpack_require__.r(__webpack_exports__);
 
       that.$httpRequest(params).then(function (res) {
         console.log('成功了', res);
-        switch (_this3.detail.comments_show[index].replys[num].isreplylike) {
+        switch (_this2.detail.comments_show[index].replys[num].isreplylike) {
           case 'yes':
-            _this3.detail.comments_show[index].replys[num].isreplylike = 'no';
-            _this3.detail.comments_show[index].replys[num].replylikenum -= 1;
+            _this2.detail.comments_show[index].replys[num].isreplylike = 'no';
+            _this2.detail.comments_show[index].replys[num].replylikenum -= 1;
             uni.showToast({
               title: '取消点赞成功',
               icon: 'none' });
 
             break;
           case 'no':
-            _this3.detail.comments_show[index].replys[num].isreplylike = 'yes';
-            _this3.detail.comments_show[index].replys[num].replylikenum += 1;
+            _this2.detail.comments_show[index].replys[num].isreplylike = 'yes';
+            _this2.detail.comments_show[index].replys[num].replylikenum += 1;
             uni.showToast({
               title: '点赞成功',
               icon: 'none' });
@@ -379,26 +388,68 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
 
-    // 分享
-    goShare: function goShare() {
-      uni.share({
-        provider: "weixin",
-        scene: "WXSceneSession",
-        type: 0,
-        href: "http://uniapp.dcloud.io/",
-        title: "uni-app分享",
-        summary: "我正在使用HBuilderX开发uni-app，赶紧跟我一起来体验！",
-        imageUrl: "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/uni@2x.png",
+    // 分享按钮
+    onShareAppMessage: function onShareAppMessage(res) {
+      var that = this,
+      params = {
+        url: this.$api.articleShare,
+        method: 'POST',
+        data: {
+          article_id: that.article_id,
+          source: 'wechat' } };
+
+
+      if (res.from === 'button') {// 来自页面内分享按钮
+        console.log('分享按钮点击');
+        that.$httpRequest(params).then(function (res) {
+          console.log(res);
+        });
+      }
+      return {
+        title: that.detail.article_title,
+        path: '/pages/index/article/detail?article_id=' + that.article_id };
+
+    },
+
+    // 删除文章
+    deleteArticle: function deleteArticle(article_id) {
+      var that = this,
+      params = {
+        url: this.$api.articleDelete,
+        method: 'POST',
+        data: {
+          article_id: that.article_id } };
+
+
+      uni.showModal({
+        title: '温馨提示',
+        content: '确认删除此篇文章？',
         success: function success(res) {
-          console.log("success:" + JSON.stringify(res));
-        },
-        fail: function fail(err) {
-          console.log("fail:" + JSON.stringify(err));
+          if (res.confirm) {
+            console.log('用户点击确定');
+            that.$httpRequest(params).then(function (res) {
+              uni.showToast({
+                title: '删除成功',
+                icon: 'none',
+                success: function success() {
+                  uni.navigateBack({
+                    delta: 1 });
+
+                } });
+
+            });
+          } else if (res.cancel) {
+            uni.showToast({
+              title: '已取消',
+              icon: 'none' });
+
+          }
         } });
 
     },
+
     // 发布评论
-    addComment: function addComment(e) {var _this4 = this;
+    addComment: function addComment(e) {var _this3 = this;
       console.log(this.speakVal);
       var that = this,
       params = {
@@ -410,7 +461,7 @@ __webpack_require__.r(__webpack_exports__);
 
       that.$httpRequest(params).then(function (res) {
         that.closeComment();
-        that.getDetail(_this4.article_id);
+        that.getDetail(_this3.article_id);
         uni.showToast({
           title: '发布成功',
           icon: 'none' });
@@ -418,7 +469,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     // 评论回复
-    addCommentReply: function addCommentReply(e) {var _this5 = this;
+    addCommentReply: function addCommentReply(e) {var _this4 = this;
       var that = this,
       params = {
         url: this.$api.commentreply,
@@ -429,7 +480,7 @@ __webpack_require__.r(__webpack_exports__);
 
       that.$httpRequest(params).then(function (res) {
         that.closeComment();
-        that.getDetail(_this5.article_id);
+        that.getDetail(_this4.article_id);
         uni.showToast({
           title: '发布成功',
           icon: 'none' });

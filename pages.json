@@ -16,6 +16,11 @@
         "navigationStyle": "custom"
 			}
 		}, {
+			"path": "pages/login/bindTel",
+			"style": {
+        "navigationStyle": "custom"
+			}
+		}, {
 			"path": "pages/index/release/release",
 			"style": {
         "navigationStyle": "custom",

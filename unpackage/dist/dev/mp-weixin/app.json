@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/index/age_18",
     "pages/login/login",
+    "pages/login/bindTel",
     "pages/index/release/release",
     "pages/index/release/center",
     "pages/index/article/detail",

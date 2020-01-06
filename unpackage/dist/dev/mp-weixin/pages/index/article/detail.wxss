@@ -323,6 +323,11 @@ text.data-v-e305de56, view.data-v-e305de56 {
 }
 .search .share-btn.data-v-e305de56 {
     opacity: 0;
+    height: 60rpx;
+    width: 60rpx;
+}
+.search .share-icon.data-v-e305de56 {
+    margin-left: -40rpx;
 }
 .banners.data-v-e305de56 {
   width: 100%;

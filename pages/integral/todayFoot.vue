@@ -3,7 +3,7 @@
     <view class="t-r f-32 col-9">步数规则</view>
     <view v-show="user_steps" class="progress-circle">
       <view class="small-circle b-13 col-90f">
-        <view class="day t-c f-50">{{user_steps.step_count}}
+        <view class="day t-c f-50">{{user_steps.now_step_count? user_steps.now_step_count: 0}}
           <view class="small-word f-20">
             <view>步</view>
           </view>
@@ -14,7 +14,7 @@
     <view class="t-c f-30 col-9">读万卷书  行万里路</view>
     <view class="m-t-20 t-c f-30 col-9">加入我们  千里之行始于足下</view>
     
-    <view class="m-t-30 t-c">
+    <view  v-if="user_steps.step_count" class="m-t-30 t-c">
       <view :class="{'sign-btn f-40 col-f': true, 'b-linear-row': user_steps.is_receive < 1, 'b-9 col-13':  user_steps.is_receive > 0}" @click="receiveIntegral(user_steps.input_date, user_steps.ranking)">{{user_steps.is_receive > 0? '积分已领取': '步数领取积分'}}</view>
     </view>
     <view class="m-t-30 t-c f-30 col-6">走的越多 积分越多</view>

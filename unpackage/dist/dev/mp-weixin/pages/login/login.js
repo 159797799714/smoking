@@ -145,18 +145,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
-      checked: true };
-
+      checked: true,
+      page_isBindTel: false // 默认是登录，false为绑定手机号
+    };
   },
   methods: {
+    checkboxChange: function checkboxChange(e) {
+      var that = this;
+      that.checked = e.detail.length > 1 ? true : false;
+    },
     // 登录
     authorLogin: function authorLogin(e) {
-      var that = this,
-      params = {
+      var that = this;
+      // 同意用户协议
+      if (!that.checked) {
+        uni.showToast({
+          title: '请阅读并勾选相关用户协议',
+          icon: 'none' });
+
+        return;
+      }
+      var params = {
         url: that.$api.login,
         method: 'POST',
         data: {
@@ -172,48 +198,58 @@ var _default =
       uni.removeStorageSync('token');
 
       // 调起登录
-      uni.showLoading({
-        title: '登录中' });
-
       uni.login({
         provider: 'weixin',
         success: function success(loginRes) {
           console.log(loginRes);
+          uni.showLoading({
+            title: '登录中' });
+
           params.data.code = loginRes.code;
 
           // 请求登录接口
           that.$httpRequest(params).then(function (res) {
+            uni.hideLoading();
             that.$store.commit('setToken', res.data.token);
             that.$store.commit('redirectLoginPage', { status: false });
             uni.setStorageSync('token', res.data.token);
-            uni.navigateBack({
-              delta: 1,
-              success: function success() {
-                uni.hideLoading();
+            uni.setStorageSync('user_id', res.data.user_id);
 
-                uni.login({
-                  provider: 'weixin',
-                  success: function success(loginRes) {
-                    // 记录步数
-                    var encryptedData = uni.getStorageSync('encryptedData'),
-                    iv = uni.getStorageSync('iv'),
-                    data = {
-                      url: that.$api.setpCount,
-                      method: 'POST',
-                      data: {
-                        encryptedData: encryptedData,
-                        iv: iv,
-                        code: loginRes.code } };
+            var isBindPhone = res.data.mobile_isbind === 'yes' ? true : false,
+            page = getCurrentPages();
+            console.log(page);
+
+            // 已经绑定手机号码
+            if (isBindPhone) {
+              uni.navigateBack({
+                delta: 1,
+                success: function success() {
+                  // 获取微信步数授权
+                  uni.login({
+                    provider: 'weixin',
+                    success: function success(loginRes) {
+                      // 记录步数
+                      var encryptedData = uni.getStorageSync('encryptedData'),
+                      iv = uni.getStorageSync('iv'),
+                      data = {
+                        url: that.$api.setpCount,
+                        method: 'POST',
+                        data: {
+                          encryptedData: encryptedData,
+                          iv: iv,
+                          code: loginRes.code } };
 
 
-                    that.$httpRequest(data).then(function (res) {
-                      console.log(res);
-                    });
-                  } });
+                      that.$httpRequest(data).then(function (res) {
+                        console.log(res);
+                      });
+                    } });
 
+                } });
 
-              } });
-
+            } else {
+              that.page_isBindTel = true;
+            }
           });
         } });
 

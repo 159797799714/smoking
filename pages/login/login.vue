@@ -7,15 +7,28 @@
       </view>
     </view>
     <view class="auth-title f-w f-40 col-9">申请获取以下权限</view>
-    <view class="auth-subtitle f-30 col-6">获得你的公开信息（昵称、头像等）</view>
-    <view class="dis-flex treaty">
-      <checkbox-group @change="checkboxChange">
-        <checkbox :value="checked" :checked="checked" color="#ff00ff"/>
-      </checkbox-group>
-      <view class="f-26 col-6">已经阅读并同意<text class="col-9" catchtap="goRegisterWord">《相关用户服务协议》</text></view>
+    
+    <!-- 登录与注册 -->
+    <view v-if="!page_isBindTel">
+      <view class="auth-subtitle f-30 col-6">获得你的公开信息（昵称、头像等）</view>
+      <view class="dis-flex treaty">
+        <checkbox-group @change="checkboxChange">
+          <checkbox :value="checked" :checked="checked" color="#ff00ff"/>
+        </checkbox-group>
+        <view class="f-26 col-6">已经阅读并同意<text class="col-9" catchtap="goRegisterWord">《相关用户服务协议》</text></view>
+      </view>
+      <button class="m-t-30 login-btn b-90f col-f" open-type="getUserInfo" lang="zh_CN" @getuserinfo="authorLogin">允许</button>
+      <button class="m-t-20 login-btn col-13 b-9" @click="reject">再看看</button>  
     </view>
-    <button class="m-t-30 login-btn b-90f col-f" open-type="getUserInfo" lang="zh_CN" @getuserinfo="authorLogin">允许</button>
-    <button class="m-t-20 login-btn col-13 b-9" @click="reject">拒绝并返回首页</button>
+    
+    <view v-else>
+      <!-- 绑定手机号码 -->
+      <view class="auth-subtitle f-30 col-6">授权你的手机号码</view>
+      <button class="m-t-20 login-btn b-90f col-f" open-type="getPhoneNumber" lang="zh_CN" @getphonenumber="getPhoneNumber">授权快速绑定</button>
+      <button class="m-t-20 login-btn col-13 b-9" @click="reject">拒绝并返回首页</button>  
+    </view>
+    
+    
   </view>
 </template>
 
@@ -23,14 +36,27 @@
   export default{
     data() {
       return {
-        checked: true
+        checked: true,
+        page_isBindTel: false,             // 默认是登录，false为绑定手机号
       }
     },
     methods: {
+      checkboxChange(e) {
+        let that= this
+        that.checked= e.detail.length > 1? true: false
+      },
       // 登录
       authorLogin(e) {
-        let that= this,
-          params= {
+        let that= this
+        // 同意用户协议
+        if(!that.checked) {
+          uni.showToast({
+            title: '请阅读并勾选相关用户协议',
+            icon: 'none'
+          })
+          return
+        }
+        let  params= {
             url: that.$api.login,
             method: 'POST',
             data: {
@@ -46,48 +72,58 @@
         uni.removeStorageSync('token')
          
         // 调起登录
-        uni.showLoading({
-            title: '登录中'
-        })
         uni.login({
           provider: 'weixin',
           success: function (loginRes) {
             console.log(loginRes)
+            uni.showLoading({
+                title: '登录中'
+            })
             params.data.code= loginRes.code
             
             // 请求登录接口
             that.$httpRequest(params).then(res => {
+              uni.hideLoading()
               that.$store.commit('setToken', res.data.token)
               that.$store.commit('redirectLoginPage', {status: false})
               uni.setStorageSync('token', res.data.token)
-              uni.navigateBack({
-                delta: 1,
-                success: function() {
-                  uni.hideLoading()
-                  
-                  uni.login({
-                    provider: 'weixin',
-                    success: function (loginRes) {
-                      // 记录步数
-                      let encryptedData= uni.getStorageSync('encryptedData'),
-                        iv= uni.getStorageSync('iv'),
-                        data= {
-                        url: that.$api.setpCount,
-                        method: 'POST',
-                        data: {
-                          encryptedData: encryptedData,
-                          iv: iv,
-                          code: loginRes.code
+              uni.setStorageSync('user_id', res.data.user_id)
+              
+              let isBindPhone= res.data.mobile_isbind === 'yes'? true: false,
+                page=  getCurrentPages()
+              console.log(page)
+              
+              // 已经绑定手机号码
+              if(isBindPhone) {
+                uni.navigateBack({
+                  delta: 1,
+                  success: function() {
+                    // 获取微信步数授权
+                    uni.login({
+                      provider: 'weixin',
+                      success: function (loginRes) {
+                        // 记录步数
+                        let encryptedData= uni.getStorageSync('encryptedData'),
+                          iv= uni.getStorageSync('iv'),
+                          data= {
+                          url: that.$api.setpCount,
+                          method: 'POST',
+                          data: {
+                            encryptedData: encryptedData,
+                            iv: iv,
+                            code: loginRes.code
+                          }
                         }
+                        that.$httpRequest(data).then(res => {
+                          console.log(res)
+                        })
                       }
-                      that.$httpRequest(data).then(res => {
-                        console.log(res)
-                      })
-                    }
-                  })
-                  
-                }
-              })
+                    })
+                  }
+                })
+              } else {
+                that.page_isBindTel= true
+              }
             })
           }
         })

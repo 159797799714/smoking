@@ -168,6 +168,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
 {
   components: {
     banner: banner,
@@ -177,6 +185,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       swiperList: [], // 轮播图
       address: '', // 定位具体位置信息
+      groups: '',
       params: {
         longitude: '', // 经度
         latitude: '', // 纬度
@@ -208,7 +217,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-
     // 获取位置
     getAddress: function getAddress() {
       var that = this;
@@ -254,6 +262,7 @@ __webpack_require__.r(__webpack_exports__);
 
         }
         that.storeLists = res.data.list;
+        that.groups = res.data.groups;
       });
     },
 

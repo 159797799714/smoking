@@ -16,6 +16,14 @@
         <text class="fr iconfont f-44 col-90f">&#xe64d;</text>
       </view>
       
+      <view class="condition">
+        <image src="../../static/img/index/address.png" class="icon-img" mode="widthFix"></image>
+        <text class="address m-l-10 col-f f-28 onelist-hidden">
+          {{groups? '欢迎加入' + groups.group_name + ':' + groups.group_number: ''}}
+        </text>
+        <view class="filter col-f f-24 b-90f">筛选地区</view>
+      </view>
+      
       <view class="storeList">
         <view v-for="(item, index) in storeLists" :key="index" class="store-item oh" @click="goStoreDetail(item)">
           <view class="fl leftBox dis-inline-block">
@@ -51,6 +59,7 @@
       return {
         swiperList: [],  // 轮播图
         address: '',     // 定位具体位置信息
+        groups: '',
         params: {
           longitude: '',   // 经度
           latitude: '',    // 纬度
@@ -82,7 +91,6 @@
       }
     },
     methods: {
-      
       // 获取位置
       getAddress() {
         let that= this
@@ -128,6 +136,7 @@
             })
           }
           that.storeLists= res.data.list
+          that.groups= res.data.groups
         })
       },
       
@@ -171,7 +180,7 @@
     }
     .banner-swiper {
       padding: 40upx 30upx 0 30upx;
-      height: 263upx;
+      height: 400upx;
       overflow: hidden;
     }
     .condition{

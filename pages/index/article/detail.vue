@@ -7,10 +7,9 @@
           <image :src="detail.user.avatarUrl" mode="aspectFill" class="b-9"></image>
           <text class="name onelist-hidden">{{ detail.user.nickName }}</text>
         </view>
-        <button type="" plain="true" open-type="share"  class="dis-inline-block share-btn">
-          <text class="iconfont">&#xe6b6;</text>
-        </button>
-        <text class="iconfont m-l-30">&#xe613;</text>
+        <button type="" plain="true" open-type="share"  class="dis-inline-block share-btn"></button>
+        <text class="iconfont share-icon">&#xe6b6;</text>
+        <text v-show="isAuthor" class="iconfont m-l-30" @click="deleteArticle(article_id)">&#xe613;</text>
       </view>
     </topBar>
     
@@ -93,9 +92,10 @@
     data() {
       return {
         scrollTop: 0,                   // 距滚动距离
-        isHeadShow: true,              // 头部作者名
+        isHeadShow: true,               // 头部作者名
         title: '',
-        article_id: '',                               // 文章ID
+        article_id: '',                 // 文章ID
+        isAuthor: false,                // 是否是此文章的作者
         indicatorDots: true,
         autoplay: true,
         interval: 2000,
@@ -107,7 +107,7 @@
         strings: [],                  // 评论信息
         speakVal: '',                 // 我的评论value值
         commentVal: '',               // 评论回复的value值
-        comment_id: '',             // 是否评论评论、默认评论文章
+        comment_id: '',               // 是否评论评论、默认评论文章
         sumList: {
           zanTotal: 2000,
           starTotal: 1578,
@@ -143,20 +143,29 @@
       
       // 获取文章详情
       getDetail(id) {
+        let that= this
         let params = {
-          url: this.$api.articleDetail,
+          url: that.$api.articleDetail,
           data: {
           article_id: id
           }
         }
-        this.$httpRequest(params).then((res) => {
-          console.log(res.data.detail)
-          this.detail = res.data.detail
+        that.$httpRequest(params).then((res) => {
+          that.detail = res.data.detail
+          // 判断是否是作者本人
+          uni.getStorage({
+            key: 'user_id',
+            success: function(result) {
+              if(result.data === res.data.detail.user_id) {
+                that.isAuthor= true
+              }
+            }
+          })
           
           var richtext =  res.data.detail.article_content
           const regex = new RegExp('img')
           richtext= richtext.replace(regex, `img style="max-width: 100%;"`)
-          this.strings = richtext
+          that.strings = richtext
         })
       },
       // 评论点赞
@@ -255,24 +264,66 @@
         })
       },
       
-      // 分享
-      goShare() {
-        uni.share({
-          provider: "weixin",
-          scene: "WXSceneSession",
-          type: 0,
-          href: "http://uniapp.dcloud.io/",
-          title: "uni-app分享",
-          summary: "我正在使用HBuilderX开发uni-app，赶紧跟我一起来体验！",
-          imageUrl: "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/uni@2x.png",
+      // 分享按钮
+      onShareAppMessage(res) {
+        let that= this,
+          params = {
+            url: this.$api.articleShare,
+            method: 'POST',
+            data: {
+              article_id: that.article_id,
+              source: 'wechat'
+            }
+          }
+        if (res.from === 'button') {// 来自页面内分享按钮
+          console.log('分享按钮点击')
+          that.$httpRequest(params).then((res) => {
+            console.log(res)
+          })
+        }
+        return {
+          title: that.detail.article_title,
+          path: '/pages/index/article/detail?article_id=' + that.article_id
+        }
+      },
+      
+      // 删除文章
+      deleteArticle(article_id) {
+        let that= this,
+          params = {
+            url: this.$api.articleDelete,
+            method: 'POST',
+            data: {
+              article_id: that.article_id
+            }
+          }
+        uni.showModal({
+          title: '温馨提示',
+          content: '确认删除此篇文章？',
           success: function (res) {
-            console.log("success:" + JSON.stringify(res));
-          },
-          fail: function (err) {
-            console.log("fail:" + JSON.stringify(err));
+            if (res.confirm) {
+              console.log('用户点击确定')
+              that.$httpRequest(params).then((res) => {
+                uni.showToast({
+                  title: '删除成功',
+                  icon: 'none',
+                  success: () => {
+                    uni.navigateBack({
+                      delta: 1
+                    })
+                  }
+                })
+              })
+            } else if (res.cancel) {
+              uni.showToast({
+                title: '已取消',
+                icon: 'none'
+              })
+            }
           }
         })
       },
+      
       // 发布评论
       addComment(e) {
         console.log(this.speakVal)
@@ -358,6 +409,11 @@
     }
     .share-btn{
       opacity: 0;
+      height: 60upx;
+      width: 60upx;
+    }
+    .share-icon{
+      margin-left: -40upx;
     }
   }
   .banners{

@@ -18,6 +18,7 @@ export default {
   articleunLike: 'axumi.article/unLike',                               // 文章取消点赞
   articleCollect: 'axumi.article/collection',                          // 文章收藏
   articleunCollect: 'axumi.article/unCollection',                      // 文章取消收藏
+  articleShare: 'axumi.article/articleShare',                          // 文章分享回调
   
   articleFocus: 'axumi.article/focus',                                 // 文章用户关注
   articleunFocus: 'axumi.article/unFocus',                             // 文章用户取消关注

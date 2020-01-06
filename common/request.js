@@ -28,10 +28,11 @@ export default function(obj) {
         let result = res[1]
         if(result.data.code === -1) {
           // 未登录或者登陆失效，重定向到登陆)
+          console.log('xxxxs', !store.state.isLogin)
           if(!store.state.isLogin) {
             store.commit('redirectLoginPage', {status: true})
             uni.navigateTo({
-              url: '../login/login'
+              url: '/pages/login/login'
             })  
           }
           return
