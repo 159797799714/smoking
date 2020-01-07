@@ -117,10 +117,19 @@ __webpack_require__.r(__webpack_exports__);
       success: function success(res) {
         console.log(res);
         that.$store.commit('setHeight', res);
-        // .statusBarHeight
       } });
 
 
+    // 商家判断0为普通用户 1为商家
+    var is_merchant = uni.getStorageSync('is_merchant');
+
+    if (is_merchant > 0) {
+      uni.reLaunch({
+        url: '/pages/partner/index' });
+
+    }
+  },
+  onShow: function onShow() {
     // 步数授权，记录步数
     uni.authorize({
       scope: 'scope.werun',
@@ -137,9 +146,6 @@ __webpack_require__.r(__webpack_exports__);
 
       } });
 
-  },
-  onShow: function onShow() {
-    console.log('App Show');
   },
   onHide: function onHide() {
     console.log('App Hide');

@@ -2655,6 +2655,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 {
   uploadImage: 'upload/image', // 图片上传
   login: 'ax.user/login', // 登录
+  decryptByMobile: 'axapp.center/decryptByMobile', // 微信授权解密手机号
+  mobileBind: 'axapp.center/mobileBind', // 授权绑定手机号
+  sendcode: 'axapp.center/sendcode', // 发送验证码
 
   // 首页文章
   homebanners: 'axumi.homebanner/gethomebanners', // 首页轮播图列表
@@ -2686,6 +2689,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   axstoreLists: 'axstore.shop/lists', // 店铺列表
   axstoreDetail: 'axstore.shop/detail', // 查看门店详情
   axhomeBanners: 'axstore.homebanner/gethomebanners', // 门店首页轮播图
+  storeLists: 'axstore.group/lists', // 门店QQ群列表
+  groupDetail: 'axstore.group/detail', // 根据id获取群详情
 
   // 积分
   integralIndex: 'ax.goods/goodsList', // 积分--商城（产品列表）首页
@@ -2733,7 +2738,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   delAddress: 'ax.address/delete', // 删除地址
   setTags: 'ax.address/setTags', // 用户设置地址标签
   tagsList: 'ax.address/tagsList', // 用户地址标签列表
-  editTags: 'ax.address/editTags' // 编辑修改地址标签
+  editTags: 'ax.address/editTags', // 编辑修改地址标签
+
+  // 商家
+  merchantsPage: 'ax.merchants/merchantsPage', // 商家首页
+  userCouponDetails: 'ax.merchants/userCouponDetails', // 商家扫码获取用户优惠券信息
+  confirmUseCoupon: 'ax.merchants/confirmUseCoupon', // 确认使用
+  useCouponList: 'ax.merchants/useCouponList', // 商家--优惠券兑换记录
+  couponStatistics: 'ax.merchants/couponStatistics' // 使用统计
 };exports.default = _default;
 
 /***/ }),
@@ -2756,6 +2768,7 @@ function _default(obj) {
 
   var token = uni.getStorageSync('token'),
   isneed = _needLoginApi.default.indexOf(obj.url) !== -1; // url是否需要登录才能
+  // 不需要登录的接口设置默认token
   if (!isneed && !token) {
     token = 'cd3f5492377469fe601f173dwewe';
   }
@@ -11033,7 +11046,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@^2.0.0-alpha-24420191128001","_id"
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationStyle": "custom", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" } }, "pages/index/age_18": { "navigationStyle": "custom", "usingComponents": {} }, "pages/login/login": { "navigationStyle": "custom", "usingComponents": {} }, "pages/index/release/release": { "navigationStyle": "custom", "navigationBarTitleText": "文章发布", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/index/release/center": { "navigationStyle": "custom", "usingComponents": {} }, "pages/index/article/detail": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar", "banner": "/pages/components/banner" } }, "pages/integral/integral": { "navigationStyle": "custom", "navigationBarTitleText": "积分", "usingComponents": { "top-bar": "/pages/components/topBar", "good-list": "/pages/components/goodList" } }, "pages/integral/goodDetail": { "navigationBarTitleText": "详情", "usingComponents": { "banner": "/pages/components/banner", "uni-popup": "/pages/components/uni-popup/uni-popup" } }, "pages/integral/order/orderSure": { "navigationBarTitleText": "订单确认", "usingComponents": {} }, "pages/integral/order/orderDetail": { "navigationBarTitleText": "订单详情", "usingComponents": {} }, "pages/integral/order/success": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/integral/plan": { "navigationBarTitleText": "打卡计划", "usingComponents": { "article-list": "/pages/components/articleList" } }, "pages/integral/todayFoot": { "navigationBarTitleText": "今日步数", "usingComponents": { "article-list": "/pages/components/articleList" } }, "pages/integral/rules": { "navigationBarTitleText": "积分规则说明", "usingComponents": {} }, "pages/integral/integralDetail": { "navigationBarTitleText": "积分详情", "usingComponents": {} }, "pages/store/store": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" } }, "pages/store/storeDetail": { "navigationBarTitleText": "门店详情", "usingComponents": {} }, "pages/mine/mine": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "top-bar": "/pages/components/topBar", "article-list": "/pages/components/articleList" } }, "pages/mine/coupon/center": { "navigationBarTitleText": "领券中心", "usingComponents": { "banner": "/pages/components/banner" } }, "pages/mine/coupon/mycoupon": { "navigationBarTitleText": "我的优惠券", "usingComponents": { "banner": "/pages/components/banner" } }, "pages/mine/coupon/couponDetail": { "navigationBarTitleText": "使用优惠券", "usingComponents": { "tki-qrcode": "/pages/components/qrcode/tki-qrcode" } }, "pages/mine/setting": { "navigationBarTitleText": "设置", "usingComponents": {} }, "pages/mine/address/address": { "navigationBarTitleText": "收货地址", "usingComponents": {} }, "pages/mine/address/addAddress": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/mine/member": { "navigationBarTitleText": "我的会员等级", "usingComponents": {} }, "pages/mine/todayExperience": { "navigationBarTitleText": "今日", "usingComponents": {} }, "pages/mine/personal": { "navigationBarTitleText": "个人信息", "usingComponents": {} }, "pages/login/bindTel": { "navigationStyle": "custom" } }, "globalStyle": { "navigationBarTextStyle": "white", "backgroundColor": "#131313", "navigationBarBackgroundColor": "#131313" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationStyle": "custom", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" } }, "pages/index/age_18": { "navigationStyle": "custom", "usingComponents": {} }, "pages/login/login": { "navigationStyle": "custom", "usingComponents": { "uni-popup": "/pages/components/uni-popup/uni-popup" } }, "pages/index/release/release": { "navigationStyle": "custom", "navigationBarTitleText": "文章发布", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/index/release/center": { "navigationStyle": "custom", "usingComponents": {} }, "pages/index/article/detail": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar", "banner": "/pages/components/banner" } }, "pages/integral/integral": { "navigationStyle": "custom", "navigationBarTitleText": "积分", "usingComponents": { "top-bar": "/pages/components/topBar", "good-list": "/pages/components/goodList" } }, "pages/integral/goodDetail": { "navigationBarTitleText": "详情", "usingComponents": { "banner": "/pages/components/banner", "uni-popup": "/pages/components/uni-popup/uni-popup" } }, "pages/integral/order/orderSure": { "navigationBarTitleText": "订单确认", "usingComponents": {} }, "pages/integral/order/orderDetail": { "navigationBarTitleText": "订单详情", "usingComponents": {} }, "pages/integral/order/success": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/integral/plan": { "navigationBarTitleText": "打卡计划", "usingComponents": { "article-list": "/pages/components/articleList" } }, "pages/integral/todayFoot": { "navigationBarTitleText": "今日步数", "usingComponents": { "article-list": "/pages/components/articleList" } }, "pages/integral/rules": { "navigationBarTitleText": "积分规则说明", "usingComponents": {} }, "pages/integral/integralDetail": { "navigationBarTitleText": "积分详情", "usingComponents": {} }, "pages/store/store": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" } }, "pages/store/storeDetail": { "navigationBarTitleText": "门店详情", "usingComponents": {} }, "pages/mine/mine": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "top-bar": "/pages/components/topBar", "article-list": "/pages/components/articleList" } }, "pages/mine/coupon/center": { "navigationBarTitleText": "领券中心", "usingComponents": { "banner": "/pages/components/banner" } }, "pages/mine/coupon/mycoupon": { "navigationBarTitleText": "我的优惠券", "usingComponents": { "banner": "/pages/components/banner" } }, "pages/mine/coupon/couponDetail": { "navigationBarTitleText": "使用优惠券", "usingComponents": { "tki-qrcode": "/pages/components/qrcode/tki-qrcode" } }, "pages/mine/setting": { "navigationBarTitleText": "设置", "usingComponents": {} }, "pages/mine/address/address": { "navigationBarTitleText": "收货地址", "usingComponents": {} }, "pages/mine/address/addAddress": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar" } }, "pages/mine/member": { "navigationBarTitleText": "我的会员等级", "usingComponents": {} }, "pages/mine/todayExperience": { "navigationBarTitleText": "今日", "usingComponents": {} }, "pages/mine/personal": { "navigationBarTitleText": "个人信息", "usingComponents": {} }, "pages/login/bindTel": { "navigationStyle": "custom", "usingComponents": {} }, "pages/partner/index": { "navigationBarTitleText": "商家首页", "usingComponents": {} }, "pages/partner/couponDetail": { "navigationBarTitleText": "优惠券详情" } }, "globalStyle": { "navigationBarTextStyle": "white", "backgroundColor": "#131313", "navigationBarBackgroundColor": "#131313" } };exports.default = _default;
 
 /***/ }),
 

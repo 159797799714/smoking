@@ -92,6 +92,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function($event) {
+      _vm.isStore = !_vm.isStore
+    }
+  }
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -176,6 +181,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 {
   components: {
     banner: banner,
@@ -185,20 +195,22 @@ __webpack_require__.r(__webpack_exports__);
     return {
       swiperList: [], // 轮播图
       address: '', // 定位具体位置信息
-      groups: '',
+      groups: '', // 显示群详情
+      groupsList: '', // QQ群城市列表
       params: {
         longitude: '', // 经度
         latitude: '', // 纬度
         region: '', // 省市区字符串逗号隔开的形式
         type: '' // 店铺类型（如：授权店，专营店，专卖店等）
       },
-      storeLists: [] // 店铺列表
+      storeLists: [], // 店铺列表
+      isStore: true // 默认true是查看门店，false是显示QQ群列表
     };
-
   },
 
   onLoad: function onLoad() {
     this.getBanners();
+    this.getGroups();
   },
   onShow: function onShow() {
     var that = this;
@@ -241,6 +253,50 @@ __webpack_require__.r(__webpack_exports__);
         console.log(res);
         that.swiperList = res.data.list;
       });
+    },
+
+    // 获取QQ群列表
+    getGroups: function getGroups() {
+      var that = this,
+      params = {
+        url: that.$api.storeLists };
+
+      that.$httpRequest(params).then(function (res) {
+        console.log(res);
+        that.groupsList = res.data.list;
+      });
+    },
+
+    // 根据城市Id获取群信息
+    getGroupDetailById: function getGroupDetailById(id) {
+      var that = this,
+      params = {
+        url: that.$api.groupDetail,
+        data: {
+          id: id },
+
+        method: 'POST' };
+
+      that.$httpRequest(params).then(function (res) {
+        that.groups = res.data.detail;
+      });
+    },
+
+    // 复制QQ群号码
+    copeQQ: function copeQQ(num) {
+      console.log(num);
+      if (!num) {
+        return;
+      }
+      uni.setClipboardData({
+        data: num.toString(),
+        success: function success() {
+          uni.showToast({
+            title: '群号码复制成功',
+            icon: 'success' });
+
+        } });
+
     },
 
     // 获取门店列表

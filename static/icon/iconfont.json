@@ -41,6 +41,13 @@
       "unicode_decimal": 58971
     },
     {
+      "icon_id": "6239193",
+      "name": "勾",
+      "font_class": "gou",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
       "icon_id": "6537882",
       "name": "空页面,空内容",
       "font_class": "kong",
@@ -74,6 +81,13 @@
       "font_class": "cuo",
       "unicode": "e612",
       "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "10016555",
+      "name": "地址",
+      "font_class": "dizhi",
+      "unicode": "e606",
+      "unicode_decimal": 58886
     },
     {
       "icon_id": "10459924",

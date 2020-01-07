@@ -2,6 +2,9 @@
 export default {
   uploadImage: 'upload/image',                                         // 图片上传
   login: 'ax.user/login',                                              // 登录
+  decryptByMobile: 'axapp.center/decryptByMobile',                     // 微信授权解密手机号
+  mobileBind: 'axapp.center/mobileBind',                               // 授权绑定手机号
+  sendcode: 'axapp.center/sendcode',                                   // 发送验证码
   
   // 首页文章
   homebanners: 'axumi.homebanner/gethomebanners',                      // 首页轮播图列表
@@ -33,6 +36,8 @@ export default {
   axstoreLists: 'axstore.shop/lists',                                  // 店铺列表
   axstoreDetail: 'axstore.shop/detail',                                // 查看门店详情
   axhomeBanners: 'axstore.homebanner/gethomebanners',                  // 门店首页轮播图
+  storeLists: 'axstore.group/lists',                                   // 门店QQ群列表
+  groupDetail: 'axstore.group/detail',                                 // 根据id获取群详情
   
   // 积分
   integralIndex: 'ax.goods/goodsList',                                 // 积分--商城（产品列表）首页
@@ -82,6 +87,12 @@ export default {
   tagsList: 'ax.address/tagsList',                                     // 用户地址标签列表
   editTags: 'ax.address/editTags',                                     // 编辑修改地址标签
   
+  // 商家
+  merchantsPage: 'ax.merchants/merchantsPage',                         // 商家首页
+  userCouponDetails: 'ax.merchants/userCouponDetails',                 // 商家扫码获取用户优惠券信息
+  confirmUseCoupon: 'ax.merchants/confirmUseCoupon',                   // 确认使用
+  useCouponList: 'ax.merchants/useCouponList',                         // 商家--优惠券兑换记录
+  couponStatistics: 'ax.merchants/couponStatistics',                   // 使用统计
   
 }
 

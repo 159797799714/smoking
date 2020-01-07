@@ -27,7 +27,9 @@
     "pages/mine/address/addAddress",
     "pages/mine/member",
     "pages/mine/todayExperience",
-    "pages/mine/personal"
+    "pages/mine/personal",
+    "pages/partner/index",
+    "pages/partner/couponDetail"
   ],
   "subPackages": [],
   "window": {

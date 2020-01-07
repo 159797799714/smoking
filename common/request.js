@@ -8,6 +8,7 @@ export default function(obj) {
   
   let token=  uni.getStorageSync('token'),
     isneed= NeedLoginApi.indexOf(obj.url) !== -1      // url是否需要登录才能
+  // 不需要登录的接口设置默认token
   if(!isneed && !token) {
     token= 'cd3f5492377469fe601f173dwewe'
   }

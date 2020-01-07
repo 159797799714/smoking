@@ -124,53 +124,79 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | pages/components/uni-popup/uni-popup */ "pages/components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! ../components/uni-popup/uni-popup.vue */ 264));};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
+  components: {
+    uniPopup: uniPopup },
+
   data: function data() {
     return {
       checked: true,
-      page_isBindTel: false // 默认是登录，false为绑定手机号
+      page_isBindTel: false, // 默认是登录，false为绑定手机号
+      mobile: 18888888888 // 微信手机号码
     };
   },
   methods: {
+
+    // 用户协议勾选
     checkboxChange: function checkboxChange(e) {
       var that = this;
       that.checked = e.detail.length > 1 ? true : false;
     },
+
     // 登录
     authorLogin: function authorLogin(e) {
       var that = this;
@@ -201,6 +227,7 @@ var _default =
       uni.login({
         provider: 'weixin',
         success: function success(loginRes) {
+          uni.clearStorageSync();
           console.log(loginRes);
           uni.showLoading({
             title: '登录中' });
@@ -214,39 +241,47 @@ var _default =
             that.$store.commit('redirectLoginPage', { status: false });
             uni.setStorageSync('token', res.data.token);
             uni.setStorageSync('user_id', res.data.user_id);
+            uni.setStorageSync('is_merchant', res.data.is_merchant);
 
-            var isBindPhone = res.data.mobile_isbind === 'yes' ? true : false,
-            page = getCurrentPages();
-            console.log(page);
+            var isBindPhone = res.data.mobile_isbind === 'yes' ? true : false;
 
             // 已经绑定手机号码
             if (isBindPhone) {
-              uni.navigateBack({
-                delta: 1,
-                success: function success() {
-                  // 获取微信步数授权
-                  uni.login({
-                    provider: 'weixin',
-                    success: function success(loginRes) {
-                      // 记录步数
-                      var encryptedData = uni.getStorageSync('encryptedData'),
-                      iv = uni.getStorageSync('iv'),
-                      data = {
-                        url: that.$api.setpCount,
-                        method: 'POST',
-                        data: {
-                          encryptedData: encryptedData,
-                          iv: iv,
-                          code: loginRes.code } };
+
+              // 判断是否是商家
+              if (res.data.is_merchant > 0) {
+                // 是商家
+                uni.reLaunch({
+                  url: '/pages/partner/index' });
+
+              } else {
+                uni.navigateBack({
+                  delta: 1,
+                  success: function success() {
+                    // 获取微信步数授权
+                    uni.login({
+                      provider: 'weixin',
+                      success: function success(loginRes) {
+                        // 记录步数
+                        var encryptedData = uni.getStorageSync('encryptedData'),
+                        iv = uni.getStorageSync('iv'),
+                        data = {
+                          url: that.$api.setpCount,
+                          method: 'POST',
+                          data: {
+                            encryptedData: encryptedData,
+                            iv: iv,
+                            code: loginRes.code } };
 
 
-                      that.$httpRequest(data).then(function (res) {
-                        console.log(res);
-                      });
-                    } });
+                        that.$httpRequest(data).then(function (res) {
+                          console.log(res);
+                        });
+                      } });
 
-                } });
+                  } });
 
+              }
             } else {
               that.page_isBindTel = true;
             }
@@ -260,6 +295,79 @@ var _default =
       uni.switchTab({
         url: '../index/index' });
 
+    },
+
+    // 解密获取手机号码
+    getPhoneNumber: function getPhoneNumber(e) {
+      console.log('获取到手机号码', e);
+      var that = this,
+      params = {};
+
+      that.open();
+
+      // uni.showLoading({
+      //   title: '授权获取中'
+      // })
+      // 获取微信步数授权
+      // uni.login({
+      //   provider: 'weixin',
+      //   success: function (res) {
+      //     console.log(res)
+      //       params= {
+      //         url: that.$api.decryptByMobile,
+      //         method: 'POST',
+      //         data: {
+      //           code: res.code,
+      //           encryptedData: e.detail.encryptedData,
+      //           iv: e.detail.iv
+      //         }
+      //       }
+      //     that.$httpRequest(params).then(result => {
+      //       // uni.hideLoading()
+      //       that.mobile= result.data.mobile
+      //       that.open()
+      //     })
+      //   }
+      // })
+
+    },
+
+    // 绑定手机号码
+    bindWechatTel: function bindWechatTel() {
+      var that = this,
+      params = {
+        url: that.$api.mobileBind,
+        method: 'POST',
+        data: {
+          mobile: 15979779714 } };
+
+
+      that.$httpRequest(params).then(function (res) {
+        console.log(res);
+        uni.showToast({
+          title: res.msg,
+          success: function success() {
+            if (res.data.is_merchant > 0) {
+              uni.redirectTo({
+                url: '/pages/partner/index' });
+
+            } else {
+              uni.navigateBack({
+                delta: 1 });
+
+            }
+          } });
+
+      });
+    },
+
+    // 打开弹窗
+    open: function open() {
+      // 需要在 popup 组件，指定 ref 为 popup
+      this.$refs.popup.open();
+    },
+    close: function close() {
+      this.$refs.popup.close();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

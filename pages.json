@@ -144,6 +144,16 @@
       "style": {
       	"navigationBarTitleText": "个人信息"
       }
+		}, {
+			"path": "pages/partner/index",
+      "style": {
+      	"navigationBarTitleText": "商家首页"
+      }
+		},  {
+			"path": "pages/partner/couponDetail",
+      "style": {
+      	"navigationBarTitleText": "优惠券详情"
+      }
 		}
 	],
   "tabBar": {
