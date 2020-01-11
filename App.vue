@@ -12,14 +12,13 @@
       
       uni.getSystemInfo({
         success: function (res) {
-          console.log(res)
           that.$store.commit('setHeight', res)
         }
       })
       
       // 商家判断0为普通用户 1为商家
       let is_merchant= uni.getStorageSync('is_merchant')
-      
+      console.log(is_merchant)
       if(is_merchant > 0) {
         uni.reLaunch({
           url: '/pages/partner/index'

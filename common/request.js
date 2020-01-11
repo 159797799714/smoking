@@ -26,6 +26,7 @@ export default function(obj) {
   let promise = new Promise(function(resolve, reject) {
     uni.request(httpDefaultData).then(
       (res) => {
+        uni.hideLoading()
         let result = res[1]
         if(result.data.code === -1) {
           // 未登录或者登陆失效，重定向到登陆)
@@ -48,6 +49,7 @@ export default function(obj) {
       }
     ).catch(
       (err) => {
+        uni.hideLoading()
         reject(err)
       }
     )

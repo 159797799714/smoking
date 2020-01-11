@@ -154,6 +154,16 @@
       "style": {
       	"navigationBarTitleText": "优惠券详情"
       }
+		}, {
+			"path": "pages/partner/couponNote",
+      "style": {
+      	"navigationBarTitleText": "优惠券记录"
+      }
+		}, {
+			"path": "pages/partner/couponStatistics",
+      "style": {
+      	"navigationBarTitleText": "使用统计"
+      }
 		}
 	],
   "tabBar": {

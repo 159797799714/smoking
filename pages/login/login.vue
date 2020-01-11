@@ -95,13 +95,12 @@
             }
           }
           
-        uni.removeStorageSync('token')
+        uni.clearStorageSync()
          
         // 调起登录
         uni.login({
           provider: 'weixin',
           success: function (loginRes) {
-            uni.clearStorageSync()
             console.log(loginRes)
             uni.showLoading({
                 title: '登录中'
