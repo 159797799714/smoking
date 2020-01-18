@@ -133,7 +133,39 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../components/topBar.vue */ 291));};var goodList = function goodList() {return __webpack_require__.e(/*! import() | pages/components/goodList */ "pages/components/goodList").then(__webpack_require__.bind(null, /*! ../components/goodList.vue */ 305));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../components/topBar.vue */ 312));};var banner = function banner() {return __webpack_require__.e(/*! import() | pages/components/banner */ "pages/components/banner").then(__webpack_require__.bind(null, /*! ../components/banner.vue */ 305));};var goodList = function goodList() {return __webpack_require__.e(/*! import() | pages/components/goodList */ "pages/components/goodList").then(__webpack_require__.bind(null, /*! ../components/goodList.vue */ 326));};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -176,23 +208,38 @@ __webpack_require__.r(__webpack_exports__);
 {
   components: {
     topBar: topBar,
-    goodList: goodList },
+    goodList: goodList,
+    banner: banner },
+
+  computed: {
+    token: function token() {
+      return this.$store.state.token;
+    } },
 
   data: function data() {
     return {
+      tabs: ['热门活动', '抽奖', '积分商场'],
+      tabIndex: 0, // 默认选中第一个
+      slipeStyle: '',
+      tabWidth: '', // 每一个tab的宽度
+      classMenu: ['抽奖记录', '进行中', '敬请期待'], // 抽奖分类
+      classIndex: 1, // 默认选中进行中
       info: {
         level: 1,
         integral: 0 },
       // 首页详情
-      goodList: [] };
+      goodList: '' };
 
   },
   onShow: function onShow() {
     if (!this.info.user) {
       this.getDetail();
     }
+    this.setLeftStyle(this.tabIndex);
   },
   methods: {
+
+    // 积分商城
     getDetail: function getDetail() {
       var that = this;
       var params = {
@@ -217,6 +264,31 @@ __webpack_require__.r(__webpack_exports__);
       uni.navigateTo({
         url: url });
 
+    },
+
+    // 选择热门活动，抽奖，或者积分商场
+    selectTab: function selectTab(index) {
+      this.tabIndex = index;
+      this.setLeftStyle(index);
+    },
+
+    // 设置底部slipe的偏移量
+    setLeftStyle: function setLeftStyle(index) {
+      var that = this,
+      left = '';
+      var query = uni.createSelectorQuery().in(this);
+      query.selectAll('.tab').boundingClientRect(function (data) {
+        if (!that.tabWidth) {
+          that.tabWidth = data[index].width;
+        }
+        left = that.tabWidth * index + that.tabWidth / 2 - 39;
+        that.slipeStyle = 'left: ' + left.toFixed(0) + 'px';
+      }).exec();
+    },
+
+    // 选择抽奖分类
+    selectMenu: function selectMenu(index) {
+      this.classIndex = index;
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

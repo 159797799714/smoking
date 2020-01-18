@@ -4,7 +4,7 @@
       :indicator-active-color="indicatorActiveColor" :interval="interval" :duration="duration">
       <swiper-item v-for="(item, index) in swiperList" :key="index" @click="naviget(item.activity_link)" class="swiper-item">
         <view class="img-bg b-13">
-          <image :src="item.image.file_path || item.file_path || item.image" mode="widthFix"></image>
+          <image :src="item.image.file_path || item.file_path || item.image" mode="widthFix" class="image"></image>
         </view>
       </swiper-item>
     </swiper>
@@ -37,7 +37,6 @@
         let goods = link.indexOf('goods_id=')
         let article = link.indexOf('article_id=')
         let luckydraw = link.indexOf('luckydraw_id=')
-        console.log(goods, article, luckydraw)
         if(goods !== -1) {
           uni.navigateTo({
             url: '../components/goodDetail?goods_id=' + link.slice(9)
@@ -68,6 +67,10 @@
     max-height: 750upx;
     width: 100%;
     background: linear-gradient(to right,#00BFFF, #9933FF, #ff33cc);
+    .swiper{
+      height: 100%;
+      width: 100%;
+    }
     .swiper-item{
       height: 100%;
       width: 100%;
@@ -75,7 +78,7 @@
         position: relative;
         height: 100%;
         width: 100%;
-        &>image{
+        .image{
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
@@ -85,10 +88,4 @@
       }
     }
  }
-</style>
-<style>
-  .swiper{
-    height: 100%;
-    width: 100%;
-  }
 </style>

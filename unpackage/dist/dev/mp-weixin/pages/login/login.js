@@ -135,7 +135,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | pages/components/uni-popup/uni-popup */ "pages/components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! ../components/uni-popup/uni-popup.vue */ 298));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | pages/components/uni-popup/uni-popup */ "pages/components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! ../components/uni-popup/uni-popup.vue */ 319));};var _default =
 
 
 
@@ -205,8 +205,35 @@ __webpack_require__.r(__webpack_exports__);
     // 用户协议勾选
     checkboxChange: function checkboxChange(e) {
       var that = this;
-      that.checked = e.detail.length > 1 ? true : false;
+      that.checked = e.detail.value.length > 0 ? true : false;
     },
+
+    // 获取微信步数授权
+    getWechatFoot: function getWechatFoot() {
+      console.log('调用了微信步数');
+      var that = this;
+      uni.login({
+        provider: 'weixin',
+        success: function success(loginRes) {
+          // 记录步数
+          var encryptedData = uni.getStorageSync('encryptedData'),
+          iv = uni.getStorageSync('iv'),
+          data = {
+            url: that.$api.setpCount,
+            method: 'POST',
+            data: {
+              encryptedData: encryptedData,
+              iv: iv,
+              code: loginRes.code } };
+
+
+          that.$httpRequest(data).then(function (res) {
+            console.log(res);
+          });
+        } });
+
+    },
+
 
     // 登录
     authorLogin: function authorLogin(e) {
@@ -214,7 +241,7 @@ __webpack_require__.r(__webpack_exports__);
       // 同意用户协议
       if (!that.checked) {
         uni.showToast({
-          title: '请阅读并勾选相关用户协议',
+          title: '请勾选相关用户协议',
           icon: 'none' });
 
         return;
@@ -228,14 +255,11 @@ __webpack_require__.r(__webpack_exports__);
           encrypted_data: e.detail.encryptedData,
           iv: e.detail.iv,
           signature: e.detail.signature,
-          referee_id: wx.getStorageSync('referee_id') } };
+          referee_id: wx.getStorageSync('referee_id') }
 
 
-
-      uni.clearStorageSync();
-
-      // 调起登录
-      uni.login({
+        // 调起登录
+      };uni.login({
         provider: 'weixin',
         success: function success(loginRes) {
           console.log(loginRes);
@@ -246,6 +270,7 @@ __webpack_require__.r(__webpack_exports__);
 
           // 请求登录接口
           that.$httpRequest(params).then(function (res) {
+
             uni.hideLoading();
             that.$store.commit('setToken', res.data.token);
             that.$store.commit('redirectLoginPage', { status: false });
@@ -254,10 +279,10 @@ __webpack_require__.r(__webpack_exports__);
             uni.setStorageSync('is_merchant', res.data.is_merchant);
 
             var isBindPhone = res.data.mobile_isbind === 'yes' ? true : false;
+            that.getWechatFoot();
 
             // 已经绑定手机号码
             if (isBindPhone) {
-
               // 判断是否是商家
               if (res.data.is_merchant > 0) {
                 // 是商家
@@ -266,30 +291,7 @@ __webpack_require__.r(__webpack_exports__);
 
               } else {
                 uni.navigateBack({
-                  delta: 1,
-                  success: function success() {
-                    // 获取微信步数授权
-                    uni.login({
-                      provider: 'weixin',
-                      success: function success(loginRes) {
-                        // 记录步数
-                        var encryptedData = uni.getStorageSync('encryptedData'),
-                        iv = uni.getStorageSync('iv'),
-                        data = {
-                          url: that.$api.setpCount,
-                          method: 'POST',
-                          data: {
-                            encryptedData: encryptedData,
-                            iv: iv,
-                            code: loginRes.code } };
-
-
-                        that.$httpRequest(data).then(function (res) {
-                          console.log(res);
-                        });
-                      } });
-
-                  } });
+                  delta: 1 });
 
               }
             } else {

@@ -85,8 +85,6 @@
           that= this
         that.leftBox= []
         that.rightBox= [] 
-        
-        console.log('变化了', list)
           
         if(list.length > 0) {
           list.map((item, index) => {
@@ -101,7 +99,6 @@
       
       // 文章点赞
       likeArticle() {
-        console.log('文章点赞')
         let that= this
         let url = this.$api.articleLike
         if (this.detail.isLike) {

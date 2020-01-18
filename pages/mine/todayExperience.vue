@@ -17,7 +17,7 @@
       <view class="open-menu">
         <view v-for="(item, index) in detail.today_experience_list" :key="index" class="bar f-26 col-9">
           <text class="fl">{{item.source_describe}}</text>
-          <text>经验+{{item.add_integral}}</text>
+          <text>{{type === 'integral'? '积分': '经验'}}+{{item.add_integral}}</text>
           <text :class="{'fr': true, 'col-f0f': item.completed_num === item.limit_num}">{{item.completed_num}}/{{item.limit_num}}</text>
         </view>
         

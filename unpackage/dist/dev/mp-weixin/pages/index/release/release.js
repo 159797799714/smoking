@@ -222,9 +222,33 @@ var _uploadImg2 = _interopRequireDefault(__webpack_require__(/*! ../../../common
 //
 //
 //
-var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../../components/topBar.vue */ 291));};var _default = { components: { topBar: topBar }, data: function data() {return { formData: { article_title: '', article_content: '', category_id: '', tags: '', address: '', address_latitude: '', address_longitude: '', uploaded: [], source: 'umi' }, imgArr: [], imgUploadID: [], time: 0 };}, onLoad: function onLoad(params) {if (params.type) {this.formData.source = params.type;}}, methods: { goIndex: function goIndex() {uni.switchTab({ url: '../index' });}, // 获取当前位置信息
-    getAddress: function getAddress() {var that = this;uni.chooseLocation({ success: function success(res) {console.log(res);console.log('位置名称：' + res.name);console.log('详细地址：' + res.address);console.log('纬度：' + res.latitude);console.log('经度：' + res.longitude);
+var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../../components/topBar.vue */ 312));};var _default = { components: { topBar: topBar }, data: function data() {return { formData: { article_title: '', article_content: '', category_id: '', tags: '', address: '', address_latitude: '', address_longitude: '', uploaded: [], source: 'umi' }, imgArr: [], imgUploadID: [], time: 0, lists: '', // 请求回来的数据
+      array: '', // picker需要话题列表['啦啦啦', '哈哈哈']
+      index: '' // picker选中的话题索引值
+    };}, onLoad: function onLoad(params) {if (params.type) {this.formData.source = params.type;}this.getTopicList();}, methods: { goIndex: function goIndex() {uni.switchTab({ url: '../index' });}, // 获取所有话题列表
+    getTopicList: function getTopicList() {var that = this,params = { url: that.$api.topicAllList };that.$httpRequest(params).then(function (res) {console.log(res.data.list);var lists = res.data.list,
+        arr = [];
+        that.lists = lists;
+        lists.map(function (item, index) {
+          arr.push(item.name);
+        });
+        that.array = arr;
+      });
+    },
 
+    // 选择话题改变
+    bindPickerChange: function bindPickerChange(e) {
+      console.log('picker发送选择改变，携带值为', e.target.value);
+      var index = e.target.value;
+      this.index = index;
+      this.formData.category_id = that.lists[index].category_id;
+    },
+
+    // 获取当前位置信息
+    getAddress: function getAddress() {
+      var that = this;
+      uni.chooseLocation({
+        success: function success(res) {
           that.formData.address = res.address + res.name;
           that.formData.address_latitude = res.latitude;
           that.formData.address_longitude = res.longitude;

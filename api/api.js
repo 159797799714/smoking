@@ -5,6 +5,7 @@ export default {
   decryptByMobile: 'axapp.center/decryptByMobile',                     // 微信授权解密手机号
   mobileBind: 'axapp.center/mobileBind',                               // 授权绑定手机号
   sendcode: 'axapp.center/sendcode',                                   // 发送验证码
+  bindByMobile: 'axapp.center/bindByMobile',                           // 用户验证码绑定手机
   
   // 首页文章
   homebanners: 'axumi.homebanner/gethomebanners',                      // 首页轮播图列表
@@ -12,8 +13,16 @@ export default {
   focusList: 'axumi.article/focusList',                                // 关注文章列表
   newList: 'axumi.article/list',                                       // 最新文章列表
   
+  // 话题
+  myThemes: 'axumi.category/myThemes',                                 // 我已添加的话题
+  addMyTheme: 'axumi.category/addMyTheme',                             // 添加话题
+  cancleMyTheme: 'axumi.category/rmMyTheme',                           // 取消已添加话题
+  themeList: 'axumi.category/themeList',                               // 所有话题列表
+  
+  
   // 文章
   articleRelease: 'axumi.article/release',                             // 文章发布
+  topicAllList: 'axumi.category/allList',                              // 文章话题列表
   articleDetail: 'axumi.article/detail',                               // 文章详情
   articleDelete: 'axumi.article/delete',                               // 文章删除
   articleAddComment: 'axumi.article/addcomments',                      // 文章评论
@@ -86,6 +95,10 @@ export default {
   setTags: 'ax.address/setTags',                                       // 用户设置地址标签
   tagsList: 'ax.address/tagsList',                                     // 用户地址标签列表
   editTags: 'ax.address/editTags',                                     // 编辑修改地址标签
+  
+  // 协议
+  agreementList: 'axagree.agreement_category/list',                    // 协议分类
+  getAgreeContentById: 'axagree.agreement_category/getContentById',    // 通过分类ID获取协议内容
   
   // 商家
   merchantsPage: 'ax.merchants/merchantsPage',                         // 商家首页

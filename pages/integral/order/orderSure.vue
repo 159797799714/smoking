@@ -1,6 +1,7 @@
 <template>
   <view class="orderSure">
-    <view class="address-info oh">
+    
+    <view v-if="address" class="address-info oh">
       <view class="left-box fl">
         <view class="f-30 col-c line-30">{{address.name}}</view>
         <view class="m-t-30">
@@ -12,6 +13,13 @@
         <view class="detail col-c f-28 twolist-hidden">{{address.detail}}</view>
       </view>
     </view>
+    
+    <navigator v-else url="/pages/mine/address/address" class="address-info col-c">
+      <view class="t-c">
+        <text class="iconfont f-60">&#xe698;</text>
+      </view>
+      <view class="m-t-15 t-c f-30">点击添加收货地址~</view>
+    </navigator>
     <view class="good-info p-30 m-t-15">
       <view class="column-item f-30 col-c oh">
         <text class="fl">颜色规格</text>
@@ -81,7 +89,6 @@
       }
     },
     onLoad(opt) {
-      console.log(opt)
       let obj= JSON.parse(opt.obj)
       this.opt= obj
       
@@ -99,7 +106,6 @@
           data: obj
         }
         that.$httpRequest(params).then(res => {
-          console.log(res)
           that.address= res.data.address
           that.goods_list= res.data.goods_list
           that.order_pay_price= res.data.order_pay_price

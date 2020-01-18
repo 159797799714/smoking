@@ -1,16 +1,16 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
-			"style": {
-        "navigationStyle": "custom"
-			}
-		}, {
 			"path": "pages/index/age_18",
       "style": {
       	"navigationStyle": "custom"
       }
 		}, {
+			"path": "pages/index/index",
+			"style": {
+        "navigationStyle": "custom"
+			}
+		},  {
 			"path": "pages/login/login",
 			"style": {
         "navigationStyle": "custom"
@@ -18,13 +18,17 @@
 		}, {
 			"path": "pages/login/bindTel",
 			"style": {
-        "navigationStyle": "custom"
+        "navigationBarTitleText": "绑定手机"
+			}
+		}, {
+			"path": "pages/index/themes/themesCenter",
+			"style": {
+        "navigationBarTitleText": "添加兴趣话题"
 			}
 		}, {
 			"path": "pages/index/release/release",
 			"style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "文章发布"
+        "navigationStyle": "custom"
 			}
 		},  {
 			"path": "pages/index/release/center",
@@ -40,7 +44,7 @@
 			"path": "pages/integral/integral",
 			"style": {
         "navigationStyle": "custom",
-				"navigationBarTitleText": "积分"
+				"navigationBarTitleText": "福利"
 			}
 		}, {
 			"path": "pages/integral/goodDetail",
@@ -100,6 +104,16 @@
 				"navigationBarTitleText": ""
 			}
 		}, {
+    	"path": "pages/mine/agreeMent",
+    	"style": {
+    		"navigationBarTitleText": "用户协议"
+    	}
+    }, {
+    	"path": "pages/mine/agreeDetail",
+    	"style": {
+    		"navigationBarTitleText": "协议"
+    	}
+    }, {
     	"path": "pages/mine/coupon/center",
     	"style": {
     		"navigationBarTitleText": "领券中心"
@@ -177,7 +191,7 @@
       "selectedIconPath": "static/img/tabbar/index2.png"
     }, {
       "pagePath": "pages/integral/integral",
-      "text": "积分",
+      "text": "福利",
       "iconPath": "static/img/tabbar/market1.png",
       "selectedIconPath": "static/img/tabbar/market2.png"
     }, {

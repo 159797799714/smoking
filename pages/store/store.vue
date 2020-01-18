@@ -7,17 +7,19 @@
         <banner :swiperList="swiperList"></banner>
       </view>
       
-      <view class="condition">
-        <image src="../../static/img/index/address.png" class="icon-img" mode="widthFix"></image>
-        <text class="address m-l-10 col-f f-28 onelist-hidden" @click="getAddress">{{address? address: '点击选择所在位置'}}</text>
-        <picker mode="region" @change="bindPickerChange" class="dis-inline-block">
-          <view class="filter col-f f-24 b-90f">筛选门店</view>
-        </picker>
+      <view class="condition flex-x-between">
+        <view class="dis-flex">
+          <image src="../../static/img/index/address.png" class="icon-img" mode="widthFix"></image>
+          <text class="address m-l-10 col-f f-28 onelist-hidden" @click="getAddress">{{address? address: '点击选择所在位置'}}</text>
+          <picker mode="region" @change="bindPickerChange" class="dis-inline-block">
+            <view class="filter col-f f-24 b-90f">筛选门店</view>
+          </picker>
+        </view>
         <text class="fr iconfont f-44 col-90f">&#xe64d;</text>
       </view>
       
       <view v-if="groups" class="condition">
-        <image src="../../static/img/index/address.png" class="icon-img" mode="widthFix"></image>
+        <text class="iconfont f-32 linear-word">&#xe63c;</text>
         <text class="address m-l-10 col-f f-28 onelist-hidden" @click="copeQQ(groups.group_number)">
           {{groups? '欢迎加入' + groups.group_name + '：' + groups.group_number: ''}}
         </text>
@@ -41,6 +43,7 @@
         </view>
       </view>
       
+      <!-- QQ群 -->
       <view v-else>
         <view v-for="(item, index) in groupsList" :key="index" class="big-box" @click="getGroupDetailById(item.id)">
         	<view :class="{'b-13 t-c col-c': true, 'f-38': item.group_name.length < 4, 'f-28': item.group_name.length > 3}">{{item.group_name}}</view>
@@ -148,6 +151,7 @@
           }
         that.$httpRequest(params).then(res => {
           that.groups= res.data.detail
+          that.isStore= true
         })
       },
       
@@ -195,6 +199,7 @@
       bindPickerChange(e) {
         console.log('picker发送选择改变，携带值为', e.target.value)
         this.params.region= e.target.value.join(',')
+        this.address= e.target.value.join(',')
         
         this.getStoreList()
       },
@@ -202,9 +207,9 @@
       // 门店详情
       goStoreDetail(item) {
         let params= {
-          shop_id: item.shop_id,
-          longitude: item.longitude,
-          latitude: item.latitude
+          shop_id: item?item.shop_id: '',
+          longitude: item?item.longitude: '',
+          latitude: item?item.latitude: ''
         }
         uni.navigateTo({
           url: 'storeDetail?data=' + JSON.stringify(params)
@@ -235,12 +240,13 @@
       overflow: hidden;
     }
     .condition{
+      display: flex;
       padding: 33upx 30upx;
       line-height: 32upx;
       .icon-img{
         display: inline-block;
         height: 32upx;
-        width: 24upx;
+        width: 32upx;
       }
     }
     // 门店

@@ -111,7 +111,7 @@
           url: that.$api.signIn
         }
         that.$httpRequest(params).then(res => {
-          console.log(res)
+          that.detail.is_sign= 'yes'
         })
       },
       
@@ -125,7 +125,6 @@
             }
           }
         that.$httpRequest(params).then(res => {
-          console.log('积分明细', res)
           that.menuList= res.data.list
         })
       },
@@ -140,7 +139,6 @@
             }
           }
         that.$httpRequest(params).then(res => {
-          console.log('兑换明细', res)
           let list= res.data.list
           list.data.map((item, index) => {
             item.create_time= item.create_time.slice(0, 10)

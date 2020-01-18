@@ -143,9 +143,14 @@ var _default =
 
   },
   onTabItemTap: function onTabItemTap(item) {
+    var token = uni.getStorageSync('token');
     if (this.time % 2 !== 0) {
       uni.switchTab({
         url: '../index' });
+
+    } else if (!token && this.time % 2 === 0) {
+      uni.reLaunch({
+        url: '../../login/login' });
 
     } else {
       uni.reLaunch({
@@ -153,10 +158,6 @@ var _default =
 
     }
     this.time += 1;
-    console.log('进来了', this.time);
-    // uni.switchTab({
-    //   url: '../index'
-    // })
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

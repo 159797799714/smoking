@@ -1,8 +1,9 @@
 {
   "navigationStyle": "custom",
-  "navigationBarTitleText": "积分",
+  "navigationBarTitleText": "福利",
   "usingComponents": {
     "top-bar": "/pages/components/topBar",
-    "good-list": "/pages/components/goodList"
+    "good-list": "/pages/components/goodList",
+    "banner": "/pages/components/banner"
   }
 }

@@ -1,6 +1,5 @@
 {
   "navigationStyle": "custom",
-  "navigationBarTitleText": "文章发布",
   "usingComponents": {
     "top-bar": "/pages/components/topBar"
   }

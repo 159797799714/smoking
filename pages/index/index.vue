@@ -3,10 +3,25 @@
     <!-- 头部 -->
     <topBar :isindex="true" />
 
-    <scroll-view scroll-y="true" class="content bg-black" @scrolltolower="lower">
+    <scroll-view scroll-y="true" class="content bg-black p-30" @scrolltolower="lower">
       <view v-if="swiperList && swiperList.length > 0" class="banner-swiper bg-black">
         <banner :swiperList="swiperList"></banner>
       </view>
+      <view class="topic-list dis-flex f-24 col-c">
+        <navigator url="/pages/index/themes/themesCenter" class="addTopicBtn dis-inline-block">
+          <view class="add-mark"></view>
+          <view class="t-c line-64">添加</view>
+        </navigator>
+        <view class="topic">
+          <view v-for="item in mythemes" :key="item" class="topic-item">
+            <view class="topic-img">
+              <image :src="item.image" mode=""></image>
+            </view>
+            <view class="t-c line-64 onelist-hidden">{{item.name}}</view>
+          </view>
+        </view>
+      </view>
+      
       <view class="TabNav dis-flex flex-x-around bg-black col-cc">
         <view v-for="(li, num) in tabList" :key="num" :class="{'item f-32 col-9': true, 'f-40 col-f0f': li.category_id === category_id }"
           @click="selectTab(li, num)">{{ li.name }}</view>
@@ -82,7 +97,8 @@
           current_page: 1,
           last_page: 1,
           per_page: 15
-        }
+        },
+        mythemes: ''
       }
     },
     onLoad() {
@@ -91,6 +107,8 @@
       that.getFindList()
     },
     onShow() {
+      this.getMyTheme()
+      
       let that= this,
         id= this.category_id
       that.page.current_page= 1
@@ -132,7 +150,6 @@
     methods: {
       // 上拉加载更多
       lower() {
-        console.log('滚动到了底部')
         let that= this,
           val= this.category_id
         if(that.page.current_page < that.page.last_page) {
@@ -200,7 +217,6 @@
         }
         that.$httpRequest(params).then(res => {
           if(res.code === 1) {
-            console.log(res.data.list)
             if(that.articleList.length < 1) {
               that.articleList= res.data.list.data
             } else if(that.page.current_page < res.data.list.last_page) {
@@ -228,7 +244,6 @@
         }
         that.$httpRequest(params).then(res => {
           if(res.code === 1) {
-            console.log('最新文章列表', res.data.list)
             if(that.page.current_page >= res.data.list.last_page && that.articleList.length < 1) {
               that.articleList= res.data.list.data
             } else {
@@ -255,7 +270,6 @@
           }
         }
         that.$httpRequest(params).then(res => {
-          console.log('关注文章列表', res)
           if(res.code === 1 ) {
             if(that.page.current_page >= res.data.list.last_page && that.articleList.length < 1) {
               that.articleList= res.data.list.data
@@ -270,6 +284,16 @@
               icon: 'none'
             })
           }
+        })
+      },
+      // 获取我关注的话题列表
+      getMyTheme() {
+        let that= this,
+          params= {
+            url: that.$api.myThemes
+          }
+        that.$httpRequest(params).then(res => {
+          that.mythemes= res.data.mythemes
         })
       },
       
@@ -299,6 +323,64 @@
   .container{
     height: 100%;
   }
+  .line-64{
+    line-height: 62upx;
+  }
+  .topic-list{
+    padding: 30upx 0;
+    border-bottom: 1upx solid #33CCFF;
+    .addTopicBtn{
+      padding: 29upx 23upx 0 16upx;
+      .add-mark{
+        position: relative;
+        margin-bottom: 14upx;
+        height: 58upx;
+        width: 58upx;
+        background: linear-gradient(-35deg,#EC08F1,#923EF4,#4269F8,#0CDDFE);
+        &::after{
+          content: '';
+          height: 100%;
+          width: 6upx;
+          background-color: #131313;
+          position: absolute;
+          left: 50%;
+          top: 0;
+          transform: translateX(-50%);
+        }
+        &::before{
+          content: '';
+          width: 100%;
+          height: 6upx;
+          background-color: #131313;
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+        }
+      }
+    }
+    .topic{
+      flex: 1;
+      white-space: nowrap;
+      overflow: auto;
+      .topic-item{
+        display: inline-block;
+        width: 100upx;
+        margin-left: 48upx;
+        .topic-img{
+          height: 100upx;
+          width: 100upx;
+          border-radius: 100%;
+          overflow: hidden;
+          &>image{
+            height: 100%;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  
   .content {
     width: 100%;
     height: calc(100% - 88upx);
@@ -311,7 +393,7 @@
       background-color: transparent;
     }
     .banner-swiper {
-      padding: 40upx 30upx 0 30upx;
+      padding-top: 40upx;
       height: 400upx;
       overflow: hidden;
     }
@@ -333,11 +415,6 @@
         position: relative;
       }
     }
-
-    .section {
-      padding: 0 30upx;
-    }
-
     .culture {
       box-sizing: border-box;
       padding: 30upx 0;

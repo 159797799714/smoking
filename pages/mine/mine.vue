@@ -3,45 +3,58 @@
     <!-- 头部 -->
     <topBar :isindex="true"/>
     
-    <view class="t-c f-36 col-f">{{userInfo.nickName}}</view>
-    <view class="t-c f-24 col-9">ID: {{userInfo.mobile}}</view>
-    <view class="p-re head m-t-20 oh">
-      <view class="fl userImg">
-        <image :src="userInfo.avatarUrl" mode="widthFix" @click="goPersonal"></image>
-      </view>
-      <view class="m-l-10 fl oh">
-        <view class="grade f-20 f-w">
-          <text class="linear-word">LV{{userInfo.level}}</text>
-          <text class="grade-btn m-l-10 b-f0f col-f" @click="goMember">查看特权</text>
+    <!-- 用户登录 -->
+    <view v-if="token">
+      <view class="t-c f-36 col-f">{{userInfo.nickName}}</view>
+      <view class="t-c f-24 col-9">ID: {{userInfo.mobile}}</view>
+      <view class="p-re head m-t-20 oh">
+        <view class="fl userImg">
+          <image :src="userInfo.avatarUrl" mode="widthFix" @click="goPersonal"></image>
         </view>
-        <view class="sign m-t-20 f-24 col-f">个性签名：{{userInfo.sign? userInfo.sign: '暂未设置个性签名'}}</view>
+        <view class="m-l-10 fl oh">
+          <view class="grade f-20 f-w">
+            <text class="linear-word">LV{{userInfo.level}}</text>
+            <text class="grade-btn m-l-10 b-f0f col-f" @click="goMember">查看特权</text>
+          </view>
+          <view class="sign m-t-20 f-24 col-f">个性签名：{{userInfo.sign? userInfo.sign: '暂未设置个性签名'}}</view>
+        </view>
+        
+        <view class="fr setting-icon" @click="goSetting">
+          <text class="iconfont f-34 col-9">&#xe676;</text>
+        </view>
+        
+      </view>
+      <view class="menu p-re">
+        
+        <view v-for="(item, index) in mycircle" :key="index" class="span-item">
+          <view class="num f-28 col-f">{{item.num}}</view>
+          <view class="m-t-10 f-26 col-6">{{item.title}}</view>
+        </view>
+        
+        <navigator v-for="(item, index) in menuList" :key="index" :open-type="item.open" :url="item.url" class="menu-item">
+          <image :src="'../../static/img/'+item.imgUrl+'.png'" mode=""></image>
+          <view class="m-t-15 f-26 col-6">{{item.title}}</view>
+        </navigator>
+        
+      </view>
+      <view class="tabBar">
+        <view v-for="(item, index) in tabList" :key="index" :class="{'tabs f-32 col-f': true, 'f-40 col-f0f': tabIndex === index}" @click="selectTab(index)">{{item}}</view>
       </view>
       
-      <view class="fr setting-icon" @click="goSetting">
-        <text class="iconfont f-34 col-9">&#xe676;</text>
+      <view class="good-main col-f">
+        <articleList :articleList="tabIndex === 0? articleList: like_article_list"/>
       </view>
-      
-    </view>
-    <view class="menu p-re">
-      
-      <view v-for="(item, index) in mycircle" :key="index" class="span-item">
-        <view class="num f-28 col-f">{{item.num}}</view>
-        <view class="m-t-10 f-26 col-6">{{item.title}}</view>
-      </view>
-      
-      <navigator v-for="(item, index) in menuList" :key="index" :open-type="item.open" :url="item.url" class="menu-item">
-        <image :src="'../../static/img/'+item.imgUrl+'.png'" mode=""></image>
-        <view class="m-t-15 f-26 col-6">{{item.title}}</view>
-      </navigator>
-      
-    </view>
-    <view class="tabBar">
-      <view v-for="(item, index) in tabList" :key="index" :class="{'tabs f-32 col-f': true, 'f-40 col-f0f': tabIndex === index}" @click="selectTab(index)">{{item}}</view>
     </view>
     
-    <view class="good-main col-f">
-      <articleList :articleList="tabIndex === 0? articleList: like_article_list"/>
+    <!-- 用户未登录 -->
+    <view v-else class="no-login t-c">
+      <text class="iconfont f-130 col-9">&#xe698;</text>
+      <view class="m-t-10 f-28 col-9">您还没有登录哦</view>
+      <view class="m-t-15">
+        <navigator url="../login/login" class="login-btn b-90f f-26 col-f">立即登录</navigator>
+      </view>
     </view>
+    
   </view>
 </template>
 
@@ -104,7 +117,11 @@
         tabIndex: 0
       }
     },
-    
+    computed: {
+      token: function() {
+       return this.$store.state.token
+      }
+    },
     onShow() {
       let that= this
       that.getDetail()
@@ -161,6 +178,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .container{
+    height: 100%;
+    width: 100%;
+  }
   .head{
     padding: 0 65upx;
     .setting-icon{
@@ -257,5 +278,16 @@
   }
   .good-main{
     padding: 0 28upx;
+  }
+  
+  // 未登录
+  .no-login{
+    margin: 50% 0 80upx;
+    width: 100%;
+    .login-btn{
+      display: inline-block;
+      padding: 10upx 20upx;
+      border-radius: 30upx;
+    }
   }
 </style>

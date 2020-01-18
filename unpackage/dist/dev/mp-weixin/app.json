@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/index/age_18",
+    "pages/index/index",
     "pages/login/login",
     "pages/login/bindTel",
+    "pages/index/themes/themesCenter",
     "pages/index/release/release",
     "pages/index/release/center",
     "pages/index/article/detail",
@@ -19,6 +20,8 @@
     "pages/store/store",
     "pages/store/storeDetail",
     "pages/mine/mine",
+    "pages/mine/agreeMent",
+    "pages/mine/agreeDetail",
     "pages/mine/coupon/center",
     "pages/mine/coupon/mycoupon",
     "pages/mine/coupon/couponDetail",
@@ -52,7 +55,7 @@
       },
       {
         "pagePath": "pages/integral/integral",
-        "text": "积分",
+        "text": "福利",
         "iconPath": "static/img/tabbar/market1.png",
         "selectedIconPath": "static/img/tabbar/market2.png"
       },

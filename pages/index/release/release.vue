@@ -22,7 +22,7 @@
       <view class="line-item">
         <image src="../../../static/img/index/topic.png" class="icon-img" mode="widthFix"></image>
         <input type="text" v-model="formData.tags" placeholder="请输入参与话题" placeholder-style="color: #ccc;font-size: 24upx;" class="col-c f-24"/>
-        <text class="fr f-40 col-9 iconfont rotate-180">&#xe61b;</text>
+        <picker @change="bindPickerChange" :value="index"  class="fr f-40 col-9 iconfont rotate-180">&#xe61b;</picker>
       </view>
       
       <view class="line-item oh" @click="getAddress">
@@ -66,12 +66,16 @@
         imgArr: [],
         imgUploadID: [],
         time: 0,
+        lists: '',               // 请求回来的数据
+        array: '',               // picker需要话题列表['啦啦啦', '哈哈哈']
+        index: '',               // picker选中的话题索引值
       }
     },
     onLoad(params) {
       if(params.type) {
         this.formData.source= params.type
       }
+      this.getTopicList()
     },
     methods: {
       goIndex() {
@@ -79,17 +83,37 @@
           url: '../index'
         })
       },
+      // 获取所有话题列表
+      getTopicList() {
+        let that= this,
+          params= {
+            url: that.$api.topicAllList
+          }
+          that.$httpRequest(params).then(res => {
+            console.log(res.data.list)
+            let lists= res.data.list,
+              arr= []
+            that.lists= lists
+            lists.map((item, index) => {
+              arr.push(item.name)
+            })
+            that.array= arr
+          })
+      },
+      
+      // 选择话题改变
+      bindPickerChange: function(e) {
+        console.log('picker发送选择改变，携带值为', e.target.value)
+        let index= e.target.value
+        this.index = index
+        this.formData.category_id= that.lists[index].category_id
+      },
+      
       // 获取当前位置信息
       getAddress() {
         let that= this
         uni.chooseLocation({
           success: function (res) {
-            console.log(res)
-            console.log('位置名称：' + res.name);
-            console.log('详细地址：' + res.address);
-            console.log('纬度：' + res.latitude);
-            console.log('经度：' + res.longitude);
-            
             that.formData.address= res.address + res.name
             that.formData.address_latitude= res.latitude
             that.formData.address_longitude= res.longitude

@@ -10,9 +10,14 @@
       }
     },
     onTabItemTap(item) {
+      let token= uni.getStorageSync('token')
       if(this.time % 2 !== 0) {
         uni.switchTab({
           url: '../index'
+        })
+      } else if(!token && this.time % 2 === 0) {
+        uni.reLaunch({
+          url: '../../login/login'
         })
       } else {
         uni.reLaunch({
@@ -20,10 +25,6 @@
         })
       }
       this.time += 1
-      console.log('进来了', this.time)
-      // uni.switchTab({
-      //   url: '../index'
-      // })
     }
   }
 </script>

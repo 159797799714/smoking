@@ -27,7 +27,7 @@
           <text class="rank-num f-40 col-c">{{item.ranking}}</text>
           <view class="dis-inline-block p-ab user">
             <image :src="item.avatarUrl" mode="width" class="user-img"></image>
-            <view class="m-t-15 user-name t-c f-24 col-9">{{item.nickName}}</view>
+            <view class="m-t-15 user-name t-c f-24 col-9 onelist-hidden">{{item.nickName}}</view>
           </view>
         </view>
         <view class="fr foot-num f-36 col-c">{{item.step_count}}步</view>

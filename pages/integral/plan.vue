@@ -2,13 +2,14 @@
   <view class="plan">
     <view class="t-r f-32 col-9">打卡规则</view>
     <view class="progress-circle">
-      <view class="small-circle b-13 col-90f">
+      <view class="small-circle b-13 col-90f p-re">
         <view class="day t-c f-130">{{detail.clock_in_days}}
           <view class="small-word f-20">
             <view>连续</view>
             <view>DAY</view>
           </view>
         </view>
+        <view class="rotate-circle p-ab"></view>
       </view>
     </view>
     
@@ -52,9 +53,7 @@
           url: that.$api.clockInPage
         }
         that.$httpRequest(params).then(res => {
-          console.log(res)
           that.detail= res.data
-          
         })
       },
       
@@ -103,6 +102,11 @@
   .small-word{
     display: inline-block;
     line-height: 24upx;
+    // .rotate-circle{
+    //   height: 100%;
+    //   width: 1upx;
+    //   background: #fff;
+    // }
   }
   .sign-btn{
     display: inline-block;

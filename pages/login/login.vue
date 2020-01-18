@@ -39,7 +39,7 @@
           <text class="m-l-30 col-9">微信绑定手机号码</text>
           <text class="fr iconfont col-90f">&#xe605;</text>
         </view>
-        <view class="row col-6">使用其他号码</view>
+        <navigator url="./bindTel?origin=login" class="row col-6">使用其他号码</navigator>
         <view class="m-t-20 btn-box dis-flex flex-x-around">
           <text class="btn b-cc" @click="reject">拒绝</text>
           <text class="btn b-90f" @click="bindWechatTel">允许</text>
@@ -68,8 +68,35 @@
       // 用户协议勾选
       checkboxChange(e) {
         let that= this
-        that.checked= e.detail.length > 1? true: false
+        that.checked= e.detail.value.length > 0? true: false
       },
+      
+      // 获取微信步数授权
+      getWechatFoot() {
+        console.log('调用了微信步数')
+        let that= this
+        uni.login({
+          provider: 'weixin',
+          success: function (loginRes) {
+            // 记录步数
+            let encryptedData= uni.getStorageSync('encryptedData'),
+              iv= uni.getStorageSync('iv'),
+              data= {
+                url: that.$api.setpCount,
+                method: 'POST',
+                data: {
+                  encryptedData: encryptedData,
+                  iv: iv,
+                  code: loginRes.code
+                }
+              }
+            that.$httpRequest(data).then(res => {
+              console.log(res)
+            })
+          }
+        })
+      },
+      
       
       // 登录
       authorLogin(e) {
@@ -77,7 +104,7 @@
         // 同意用户协议
         if(!that.checked) {
           uni.showToast({
-            title: '请阅读并勾选相关用户协议',
+            title: '请勾选相关用户协议',
             icon: 'none'
           })
           return
@@ -94,9 +121,6 @@
               referee_id: wx.getStorageSync('referee_id')
             }
           }
-          
-        uni.clearStorageSync()
-         
         // 调起登录
         uni.login({
           provider: 'weixin',
@@ -109,6 +133,7 @@
             
             // 请求登录接口
             that.$httpRequest(params).then(res => {
+              
               uni.hideLoading()
               that.$store.commit('setToken', res.data.token)
               that.$store.commit('redirectLoginPage', {status: false})
@@ -117,10 +142,10 @@
               uni.setStorageSync('is_merchant', res.data.is_merchant)
               
               let isBindPhone= res.data.mobile_isbind === 'yes'? true: false
+              that.getWechatFoot()
               
               // 已经绑定手机号码
               if(isBindPhone) {
-                
                 // 判断是否是商家
                 if(res.data.is_merchant > 0) {
                   // 是商家
@@ -129,30 +154,7 @@
                   })
                 } else {
                   uni.navigateBack({
-                    delta: 1,
-                    success: function() {
-                      // 获取微信步数授权
-                      uni.login({
-                        provider: 'weixin',
-                        success: function (loginRes) {
-                          // 记录步数
-                          let encryptedData= uni.getStorageSync('encryptedData'),
-                            iv= uni.getStorageSync('iv'),
-                            data= {
-                            url: that.$api.setpCount,
-                            method: 'POST',
-                            data: {
-                              encryptedData: encryptedData,
-                              iv: iv,
-                              code: loginRes.code
-                            }
-                          }
-                          that.$httpRequest(data).then(res => {
-                            console.log(res)
-                          })
-                        }
-                      })
-                    }
+                    delta: 1
                   })  
                 }
               } else {

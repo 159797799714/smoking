@@ -12,10 +12,6 @@ const store = new Vuex.Store({
     statusBarHeight: 20,    // 状态栏高度
     windowHeight: '',       // 屏幕高度,
     fontSize: 16,           // 默认系统字体大小
-    // footData: {
-    //   encryptedData: '',
-    //   iv: ''
-    // },           // 记录步数的参数
   },
   mutations: {
     login(state, userinfo) {
@@ -37,9 +33,7 @@ const store = new Vuex.Store({
     redirectLoginPage(state, res) {
       state.isLogin= res.status
     },
-    // setFootData(state, res) {
-    //   state.footData= res
-    // }
+    
   }
 })
 

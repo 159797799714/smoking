@@ -2,7 +2,7 @@
   <view class="goodList">
     <view v-for="(item, index) in goodList" :key="index" class="good-item b-f" @click="goDetail(item.goods_id)">
       <view class="good-img">
-        <image :src="item.image[0].file_path" mode="widthFix"></image>
+        <image :src="item.image[0].file_path" mode="aspectFill"></image>
       </view>
       <view class="good-info">
         <view class="m-t-30 f-24 col-6 onelist-hidden">{{item.name}}</view>

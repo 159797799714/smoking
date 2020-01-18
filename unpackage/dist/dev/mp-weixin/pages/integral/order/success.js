@@ -133,7 +133,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../../components/topBar.vue */ 291));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../../components/topBar.vue */ 312));};var _default =
 
 
 
@@ -169,7 +169,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   onLoad: function onLoad(opt) {
-    console.log(opt.num);
     if (opt.num) {
       this.num = opt.num;
       this.order_id = opt.order_id;
@@ -178,7 +177,6 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // 完成，返回首页
     achieve: function achieve() {
-      console.log('点击了完成');
       uni.switchTab({
         url: '../integral' });
 

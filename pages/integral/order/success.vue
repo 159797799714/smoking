@@ -34,7 +34,6 @@
       }
     },
     onLoad(opt) {
-      console.log(opt.num)
       if(opt.num) {
         this.num= opt.num
         this.order_id= opt.order_id
@@ -43,7 +42,6 @@
     methods: {
       // 完成，返回首页
       achieve() {
-        console.log('点击了完成')
         uni.switchTab({
           url: '../integral'
         })

@@ -220,6 +220,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -243,7 +251,6 @@ var _default =
     };
   },
   onLoad: function onLoad(opt) {
-    console.log(opt);
     var obj = JSON.parse(opt.obj);
     this.opt = obj;
 
@@ -261,7 +268,6 @@ var _default =
         data: obj };
 
       that.$httpRequest(params).then(function (res) {
-        console.log(res);
         that.address = res.data.address;
         that.goods_list = res.data.goods_list;
         that.order_pay_price = res.data.order_pay_price;

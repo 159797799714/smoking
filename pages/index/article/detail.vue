@@ -9,7 +9,8 @@
         </view>
         <button type="" plain="true" open-type="share"  class="dis-inline-block share-btn"></button>
         <text class="iconfont share-icon">&#xe6b6;</text>
-        <text v-show="isAuthor" class="iconfont m-l-30" @click="deleteArticle(article_id)">&#xe613;</text>
+        <text v-if="isAuthor" class="iconfont m-l-30" @click="deleteArticle(article_id)">&#xe613;</text>
+        <text v-else :class="{'collect f-30 col-f': true, 'b-6': detail.isFocus === 'yes', 'b-90f': detail.isFocus === 'no'}" @click="focusAuthor(article_id, detail.isFocus)">{{detail.isFocus === 'no'?'关注': '取消关注'}}</text>
       </view>
     </topBar>
     
@@ -170,7 +171,6 @@
       },
       // 评论点赞
       zanAction(item, index) {
-        console.log('点赞', item, item.islike, index)
         let that= this
         let url = this.$api.commentUnlike
         if (item.islike === 'no') {
@@ -183,7 +183,6 @@
           }
         }
         that.$httpRequest(params).then((res) => {
-          console.log('成功了', res)
           switch(this.detail.comments_show[index].islike) {
             case 'yes':
               this.detail.comments_show[index].islike = 'no'
@@ -205,9 +204,33 @@
         })
       },
       
+      // 关注用户
+      focusAuthor(article_id, status) {
+        let that= this
+        let url = this.$api.articleunFocus
+        if (status === 'no') {
+          url = this.$api.articleFocus
+        }
+        let params= {
+          url: url,
+          data: {
+            article_id: article_id
+          }
+        }
+        that.$httpRequest(params).then((res) => {
+          switch(that.detail.isFocus) {
+            case 'yes':
+              that.detail.isFocus = 'no'
+              break
+            case 'no':
+              that.detail.isFocus = 'yes'
+              break
+          }
+        })
+      },
+      
       // 评论回复点赞
       commentZanAction(li, index, num) {
-        console.log('点赞', li, li.isreplylike, index, num)
         let that= this
         let url = this.$api.commentreplyunlike
         if (li.isreplylike === 'no') {
@@ -220,7 +243,6 @@
           }
         }
         that.$httpRequest(params).then((res) => {
-          console.log('成功了', res)
           switch(this.detail.comments_show[index].replys[num].isreplylike) {
             case 'yes':
               this.detail.comments_show[index].replys[num].isreplylike = 'no'
@@ -244,7 +266,6 @@
       
       // 文章点赞
       likeArticle() {
-        console.log('文章点赞')
         let that= this
         let url = this.$api.articleLike
         if (this.detail.isLike) {
@@ -276,9 +297,11 @@
             }
           }
         if (res.from === 'button') {// 来自页面内分享按钮
-          console.log('分享按钮点击')
           that.$httpRequest(params).then((res) => {
-            console.log(res)
+            uni.showToast({
+              title: '分享成功',
+              icon: 'none'
+            })
           })
         }
         return {
@@ -365,7 +388,6 @@
       },
       // 评论评论
       commentComment(id) {
-        console.log('点击了', id)
         this.comment_id= id
       },
       // 取消评论回复
@@ -395,6 +417,12 @@
     padding: 0 30upx;
     line-height: 88upx;
     align-items: center;
+    .collect{
+      margin-left: 20upx;
+      padding: 7upx 20upx;
+      line-height: 1;
+      border-radius: 20upx;
+    }
     .center{
       flex: 1;
       display: flex;

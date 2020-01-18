@@ -54,6 +54,7 @@
 </script>
 
 <style>
+  @import './static/icon/iconfont.css';
   page{
     position: relative;
     top: 0;

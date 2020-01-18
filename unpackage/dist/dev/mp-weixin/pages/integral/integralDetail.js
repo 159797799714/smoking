@@ -246,7 +246,7 @@ var _default =
         url: that.$api.signIn };
 
       that.$httpRequest(params).then(function (res) {
-        console.log(res);
+        that.detail.is_sign = 'yes';
       });
     },
 
@@ -260,7 +260,6 @@ var _default =
 
 
       that.$httpRequest(params).then(function (res) {
-        console.log('积分明细', res);
         that.menuList = res.data.list;
       });
     },
@@ -275,7 +274,6 @@ var _default =
 
 
       that.$httpRequest(params).then(function (res) {
-        console.log('兑换明细', res);
         var list = res.data.list;
         list.data.map(function (item, index) {
           item.create_time = item.create_time.slice(0, 10);

@@ -7,11 +7,6 @@
     <view class="m-t-25 t-c f-44 f-w linear-word">Lv{{detail.level}}</view>
     <view class="m-t-25 level-column t-c">
       <view v-for="item in level" :key="item" :class="{'level-span b-33': true, 'b-linear': detail.level-1 === item , 'b-9': detail.level === item}">LV{{item + 1}}</view>
-      <!-- <view class="level-span b-linear">LV1</view>
-      <view class="level-span b-9">LV2</view>
-      <view class="level-span b-33">LV3</view>
-      <view class="level-span b-33">LV4</view>
-      <view class="level-span b-33">LV5</view> -->
     </view>
     
     
@@ -52,28 +47,28 @@
         left: '',
         menuList: [{
           name: '新品尝鲜',
-          imgUrl: require('@/static/img/tabbar/index1.png')
+          imgUrl: require('@/static/img/member/item1.png')
         }, {
-          name: '新品尝鲜',
-          imgUrl: require('@/static/img/tabbar/index1.png')
+          name: '电音门票',
+          imgUrl: require('@/static/img/member/item2.png')
         }, {
-          name: '新品尝鲜',
-          imgUrl: require('@/static/img/tabbar/index1.png')
+          name: '生日礼包',
+          imgUrl: require('@/static/img/member/item3.png')
         }, {
-          name: '新品尝鲜',
-          imgUrl: require('@/static/img/tabbar/index1.png')
+          name: '专享折扣',
+          imgUrl: require('@/static/img/member/item4.png')
         }, {
-          name: '新品尝鲜',
-          imgUrl: require('@/static/img/tabbar/index1.png')
+          name: '积分双倍',
+          imgUrl: require('@/static/img/member/item5.png')
         },  {
-          name: '新品尝鲜',
-          imgUrl: require('@/static/img/tabbar/index1.png')
+          name: '升级礼包',
+          imgUrl: require('@/static/img/member/item6.png')
         }, {
-          name: '新品尝鲜',
-          imgUrl: require('@/static/img/tabbar/index1.png')
+          name: '线下活动',
+          imgUrl: require('@/static/img/member/item7.png')
         }, {
-          name: '新品尝鲜',
-          imgUrl: require('@/static/img/tabbar/index1.png')
+          name: '优享客服',
+          imgUrl: require('@/static/img/member/item8.png')
         }]
       }
     },

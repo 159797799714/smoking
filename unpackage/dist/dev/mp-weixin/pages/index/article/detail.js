@@ -133,7 +133,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../../components/topBar.vue */ 291));};var banner = function banner() {return __webpack_require__.e(/*! import() | pages/components/banner */ "pages/components/banner").then(__webpack_require__.bind(null, /*! ../../components/banner.vue */ 282));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../../components/topBar.vue */ 312));};var banner = function banner() {return __webpack_require__.e(/*! import() | pages/components/banner */ "pages/components/banner").then(__webpack_require__.bind(null, /*! ../../components/banner.vue */ 305));};var _default =
+
 
 
 
@@ -305,7 +306,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     // 评论点赞
     zanAction: function zanAction(item, index) {var _this = this;
-      console.log('点赞', item, item.islike, index);
       var that = this;
       var url = this.$api.commentUnlike;
       if (item.islike === 'no') {
@@ -318,7 +318,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
       that.$httpRequest(params).then(function (res) {
-        console.log('成功了', res);
         switch (_this.detail.comments_show[index].islike) {
           case 'yes':
             _this.detail.comments_show[index].islike = 'no';
@@ -340,9 +339,33 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
 
+    // 关注用户
+    focusAuthor: function focusAuthor(article_id, status) {
+      var that = this;
+      var url = this.$api.articleunFocus;
+      if (status === 'no') {
+        url = this.$api.articleFocus;
+      }
+      var params = {
+        url: url,
+        data: {
+          article_id: article_id } };
+
+
+      that.$httpRequest(params).then(function (res) {
+        switch (that.detail.isFocus) {
+          case 'yes':
+            that.detail.isFocus = 'no';
+            break;
+          case 'no':
+            that.detail.isFocus = 'yes';
+            break;}
+
+      });
+    },
+
     // 评论回复点赞
     commentZanAction: function commentZanAction(li, index, num) {var _this2 = this;
-      console.log('点赞', li, li.isreplylike, index, num);
       var that = this;
       var url = this.$api.commentreplyunlike;
       if (li.isreplylike === 'no') {
@@ -355,7 +378,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
       that.$httpRequest(params).then(function (res) {
-        console.log('成功了', res);
         switch (_this2.detail.comments_show[index].replys[num].isreplylike) {
           case 'yes':
             _this2.detail.comments_show[index].replys[num].isreplylike = 'no';
@@ -379,7 +401,6 @@ __webpack_require__.r(__webpack_exports__);
 
     // 文章点赞
     likeArticle: function likeArticle() {
-      console.log('文章点赞');
       var that = this;
       var url = this.$api.articleLike;
       if (this.detail.isLike) {
@@ -411,9 +432,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
       if (res.from === 'button') {// 来自页面内分享按钮
-        console.log('分享按钮点击');
         that.$httpRequest(params).then(function (res) {
-          console.log(res);
+          uni.showToast({
+            title: '分享成功',
+            icon: 'none' });
+
         });
       }
       return {
@@ -500,7 +523,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     // 评论评论
     commentComment: function commentComment(id) {
-      console.log('点击了', id);
       this.comment_id = id;
     },
     // 取消评论回复

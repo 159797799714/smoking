@@ -66,7 +66,6 @@
       }
     },
     onLoad(opt) {
-      console.log('订单详情', opt)
       this.order_id= opt.order_id
       this.getDetail(opt.order_id)
     },

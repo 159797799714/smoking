@@ -140,7 +140,10 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var banner = function banner() {return __webpack_require__.e(/*! import() | pages/components/banner */ "pages/components/banner").then(__webpack_require__.bind(null, /*! ../components/banner.vue */ 282));};var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../components/topBar.vue */ 291));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var banner = function banner() {return __webpack_require__.e(/*! import() | pages/components/banner */ "pages/components/banner").then(__webpack_require__.bind(null, /*! ../components/banner.vue */ 305));};var topBar = function topBar() {return __webpack_require__.e(/*! import() | pages/components/topBar */ "pages/components/topBar").then(__webpack_require__.bind(null, /*! ../components/topBar.vue */ 312));};var _default =
+
+
+
 
 
 
@@ -290,6 +293,7 @@ __webpack_require__.r(__webpack_exports__);
 
       that.$httpRequest(params).then(function (res) {
         that.groups = res.data.detail;
+        that.isStore = true;
       });
     },
 
@@ -337,6 +341,7 @@ __webpack_require__.r(__webpack_exports__);
     bindPickerChange: function bindPickerChange(e) {
       console.log('picker发送选择改变，携带值为', e.target.value);
       this.params.region = e.target.value.join(',');
+      this.address = e.target.value.join(',');
 
       this.getStoreList();
     },
@@ -344,9 +349,9 @@ __webpack_require__.r(__webpack_exports__);
     // 门店详情
     goStoreDetail: function goStoreDetail(item) {
       var params = {
-        shop_id: item.shop_id,
-        longitude: item.longitude,
-        latitude: item.latitude };
+        shop_id: item ? item.shop_id : '',
+        longitude: item ? item.longitude : '',
+        latitude: item ? item.latitude : '' };
 
       uni.navigateTo({
         url: 'storeDetail?data=' + JSON.stringify(params) });

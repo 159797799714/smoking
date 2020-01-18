@@ -61,6 +61,7 @@ text, view{
 .f-44{font-size: 44upx;}
 .f-50{font-size: 50upx;}
 .f-60{font-size: 60upx;}
+.f-130{font-size: 130upx;}
 .f-w{font-weight: bold;}
 
 // 颜色
@@ -133,21 +134,4 @@ text, view{
   background-image: linear-gradient(#0CDDFE,#4269F8,#923EF4,#EC08F1);
   -webkit-background-clip:text;
   color: transparent;
-}
-// iconfont
-@font-face {
-  font-family: 'iconfont';
-  src: url('~@/static/icon/iconfont.eot');
-  src: url('~@/static/icon/iconfont.eot?#iefix') format('embedded-opentype'),
-      url('~@/static/icon/iconfont.woff2') format('woff2'),
-      url('~@/static/icon/iconfont.woff') format('woff'),
-      url('~@/static/icon/iconfont.ttf') format('truetype'),
-      url('~@/static/icon/iconfont.svg#iconfont') format('svg');
-}
-
-.iconfont {
-  font-family: "iconfont" !important;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
