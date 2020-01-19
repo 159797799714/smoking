@@ -5,6 +5,7 @@
     "pages/login/login",
     "pages/login/bindTel",
     "pages/index/themes/themesCenter",
+    "pages/index/themes/themeDetail",
     "pages/index/release/release",
     "pages/index/release/center",
     "pages/index/article/detail",

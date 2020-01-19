@@ -26,6 +26,11 @@
         "navigationBarTitleText": "添加兴趣话题"
 			}
 		}, {
+			"path": "pages/index/themes/themeDetail",
+			"style": {
+        "navigationBarTitleText": ""
+			}
+		}, {
 			"path": "pages/index/release/release",
 			"style": {
         "navigationStyle": "custom"

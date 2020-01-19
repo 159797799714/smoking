@@ -2685,7 +2685,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   addMyTheme: 'axumi.category/addMyTheme', // 添加话题
   cancleMyTheme: 'axumi.category/rmMyTheme', // 取消已添加话题
   themeList: 'axumi.category/themeList', // 所有话题列表
-
+  themeByArticleList: 'axumi.category/themeByArticleList', // 话题详情
 
   // 文章
   articleRelease: 'axumi.article/release', // 文章发布
@@ -8933,7 +8933,7 @@ module.exports = [
 
 /***/ }),
 
-/***/ 246:
+/***/ 254:
 /*!*******************************************************************!*\
   !*** C:/Users/pc/Desktop/LEI/smoking/static/img/member/item1.png ***!
   \*******************************************************************/
@@ -8944,7 +8944,7 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADkAAAA8CAMAAADr
 
 /***/ }),
 
-/***/ 247:
+/***/ 255:
 /*!*******************************************************************!*\
   !*** C:/Users/pc/Desktop/LEI/smoking/static/img/member/item2.png ***!
   \*******************************************************************/
@@ -8955,7 +8955,7 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADkAAAA8CAMAAADr
 
 /***/ }),
 
-/***/ 248:
+/***/ 256:
 /*!*******************************************************************!*\
   !*** C:/Users/pc/Desktop/LEI/smoking/static/img/member/item3.png ***!
   \*******************************************************************/
@@ -8966,7 +8966,7 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADkAAAA8CAMAAADr
 
 /***/ }),
 
-/***/ 249:
+/***/ 257:
 /*!*******************************************************************!*\
   !*** C:/Users/pc/Desktop/LEI/smoking/static/img/member/item4.png ***!
   \*******************************************************************/
@@ -8977,7 +8977,7 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADkAAAA8CAMAAADr
 
 /***/ }),
 
-/***/ 250:
+/***/ 258:
 /*!*******************************************************************!*\
   !*** C:/Users/pc/Desktop/LEI/smoking/static/img/member/item5.png ***!
   \*******************************************************************/
@@ -8988,7 +8988,7 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADkAAAA8CAMAAADr
 
 /***/ }),
 
-/***/ 251:
+/***/ 259:
 /*!*******************************************************************!*\
   !*** C:/Users/pc/Desktop/LEI/smoking/static/img/member/item6.png ***!
   \*******************************************************************/
@@ -8999,7 +8999,7 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADkAAAA8CAMAAADr
 
 /***/ }),
 
-/***/ 252:
+/***/ 260:
 /*!*******************************************************************!*\
   !*** C:/Users/pc/Desktop/LEI/smoking/static/img/member/item7.png ***!
   \*******************************************************************/
@@ -9010,7 +9010,7 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADkAAAA8CAMAAADr
 
 /***/ }),
 
-/***/ 253:
+/***/ 261:
 /*!*******************************************************************!*\
   !*** C:/Users/pc/Desktop/LEI/smoking/static/img/member/item8.png ***!
   \*******************************************************************/
@@ -9052,7 +9052,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 302:
+/***/ 310:
 /*!*****************************************************************************!*\
   !*** C:/Users/pc/Desktop/LEI/smoking/pages/components/u-charts/u-charts.js ***!
   \*****************************************************************************/
@@ -14697,7 +14697,7 @@ if ( true && typeof module.exports === "object") {
 
 /***/ }),
 
-/***/ 345:
+/***/ 353:
 /*!*************************************************************************!*\
   !*** C:/Users/pc/Desktop/LEI/smoking/pages/components/qrcode/qrcode.js ***!
   \*************************************************************************/
@@ -16820,7 +16820,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@alpha","_id":"@dcloudio/uni-stat@2
 
 /***/ }),
 
-/***/ 61:
+/***/ 69:
 /*!***********************************************************!*\
   !*** C:/Users/pc/Desktop/LEI/smoking/common/uploadImg.js ***!
   \***********************************************************/
@@ -16865,7 +16865,7 @@ function _default(imgInfo) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/age_18": { "navigationStyle": "custom", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/index/index": { "navigationStyle": "custom", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" }, "usingAutoImportComponents": {} }, "pages/login/login": { "navigationStyle": "custom", "usingComponents": { "uni-popup": "/pages/components/uni-popup/uni-popup" }, "usingAutoImportComponents": {} }, "pages/login/bindTel": { "navigationBarTitleText": "绑定手机", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/index/release/release": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar" }, "usingAutoImportComponents": {} }, "pages/index/release/center": { "navigationStyle": "custom", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/index/article/detail": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar", "banner": "/pages/components/banner" }, "usingAutoImportComponents": {} }, "pages/integral/integral": { "navigationStyle": "custom", "navigationBarTitleText": "福利", "usingComponents": { "top-bar": "/pages/components/topBar", "good-list": "/pages/components/goodList", "banner": "/pages/components/banner" }, "usingAutoImportComponents": {} }, "pages/integral/goodDetail": { "navigationBarTitleText": "详情", "usingComponents": { "banner": "/pages/components/banner", "uni-popup": "/pages/components/uni-popup/uni-popup" }, "usingAutoImportComponents": {} }, "pages/integral/order/orderSure": { "navigationBarTitleText": "订单确认", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/integral/order/orderDetail": { "navigationBarTitleText": "订单详情", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/integral/order/success": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar" }, "usingAutoImportComponents": {} }, "pages/integral/plan": { "navigationBarTitleText": "打卡计划", "usingComponents": { "article-list": "/pages/components/articleList" }, "usingAutoImportComponents": {} }, "pages/integral/todayFoot": { "navigationBarTitleText": "今日步数", "usingComponents": { "article-list": "/pages/components/articleList" }, "usingAutoImportComponents": {} }, "pages/integral/rules": { "navigationBarTitleText": "积分规则说明", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/integral/integralDetail": { "navigationBarTitleText": "积分详情", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/store/store": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" }, "usingAutoImportComponents": {} }, "pages/store/storeDetail": { "navigationBarTitleText": "门店详情", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/mine/mine": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "top-bar": "/pages/components/topBar", "article-list": "/pages/components/articleList" }, "usingAutoImportComponents": {} }, "pages/mine/agreeMent": { "navigationBarTitleText": "用户协议", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/mine/agreeDetail": { "navigationBarTitleText": "协议", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/mine/coupon/center": { "navigationBarTitleText": "领券中心", "usingComponents": { "banner": "/pages/components/banner" }, "usingAutoImportComponents": {} }, "pages/mine/coupon/mycoupon": { "navigationBarTitleText": "我的优惠券", "usingComponents": { "banner": "/pages/components/banner" }, "usingAutoImportComponents": {} }, "pages/mine/coupon/couponDetail": { "navigationBarTitleText": "使用优惠券", "usingComponents": { "tki-qrcode": "/pages/components/qrcode/tki-qrcode" }, "usingAutoImportComponents": {} }, "pages/mine/setting": { "navigationBarTitleText": "设置", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/mine/address/address": { "navigationBarTitleText": "收货地址", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/mine/address/addAddress": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar" }, "usingAutoImportComponents": {} }, "pages/mine/member": { "navigationBarTitleText": "我的会员等级", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/mine/todayExperience": { "navigationBarTitleText": "今日", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/mine/personal": { "navigationBarTitleText": "个人信息", "usingComponents": { "uni-popup": "/pages/components/uni-popup/uni-popup" }, "usingAutoImportComponents": {} }, "pages/partner/index": { "navigationBarTitleText": "商家首页", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/partner/couponDetail": { "navigationBarTitleText": "优惠券详情", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/partner/couponNote": { "navigationBarTitleText": "优惠券记录", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/partner/couponStatistics": { "navigationBarTitleText": "使用统计", "usingComponents": { "circle": "/pages/components/circle" }, "usingAutoImportComponents": {} }, "pages/index/themes/themesCenter": { "navigationBarTitleText": "添加兴趣话题" } }, "globalStyle": { "navigationBarTextStyle": "white", "backgroundColor": "#131313", "navigationBarBackgroundColor": "#131313" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/age_18": { "navigationStyle": "custom", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/index/index": { "navigationStyle": "custom", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" }, "usingAutoImportComponents": {} }, "pages/login/login": { "navigationStyle": "custom", "usingComponents": { "uni-popup": "/pages/components/uni-popup/uni-popup" }, "usingAutoImportComponents": {} }, "pages/login/bindTel": { "navigationBarTitleText": "绑定手机", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/index/themes/themesCenter": { "navigationBarTitleText": "添加兴趣话题", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/index/release/release": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar" }, "usingAutoImportComponents": {} }, "pages/index/release/center": { "navigationStyle": "custom", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/index/article/detail": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar", "banner": "/pages/components/banner" }, "usingAutoImportComponents": {} }, "pages/integral/integral": { "navigationStyle": "custom", "navigationBarTitleText": "福利", "usingComponents": { "top-bar": "/pages/components/topBar", "good-list": "/pages/components/goodList", "banner": "/pages/components/banner" }, "usingAutoImportComponents": {} }, "pages/integral/goodDetail": { "navigationBarTitleText": "详情", "usingComponents": { "banner": "/pages/components/banner", "uni-popup": "/pages/components/uni-popup/uni-popup" }, "usingAutoImportComponents": {} }, "pages/integral/order/orderSure": { "navigationBarTitleText": "订单确认", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/integral/order/orderDetail": { "navigationBarTitleText": "订单详情", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/integral/order/success": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar" }, "usingAutoImportComponents": {} }, "pages/integral/plan": { "navigationBarTitleText": "打卡计划", "usingComponents": { "article-list": "/pages/components/articleList" }, "usingAutoImportComponents": {} }, "pages/integral/todayFoot": { "navigationBarTitleText": "今日步数", "usingComponents": { "article-list": "/pages/components/articleList" }, "usingAutoImportComponents": {} }, "pages/integral/rules": { "navigationBarTitleText": "积分规则说明", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/integral/integralDetail": { "navigationBarTitleText": "积分详情", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/store/store": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "banner": "/pages/components/banner", "top-bar": "/pages/components/topBar" }, "usingAutoImportComponents": {} }, "pages/store/storeDetail": { "navigationBarTitleText": "门店详情", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/mine/mine": { "navigationStyle": "custom", "navigationBarTitleText": "", "usingComponents": { "top-bar": "/pages/components/topBar", "article-list": "/pages/components/articleList" }, "usingAutoImportComponents": {} }, "pages/mine/agreeMent": { "navigationBarTitleText": "用户协议", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/mine/agreeDetail": { "navigationBarTitleText": "协议", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/mine/coupon/center": { "navigationBarTitleText": "领券中心", "usingComponents": { "banner": "/pages/components/banner" }, "usingAutoImportComponents": {} }, "pages/mine/coupon/mycoupon": { "navigationBarTitleText": "我的优惠券", "usingComponents": { "banner": "/pages/components/banner" }, "usingAutoImportComponents": {} }, "pages/mine/coupon/couponDetail": { "navigationBarTitleText": "使用优惠券", "usingComponents": { "tki-qrcode": "/pages/components/qrcode/tki-qrcode" }, "usingAutoImportComponents": {} }, "pages/mine/setting": { "navigationBarTitleText": "设置", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/mine/address/address": { "navigationBarTitleText": "收货地址", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/mine/address/addAddress": { "navigationStyle": "custom", "usingComponents": { "top-bar": "/pages/components/topBar" }, "usingAutoImportComponents": {} }, "pages/mine/member": { "navigationBarTitleText": "我的会员等级", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/mine/todayExperience": { "navigationBarTitleText": "今日", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/mine/personal": { "navigationBarTitleText": "个人信息", "usingComponents": { "uni-popup": "/pages/components/uni-popup/uni-popup" }, "usingAutoImportComponents": {} }, "pages/partner/index": { "navigationBarTitleText": "商家首页", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/partner/couponDetail": { "navigationBarTitleText": "优惠券详情", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/partner/couponNote": { "navigationBarTitleText": "优惠券记录", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/partner/couponStatistics": { "navigationBarTitleText": "使用统计", "usingComponents": { "circle": "/pages/components/circle" }, "usingAutoImportComponents": {} }, "pages/index/themes/themeDetail": { "navigationBarTitleText": "" } }, "globalStyle": { "navigationBarTextStyle": "white", "backgroundColor": "#131313", "navigationBarBackgroundColor": "#131313" } };exports.default = _default;
 
 /***/ }),
 

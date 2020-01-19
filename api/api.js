@@ -18,7 +18,7 @@ export default {
   addMyTheme: 'axumi.category/addMyTheme',                             // 添加话题
   cancleMyTheme: 'axumi.category/rmMyTheme',                           // 取消已添加话题
   themeList: 'axumi.category/themeList',                               // 所有话题列表
-  
+  themeByArticleList: 'axumi.category/themeByArticleList',             // 话题详情
   
   // 文章
   articleRelease: 'axumi.article/release',                             // 文章发布

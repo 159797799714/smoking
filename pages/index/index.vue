@@ -13,12 +13,12 @@
           <view class="t-c line-64">添加</view>
         </navigator>
         <view class="topic">
-          <view v-for="item in mythemes" :key="item" class="topic-item">
+          <navigator :url="'./themes/themeDetail?id='+item.category_id" v-for="item in mythemes" :key="item" class="topic-item">
             <view class="topic-img">
               <image :src="item.image" mode=""></image>
             </view>
             <view class="t-c line-64 onelist-hidden">{{item.name}}</view>
-          </view>
+          </navigator>
         </view>
       </view>
       
