@@ -1,0 +1,305 @@
+text.data-v-55e8b9fa, view.data-v-55e8b9fa {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  text-decoration: none;
+}
+.border-box.data-v-55e8b9fa {
+  box-sizing: border-box;
+}
+.p-re.data-v-55e8b9fa {
+  position: relative;
+}
+.p-ab.data-v-55e8b9fa {
+  position: absolute;
+}
+.p-fix.data-v-55e8b9fa {
+  position: fixed;
+}
+.fr.data-v-55e8b9fa {
+  float: right;
+}
+.fl.data-v-55e8b9fa {
+  float: left;
+}
+.oh.data-v-55e8b9fa {
+  overflow: hidden;
+}
+.dis-block.data-v-55e8b9fa {
+  display: block;
+}
+.dis-inline-block.data-v-55e8b9fa {
+  display: inline-block;
+}
+.dis-flex.data-v-55e8b9fa {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.flex-box.data-v-55e8b9fa {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.flex-dir-col.data-v-55e8b9fa {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.flex-x-center.data-v-55e8b9fa {
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.flex-x-between.data-v-55e8b9fa {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.flex-x-around.data-v-55e8b9fa {
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+}
+.flex-x-end.data-v-55e8b9fa {
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+          justify-content: flex-end;
+}
+.flex-y-center.data-v-55e8b9fa {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.flex-y-end.data-v-55e8b9fa {
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+          align-items: flex-end;
+}
+.flex-wrap.data-v-55e8b9fa {
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+.flex-nowrap.data-v-55e8b9fa {
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+}
+.m-t-10.data-v-55e8b9fa {
+  margin-top: 10rpx;
+}
+.m-t-15.data-v-55e8b9fa {
+  margin-top: 15rpx;
+}
+.m-t-20.data-v-55e8b9fa {
+  margin-top: 20rpx;
+}
+.m-t-25.data-v-55e8b9fa {
+  margin-top: 25rpx;
+}
+.m-t-30.data-v-55e8b9fa {
+  margin-top: 30rpx;
+}
+.m-l-10.data-v-55e8b9fa {
+  margin-left: 10rpx;
+}
+.m-l-20.data-v-55e8b9fa {
+  margin-left: 20rpx;
+}
+.m-l-25.data-v-55e8b9fa {
+  margin-left: 25rpx;
+}
+.m-l-30.data-v-55e8b9fa {
+  margin-left: 30rpx;
+}
+.p-30.data-v-55e8b9fa {
+  padding: 0 30rpx;
+}
+.f-16.data-v-55e8b9fa {
+  font-size: 16rpx;
+}
+.f-18.data-v-55e8b9fa {
+  font-size: 18rpx;
+}
+.f-20.data-v-55e8b9fa {
+  font-size: 20rpx;
+}
+.f-22.data-v-55e8b9fa {
+  font-size: 22rpx;
+}
+.f-24.data-v-55e8b9fa {
+  font-size: 24rpx;
+}
+.f-26.data-v-55e8b9fa {
+  font-size: 26rpx;
+}
+.f-28.data-v-55e8b9fa {
+  font-size: 28rpx;
+}
+.f-30.data-v-55e8b9fa {
+  font-size: 30rpx;
+}
+.f-32.data-v-55e8b9fa {
+  font-size: 32rpx;
+}
+.f-36.data-v-55e8b9fa {
+  font-size: 36rpx;
+}
+.f-38.data-v-55e8b9fa {
+  font-size: 38rpx;
+}
+.f-40.data-v-55e8b9fa {
+  font-size: 40rpx;
+}
+.f-44.data-v-55e8b9fa {
+  font-size: 44rpx;
+}
+.f-50.data-v-55e8b9fa {
+  font-size: 50rpx;
+}
+.f-60.data-v-55e8b9fa {
+  font-size: 60rpx;
+}
+.f-130.data-v-55e8b9fa {
+  font-size: 130rpx;
+}
+.f-w.data-v-55e8b9fa {
+  font-weight: bold;
+}
+.col-f.data-v-55e8b9fa {
+  color: #fff;
+}
+.col-13.data-v-55e8b9fa {
+  color: #131313;
+}
+.col-9.data-v-55e8b9fa {
+  color: #999;
+}
+.col-6.data-v-55e8b9fa {
+  color: #666;
+}
+.col-c.data-v-55e8b9fa {
+  color: #ccc;
+}
+.col-f3c.data-v-55e8b9fa {
+  color: #ff33cc;
+}
+.col-f0f.data-v-55e8b9fa {
+  color: #FF00FF;
+}
+.col-90f.data-v-55e8b9fa {
+  color: #9900FF;
+}
+.t-l.data-v-55e8b9fa {
+  text-align: left;
+}
+.t-c.data-v-55e8b9fa {
+  text-align: center;
+}
+.t-r.data-v-55e8b9fa {
+  text-align: right;
+}
+.b-f.data-v-55e8b9fa {
+  background: #fff;
+}
+.b-9.data-v-55e8b9fa {
+  background: #999;
+}
+.b-6.data-v-55e8b9fa {
+  background: #666;
+}
+.b-13.data-v-55e8b9fa {
+  background: #131313;
+}
+.b-33.data-v-55e8b9fa {
+  background: #333333;
+}
+.b-00.data-v-55e8b9fa {
+  background: #000;
+}
+.b-c3f.data-v-55e8b9fa {
+  background: #cc33ff;
+}
+.b-f0f.data-v-55e8b9fa {
+  background: #ff00ff;
+}
+.b-90f.data-v-55e8b9fa {
+  background: #9900ff;
+}
+.b-linear.data-v-55e8b9fa {
+  background: -webkit-linear-gradient(bottom, #525ff7, #fb00f0);
+  background: linear-gradient(0deg, #525ff7, #fb00f0);
+}
+.b-linear-row.data-v-55e8b9fa {
+  background: -webkit-linear-gradient(right, #525ff7, #fb00f0);
+  background: linear-gradient(-90deg, #525ff7, #fb00f0);
+}
+.oh.data-v-55e8b9fa {
+  overflow: hidden;
+}
+.onelist-hidden.data-v-55e8b9fa {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.twolist-hidden.data-v-55e8b9fa {
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.threelist-hidden.data-v-55e8b9fa {
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+.t-line.data-v-55e8b9fa {
+  text-decoration: line-through;
+}
+.rotate-180.data-v-55e8b9fa {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+.b-linear.data-v-55e8b9fa {
+  background: -webkit-linear-gradient(right, #525ff7, #fb00f0);
+  background: linear-gradient(-90deg, #525ff7, #fb00f0);
+}
+.linear-word.data-v-55e8b9fa {
+  background-image: -webkit-linear-gradient(#0CDDFE, #4269F8, #923EF4, #EC08F1);
+  background-image: linear-gradient(#0CDDFE, #4269F8, #923EF4, #EC08F1);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.container.data-v-55e8b9fa {
+  padding: 0rpx 30rpx;
+  font-size: 32rpx;
+}
+.container .row.data-v-55e8b9fa {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+            align-items: center;
+    line-height: 100rpx;
+}
+.container .row .left-box.data-v-55e8b9fa {
+      width: 150rpx;
+}
+.container .row .code-state.data-v-55e8b9fa {
+      padding: 5rpx 0;
+      width: 170rpx;
+      text-align: center;
+      line-height: 1;
+      border: 1rpx solid #666;
+      border-radius: 17rpx;
+}
+.b-linear-row.data-v-55e8b9fa {
+  margin-top: 150rpx;
+  line-height: 100rpx;
+}
+

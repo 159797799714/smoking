@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "使用优惠券",
+  "usingComponents": {
+    "tki-qrcode": "/pages/components/qrcode/tki-qrcode"
+  }
+}

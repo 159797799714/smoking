@@ -1,0 +1,7 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "top-bar": "/pages/components/topBar",
+    "banner": "/pages/components/banner"
+  }
+}

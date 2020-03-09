@@ -1,0 +1,1 @@
+<view class="topBar data-v-2ad2cdcd" style="{{'padding-top:'+(statusBarHeight+'px')+';'}}"><block wx:if="{{!isindex}}"><view class="p-re title t-c col-f data-v-2ad2cdcd" style="{{'font-size:'+(fontSize+'px')+';'}}"><block wx:if="{{title}}"><text class="data-v-2ad2cdcd">{{title}}</text></block><view class="title-cover data-v-2ad2cdcd"><slot></slot></view></view></block></view>

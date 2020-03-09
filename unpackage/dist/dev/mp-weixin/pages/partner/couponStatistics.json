@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "使用统计",
+  "usingComponents": {
+    "circle": "/pages/components/circle"
+  }
+}

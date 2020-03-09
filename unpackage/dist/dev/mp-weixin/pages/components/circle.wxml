@@ -1,0 +1,1 @@
+<view class="qiun-columns data-v-358bcf2a"><view class="qiun-title-bar qiun-common-mt data-v-358bcf2a"></view><view class="qiun-charts data-v-358bcf2a"><canvas class="charts data-v-358bcf2a" canvas-id="canvasRing" id="canvasRing" data-event-opts="{{[['touchstart',[['touchRing',['$event']]]]]}}" bindtouchstart="__e"></canvas></view></view>

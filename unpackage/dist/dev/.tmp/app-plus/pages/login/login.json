@@ -1,0 +1,6 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "uni-popup": "/pages/components/uni-popup/uni-popup"
+  }
+}

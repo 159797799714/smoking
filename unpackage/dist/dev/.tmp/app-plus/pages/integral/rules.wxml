@@ -1,0 +1,1 @@
+<view class="rules data-v-d090d17c"><view class="rules-main data-v-d090d17c"><block wx:for="{{rules}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view class="line f-28 col-9 data-v-d090d17c">{{index+1+'.'+item}}</view></block></view></view>

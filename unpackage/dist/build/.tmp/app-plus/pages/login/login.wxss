@@ -1,0 +1,676 @@
+text.data-v-39169ff6, view.data-v-39169ff6 {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  text-decoration: none;
+}
+.border-box.data-v-39169ff6 {
+  box-sizing: border-box;
+}
+.p-re.data-v-39169ff6 {
+  position: relative;
+}
+.p-ab.data-v-39169ff6 {
+  position: absolute;
+}
+.p-fix.data-v-39169ff6 {
+  position: fixed;
+}
+.fr.data-v-39169ff6 {
+  float: right;
+}
+.fl.data-v-39169ff6 {
+  float: left;
+}
+.oh.data-v-39169ff6 {
+  overflow: hidden;
+}
+.dis-block.data-v-39169ff6 {
+  display: block;
+}
+.dis-inline-block.data-v-39169ff6 {
+  display: inline-block;
+}
+.dis-flex.data-v-39169ff6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.flex-box.data-v-39169ff6 {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.flex-dir-col.data-v-39169ff6 {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.flex-x-center.data-v-39169ff6 {
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.flex-x-between.data-v-39169ff6 {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.flex-x-around.data-v-39169ff6 {
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+}
+.flex-x-end.data-v-39169ff6 {
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+          justify-content: flex-end;
+}
+.flex-y-center.data-v-39169ff6 {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.flex-y-end.data-v-39169ff6 {
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+          align-items: flex-end;
+}
+.flex-wrap.data-v-39169ff6 {
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+.flex-nowrap.data-v-39169ff6 {
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+}
+.m-t-10.data-v-39169ff6 {
+  margin-top: 10rpx;
+}
+.m-t-15.data-v-39169ff6 {
+  margin-top: 15rpx;
+}
+.m-t-20.data-v-39169ff6 {
+  margin-top: 20rpx;
+}
+.m-t-25.data-v-39169ff6 {
+  margin-top: 25rpx;
+}
+.m-t-30.data-v-39169ff6 {
+  margin-top: 30rpx;
+}
+.m-l-10.data-v-39169ff6 {
+  margin-left: 10rpx;
+}
+.m-l-20.data-v-39169ff6 {
+  margin-left: 20rpx;
+}
+.m-l-25.data-v-39169ff6 {
+  margin-left: 25rpx;
+}
+.m-l-30.data-v-39169ff6 {
+  margin-left: 30rpx;
+}
+.p-30.data-v-39169ff6 {
+  padding: 0 30rpx;
+}
+.f-16.data-v-39169ff6 {
+  font-size: 16rpx;
+}
+.f-18.data-v-39169ff6 {
+  font-size: 18rpx;
+}
+.f-20.data-v-39169ff6 {
+  font-size: 20rpx;
+}
+.f-22.data-v-39169ff6 {
+  font-size: 22rpx;
+}
+.f-24.data-v-39169ff6 {
+  font-size: 24rpx;
+}
+.f-26.data-v-39169ff6 {
+  font-size: 26rpx;
+}
+.f-28.data-v-39169ff6 {
+  font-size: 28rpx;
+}
+.f-30.data-v-39169ff6 {
+  font-size: 30rpx;
+}
+.f-32.data-v-39169ff6 {
+  font-size: 32rpx;
+}
+.f-36.data-v-39169ff6 {
+  font-size: 36rpx;
+}
+.f-38.data-v-39169ff6 {
+  font-size: 38rpx;
+}
+.f-40.data-v-39169ff6 {
+  font-size: 40rpx;
+}
+.f-44.data-v-39169ff6 {
+  font-size: 44rpx;
+}
+.f-50.data-v-39169ff6 {
+  font-size: 50rpx;
+}
+.f-60.data-v-39169ff6 {
+  font-size: 60rpx;
+}
+.f-130.data-v-39169ff6 {
+  font-size: 130rpx;
+}
+.f-w.data-v-39169ff6 {
+  font-weight: bold;
+}
+.col-f.data-v-39169ff6 {
+  color: #fff;
+}
+.col-13.data-v-39169ff6 {
+  color: #131313;
+}
+.col-9.data-v-39169ff6 {
+  color: #999;
+}
+.col-6.data-v-39169ff6 {
+  color: #666;
+}
+.col-c.data-v-39169ff6 {
+  color: #ccc;
+}
+.col-f3c.data-v-39169ff6 {
+  color: #ff33cc;
+}
+.col-f0f.data-v-39169ff6 {
+  color: #FF00FF;
+}
+.col-90f.data-v-39169ff6 {
+  color: #9900FF;
+}
+.t-l.data-v-39169ff6 {
+  text-align: left;
+}
+.t-c.data-v-39169ff6 {
+  text-align: center;
+}
+.t-r.data-v-39169ff6 {
+  text-align: right;
+}
+.b-f.data-v-39169ff6 {
+  background: #fff;
+}
+.b-9.data-v-39169ff6 {
+  background: #999;
+}
+.b-6.data-v-39169ff6 {
+  background: #666;
+}
+.b-13.data-v-39169ff6 {
+  background: #131313;
+}
+.b-33.data-v-39169ff6 {
+  background: #333333;
+}
+.b-00.data-v-39169ff6 {
+  background: #000;
+}
+.b-c3f.data-v-39169ff6 {
+  background: #cc33ff;
+}
+.b-f0f.data-v-39169ff6 {
+  background: #ff00ff;
+}
+.b-90f.data-v-39169ff6 {
+  background: #9900ff;
+}
+.b-linear.data-v-39169ff6 {
+  background: -webkit-linear-gradient(bottom, #525ff7, #fb00f0);
+  background: linear-gradient(0deg, #525ff7, #fb00f0);
+}
+.b-linear-row.data-v-39169ff6 {
+  background: -webkit-linear-gradient(right, #525ff7, #fb00f0);
+  background: linear-gradient(-90deg, #525ff7, #fb00f0);
+}
+.oh.data-v-39169ff6 {
+  overflow: hidden;
+}
+.onelist-hidden.data-v-39169ff6 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.twolist-hidden.data-v-39169ff6 {
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.threelist-hidden.data-v-39169ff6 {
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+.t-line.data-v-39169ff6 {
+  text-decoration: line-through;
+}
+.rotate-180.data-v-39169ff6 {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+.b-linear.data-v-39169ff6 {
+  background: -webkit-linear-gradient(right, #525ff7, #fb00f0);
+  background: linear-gradient(-90deg, #525ff7, #fb00f0);
+}
+.linear-word.data-v-39169ff6 {
+  background-image: -webkit-linear-gradient(#0CDDFE, #4269F8, #923EF4, #EC08F1);
+  background-image: linear-gradient(#0CDDFE, #4269F8, #923EF4, #EC08F1);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.container.data-v-39169ff6 {
+  padding: 88rpx 60rpx 0;
+  font-size: 32rpx;
+}
+.wechatapp.data-v-39169ff6 {
+  padding: 80rpx 0 48rpx;
+  margin-bottom: 72rpx;
+  text-align: center;
+}
+.wechatapp .header.data-v-39169ff6 {
+  width: 190rpx;
+  height: 190rpx;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 2rpx solid #ccc;
+  overflow: hidden;
+  box-shadow: 1px 0px 5px rgba(50, 50, 50, 0.3);
+}
+.auth-title.data-v-39169ff6 {
+  margin-bottom: 50rpx;
+}
+.auth-subtitle.data-v-39169ff6 {
+  margin-bottom: 15rpx;
+}
+.treaty.data-v-39169ff6 {
+  margin-bottom: 70rpx;
+}
+.login-btn.data-v-39169ff6 {
+  border: none;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 999rpx;
+}
+.b-cc.data-v-39169ff6 {
+  background: #ccc;
+}
+.login-btn.data-v-39169ff6::after {
+  display: none;
+}
+.login-btn.button-hover.data-v-39169ff6 {
+  box-shadow: inset 0 5rpx 30rpx rgba(0, 0, 0, 0.15);
+}
+.popup-main.data-v-39169ff6 {
+  padding: 30rpx 30rpx 60rpx;
+}
+.row.data-v-39169ff6 {
+  line-height: 80rpx;
+}
+.btn.data-v-39169ff6 {
+  width: 200rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 10rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  重写 checkbox 样式  */
+/* 未选中的 背景样式 */
+
+
+checkbox .wx-checkbox-input{
+  position: relative;
+  top: -8rpx;
+   width: 24rpx; /* 背景的宽 */
+   height: 24rpx; /* 背景的高 */
+   background: #131313;
+   border: 1px solid #666;
+}
+/* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked{
+   border: 1px solid #666;
+   background: #131313;
+}
+/* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
+  border-radius: 50%;/* 圆角 */
+  width: 24rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+  height: 24rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+  line-height: 24rpx;
+  text-align: center;
+  font-size: 16rpx; /* 对勾大小 30rpx */
+  color: #ff00ff; /* 对勾颜色 白色 */
+  background: transparent;
+  transform:translate(-50%, -50%) scale(1);
+  -webkit-transform:translate(-50%, -50%) scale(1);
+}
+
+
